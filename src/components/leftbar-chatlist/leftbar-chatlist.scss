@@ -1,0 +1,25 @@
+.leftbar__chatlist {
+    .leftbar__chat {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+
+        .leftbar__chat-ico {
+            min-width: 50px;
+            min-height: 50px;
+            margin-right: 12px;
+            border-radius: 100%;
+            border: 2px solid rgb(255, 255, 255);
+        }
+
+        .leftbar__chat-name {
+            width: 57%;
+        }
+
+        .leftbar__unread-msgs {
+            padding: 3px;
+            border-radius: 20px;
+            background-color: rgb(202, 56, 56);
+        }
+    }
+}

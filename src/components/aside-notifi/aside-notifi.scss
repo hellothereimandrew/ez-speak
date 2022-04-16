@@ -1,0 +1,41 @@
+.aside-notifi {
+    display: none;
+    justify-content: center;
+    height: 100vh;
+    z-index: 1000;
+    background-color: rgba(0, 31, 46, 0.75);
+
+    .aside-notifi__header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+        .aside-notifi__heading {
+            margin-right: 10px;
+        }
+    }
+
+    .aside-notifi__message {
+        padding: 8px;
+
+        .aside-notifi__maessage-date {
+            display: flex;
+            margin-bottom: 3px;
+        }
+
+        .aside-notifi__note {
+            display: flex;
+            align-items: center;
+        }
+
+        .aside-notifi__circle {
+            width: 10px;
+            height: 10px;
+            margin-right: 8px;
+            border-radius: 100%;
+            background-color: rgb(202, 56, 56);
+        }
+    }
+}

@@ -1,0 +1,86 @@
+.account-form {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    padding: 30px;
+    background-color: rgb(0, 31, 46);
+
+    .userpic {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 15px;
+        border: 2px solid rgba(122, 90, 154, 1);
+        border-radius: 100%;
+    }
+
+    .username {
+        margin-bottom: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+        .username__wrap {
+            display: flex;
+
+            .username__input {
+                margin-left: 15px;
+                background: none;
+                outline: 0;
+                border: 0;
+            }
+        }
+    }
+
+    .userrole {
+        margin-bottom: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+        .userrole__wrap {
+            display: flex;
+
+            .userrole__input {
+                margin-left: 15px;
+                background: none;
+                outline: 0;
+                border: 0;
+            }
+        }
+    }
+
+    .email {
+        margin-bottom: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+        .email__wrap {
+            display: flex;
+
+            .email__input {
+                margin-left: 15px;
+                background: none;
+                outline: 0;
+                border: 0;
+            }
+        }
+    }
+
+    .ctrl-btns {
+        display: flex;
+
+        .ctrl-btns__save {
+            width: 120px;
+            height: 40px;
+            margin-right: 15px;
+            border: 1px solid rgba(122, 90, 154, 1);
+            border-radius: 10px;
+            background: none;
+        }
+
+        .ctrl-btns__cancel {
+            width: 120px;
+            height: 40px;
+            border: 1px solid rgba(122, 90, 154, 1);
+            border-radius: 10px;
+            background: none;
+        }
+    }
+}

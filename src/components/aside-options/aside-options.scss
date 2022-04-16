@@ -1,0 +1,31 @@
+.aside-options {
+    display: none;
+    justify-content: center;
+    height: 100vh;
+    z-index: 1000;
+    background-color: rgba(0, 31, 46, 0.75);
+
+    .aside-options__header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+        .aside-options__heading {
+            margin-right: 10px;
+        }
+    }
+
+    .aside-options__logout {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .aside-options__logout-text {
+            margin-left: 8px;
+            font-family: Nunito-SemiBold;
+            color: rgb(255, 48, 48);
+        }
+    }
+}

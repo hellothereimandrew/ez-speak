@@ -1,0 +1,113 @@
+.channel-settings {
+    padding: 30px;
+    background-color: rgb(0, 31, 46);
+
+    .channel-settings__header {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    .selected-channel {
+        margin-bottom: 10px;
+
+        .selected-channel__header {
+            margin-bottom: 5px;
+        }
+
+        .selected-channel-box {
+            margin-bottom: 10px;
+
+            .selected-channel__select {
+                width: 200px;
+                height: 30px;
+                background: none;
+                outline: 0;
+                border: 0;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 5px;
+            }
+        }
+
+        .channel-name {
+            
+
+            .channel-name__header {
+                margin-bottom: 5px;
+            }
+
+            .channel-name-box__input {
+                width: 200px;
+                height: 30px;
+                background: none;
+                outline: 0;
+                border: 0;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 5px;
+            }
+        }
+    }
+    .profiles-settings {
+
+        .profiles-settings__header {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .profiles-settings-choice {
+            margin-bottom: 10px;
+
+            .profiles-settings-choice__header {
+                margin-bottom: 5px;
+            }
+
+            .profiles-settings__select {
+                width: 200px;
+                height: 30px;
+                background: none;
+                outline: 0;
+                border: 0;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 5px;
+            }
+        }
+
+        .profiles-settings-setname {
+            margin-bottom: 15px;
+
+            .profiles-settings-setname__header {
+                margin-bottom: 5px;
+            }
+
+            .profiles-settings-setname__input {
+                width: 200px;
+                height: 30px;
+                background: none;
+                outline: 0;
+                border: 0;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 5px;
+            }
+        }
+        .profiles-settings-users {
+            margin-bottom: 10px;
+
+            .profiles-settings-users__header {
+                margin-bottom: 10px;
+                text-align: center;
+            }
+        }
+
+        .profiles-settings-rights {
+
+            .profiles-settings-rights__header {
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            .profiles-settings-rights__wrap {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+}

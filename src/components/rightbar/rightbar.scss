@@ -1,0 +1,58 @@
+.rightbar {
+    display: flex;
+    justify-content: center;
+    width: 22%;
+    height: 100vh;
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 31, 46, 1);
+
+    .rightbar__chat-ico {
+        min-width: 150px;
+        min-height: 150px;
+        margin-bottom: 10px;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 50%;
+    }
+
+    .leftbar__chat-name {
+        margin-bottom: 10px;
+    }
+
+    .rightbar__current-chat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 80px;
+
+        .rightbar__ctrl-btns {
+            display: flex;
+            margin-bottom: 10px;
+
+            .rightbar__add-member {
+                margin-right: 12px;
+            }
+        }
+
+        .rightbar__actions-btns {
+            display: flex;
+            flex-direction: column;
+
+            .rightbar__call {
+                display: flex;
+                margin-bottom: 5px;
+
+                .rightbar__call-img {
+                    margin-right: 10px;
+                }
+            }
+
+            .rightbar__conference {
+                display: flex;
+
+                .rightbar__conference-img {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}

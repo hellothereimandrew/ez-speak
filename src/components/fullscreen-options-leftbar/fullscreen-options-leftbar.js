@@ -1,0 +1,30 @@
+import '../fullscreen-options-leftbar/fullscreen-options-leftbar.scss';
+
+let FullscreenOptionsLeftbar = () => {
+    return (
+        <div className="fullscreen-options__leftbar">
+            <div className="fullscreen-options__header">
+                <p>Options</p>
+            </div>
+            <div className="fullscreen-options-list">
+                <p className="fullscreen-options-list__acc">Account</p>
+                <p className="fullscreen-options-list__pass">Change password</p>
+                <p className="fullscreen-options-list__quality">Quality settings</p>
+                <p className="fullscreen-options-list__chnl">Channels</p>
+            </div>
+            <div className="fullscreen-options__logout">
+                <div>
+                    <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.1146 2.33688C12.3105 3.20578 13.2007 4.43098 13.6575 5.83688C14.1143 7.24278 14.1143 8.75722 13.6575 10.1631C13.2007 11.569 12.3105 12.7942 11.1146 13.6631C9.91862 14.532 8.4783 15 7.00004 15C5.52178 15 4.08146 14.532 2.88552 13.6631C1.68958 12.7942 0.799414 11.569 0.342606 10.1631C-0.114203 8.75721 -0.114202 7.24278 0.342607 5.83688C0.799416 4.43097 1.68958 3.20578 2.88552 2.33688L3.91415 3.75266C3.0172 4.40433 2.34957 5.32323 2.00697 6.37766C1.66436 7.43209 1.66436 8.56791 2.00696 9.62234C2.34957 10.6768 3.01719 11.5957 3.91415 12.2473C4.81111 12.899 5.89134 13.25 7.00004 13.25C8.10874 13.25 9.18898 12.899 10.0859 12.2473C10.9829 11.5957 11.6505 10.6768 11.9931 9.62234C12.3357 8.56791 12.3357 7.43209 11.9931 6.37766C11.6505 5.32323 10.9829 4.40433 10.0859 3.75266L11.1146 2.33688Z"
+                            fill="#FF3030" />
+                        <line x1="7" x2="7" y2="11" stroke="#FF3030" stroke-width="2" />
+                    </svg>
+                </div>
+                <p className="fullscreen-options__logout-text">Logout</p>
+            </div>
+        </div>
+    )
+}
+
+export default FullscreenOptionsLeftbar;
