@@ -1,0 +1,73 @@
+<div class="chat-section" (click)="closeContextMenu()">
+  <div class="header">
+    <p class="header__current-chat" (click)="rightbarListener.emit()">
+      {{ currentChatHeader }}
+    </p>
+  </div>
+
+  <div *ngIf="!isPrivate" class="current-chat-public">
+    <div #scrollable class="messages-list">
+      <div
+        *ngFor="let item of messages"
+        (contextmenu)="openContextMenu($event)"
+        (click)="openContextMenu($event)"
+        class="my-message"
+      >
+        <div class="my-message__ico">
+          <img src="{{ item.ico }}" alt="alt" />
+        </div>
+        <div>
+          <div style="display: flex">
+            <div class="my-message__name">{{ item.user }}</div>
+            <!-- <div class="my-message__date">{{ item.date }}</div> -->
+            <div class="my-message__time">{{ item.time }}</div>
+          </div>
+          <div class="my-message__text">{{ item.text }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="messages-wrap">
+    <div class="send-msg-img">
+      <svg
+        style="display: flex"
+        width="23"
+        height="21"
+        viewBox="0 0 23 21"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        (input)="sendMessage($event)"
+      >
+        <path
+          d="M1 0.999999L22 10.5L0.999999 20L8 10.5L1 0.999999Z"
+          fill="white"
+          fill-opacity="0.1"
+          stroke="white"
+          stroke-opacity="0.3"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <input
+      class="messages-wrap-input"
+      type="text"
+      (keyup.enter)="sendMessage($event)"
+    />
+  </div>
+
+  <div
+    *ngIf="!hideContextMenu"
+    class="ez-context-menu"
+    [ngStyle]="{
+      top: contextMenuPosition?.y + 'px',
+      left: contextMenuPosition?.x + 'px'
+    }"
+  >
+    <p class="ez-context-menu__item">Ответить</p>
+    <p class="ez-context-menu__item">Переслать</p>
+    <p class="ez-context-menu__item">Выбрать</p>
+    <p class="ez-context-menu__item">Изменить</p>
+    <p class="ez-context-menu__item">Удалить</p>
+  </div>
+</div>

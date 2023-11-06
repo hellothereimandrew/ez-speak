@@ -1,1 +1,126 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito-Light";
+  color: rgb(240, 240, 240);
+  // cursor: default;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.ez-input {
+  padding-left: 15px;
+  background: none;
+  outline: 0;
+  border: 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+
+  &.ng-valid.ng-dirty {
+    border-bottom: 2px solid rgb(102, 204, 180);
+  }
+
+  &.ng-invalid.ng-dirty {
+    border-bottom: 2px solid rgb(206, 60, 60);
+  }
+}
+
+.ez-select {
+  width: 130px;
+  padding: 2px;
+  margin-bottom: 5px;
+  background: none;
+  outline: 0;
+  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.ez-select__option {
+  background: none;
+  outline: 0;
+  border: 0;
+}
+
+.ez-context-menu {
+  position: absolute;
+  width: 200px;
+  user-select: none;
+  left: 10px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+
+  .ez-context-menu__item {
+    margin-bottom: 5px;
+
+    &:hover {
+      color: #3b93c5;
+      cursor: pointer;
+    }
+  }
+}
+
+.ez-button {
+  width: 170px;
+  height: 40px;
+  margin-bottom: 5px;
+  outline: 0;
+  background: none;
+  border: 2px solid rgb(70, 188, 255);
+  border-radius: 10px;
+  transition: 500ms;
+
+  &:hover {
+    background: rgb(70, 188, 255);
+    transition: 500ms;
+    cursor: pointer;
+  }
+}
+
+.ez-small-button {
+  width: 120px;
+  height: 25px;
+  margin-bottom: 5px;
+  outline: 0;
+  // background: linear-gradient(120deg, #5481c5 0%, #7a5a9a 60%);
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  transition: 500ms;
+}
+
+.active-stroke {
+  stroke: rgb(59, 147, 197);
+  stroke-opacity: 1;
+  cursor: pointer;
+}
+
+.active-fill {
+  fill: rgb(70, 188, 255);
+  fill-opacity: 1;
+  cursor: pointer;
+}
+
+@font-face {
+  font-family: "Nunito-Light";
+  src: url("./assets/fonts/Nunito-Light.ttf");
+}
+
+@font-face {
+  font-family: "Nunito-Regular";
+  src: url("./assets/fonts/Nunito-Regular.ttf");
+}
+
+// $main-text-font: "Nunito-Regular";
+// $main-text-color: rgb(255, 255, 255);
+// // $active: rgb(59, 147, 197);
+// $leftbar-color: rgb(16, 24, 28);
+// $chat-section-color: rgb(255, 255, 255);
+// background: linear-gradient(120deg, #5481c5 0%, #7a5a9a 60%);

@@ -1,0 +1,17 @@
+.main {
+  display: flex;
+  user-select: none;
+}
+
+app-main-leftbar {
+  min-width: 15%;
+}
+
+app-main-chat-section {
+  width: 100%;
+  height: 100vh;
+}
+
+app-main-rightbar {
+  min-width: 15%;
+}

@@ -1,0 +1,43 @@
+.sign-in {
+  font-family: "Nunito-Regular";
+
+  .username,
+  .password {
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .show {
+    position: absolute;
+    top: 7px;
+    right: 3px;
+    fill: rgb(70, 188, 255);
+    cursor: pointer;
+    transition: 500ms;
+  }
+
+  .remember-me {
+    display: flex;
+    margin-bottom: 20px;
+
+    .remember-me__checkbox {
+      margin-right: 5px;
+    }
+  }
+
+  .submit {
+    margin-top: 20px;
+  }
+
+  .remind-pass {
+    font-size: 12px;
+    text-align: center;
+    transition: 500ms;
+
+    &:hover {
+      color: #46bcff;
+      transition: 500ms;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.sign-up {
+  margin-bottom: 20px;
+
+  .username,
+  .password,
+  .confirm-password {
+    margin-bottom: 12px;
+  }
+
+  .email {
+    margin-bottom: 20px;
+  }
+
+  .next {
+
+    .next__btn {
+      width: 170px;
+      height: 40px;
+      margin-bottom: 5px;
+      border-radius: 10px;
+      border: 0;
+      outline: 0;
+      // background: linear-gradient(120deg, #5481c5 0%, #7a5a9a 60%);
+      background: none;
+      border: 2px solid rgb(70, 188, 255);
+      transition: 500ms;
+
+      &:hover {
+        background: rgb(70, 188, 255);
+        transition: 500ms;
+        cursor: pointer;
+      }
+    }
+  }
+}

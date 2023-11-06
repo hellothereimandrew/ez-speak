@@ -1,0 +1,122 @@
+.leftbar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-right: 1px solid rgba(255, 255, 255, 0.102);
+  background-color: rgb(16, 24, 28);
+  // background-color: rgb(17, 28, 33);
+  // background-color: rgb(30, 30, 49);
+  // background-color: rgb(0, 31, 46);
+  // background-color: rgb(26 32 34);
+
+  .leftbar__user-card {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.102);
+
+    .leftbar__user-ico {
+      width: 45px;
+      height: 45px;
+      margin-right: 12px;
+      border-radius: 30px;
+      border: 2px solid rgb(59, 147, 197);
+      overflow: hidden;
+
+      img {
+        width: inherit;
+        height: inherit;
+      }
+    }
+
+    .leftbar__current-info {
+      width: 62%;
+
+      .leftbar__user-name {
+        font-size: 16px;
+      }
+
+      .leftbar__user-role {
+        font-size: 14px;
+      }
+    }
+
+    .leftbar__options {
+      cursor: pointer;
+    }
+  }
+
+  .leftbar__nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.102);
+
+    .leftbar__private,
+    .leftbar__group,
+    .leftbar__channel,
+    .leftbar__notifications {
+      display: flex;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .leftbar__create-chat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.102);
+
+    input {
+      background: none;
+    }
+  }
+
+  .leftbar__chat-container {
+    height: 87vh;
+  }
+
+  .leftbar__chat {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+
+
+    .leftbar__chat-ico {
+      min-width: 45px;
+      min-height: 45px;
+      margin-right: 12px;
+      border-radius: 100%;
+      border: 2px solid rgb(240, 240, 240);
+    }
+
+    .leftbar__chat-name {
+      width: 57%;
+      cursor: pointer;
+    }
+
+    .leftbar__unread-msgs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      font-size: 14px;
+      border-radius: 100%;
+      background-color: #ca3838;
+    }
+
+    .X {
+      margin-left: 10px;
+      padding: 5px;
+      background: none;
+      border: 1px solid #ffffff4d;
+      cursor: pointer;
+    }
+  }
+}
