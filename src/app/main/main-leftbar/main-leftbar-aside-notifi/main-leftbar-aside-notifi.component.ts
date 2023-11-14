@@ -21,6 +21,7 @@ export class MainLeftbarAsideNotifiComponent implements OnInit {
   constructor() {}
 
   public clearNotifications(): void {
+    // this.notifiList = [];
     console.log('clear');
   }
 }

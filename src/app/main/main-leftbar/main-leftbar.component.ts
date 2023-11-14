@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Chat } from 'src/app/shared/chat-db';
+import { Users } from 'src/app/shared/users-db';
 
 @Component({
   selector: 'app-main-leftbar',
@@ -7,92 +8,83 @@ import { Chat } from 'src/app/shared/chat-db';
   styleUrls: ['./main-leftbar.component.scss'],
 })
 export class MainLeftbarComponent implements OnInit {
-  @Input() user: Object = {
-    id: 1,
+  @Input() user: Users = {
+    id: 0,
     ico: '',
     name: '',
     role: '',
   };
 
-  @Output() rightbarListener = new EventEmitter<boolean>();
+  @Output() rightbarListener: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
   @Output() currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
   public hideNotifi: boolean = true;
   public hideOptions: boolean = true;
   public hideContextMenu: boolean = true;
   public hideRightbar: boolean = true;
+  public showControls: boolean = false;
+  public showSearch: boolean = false;
+  public pinned: boolean = false;
   public contextMenuPosition: any;
   public selectedButton: string = '';
+  public channelName: string = '';
   public chats: Chat[] = [];
-  public test: any = '';
+  public pinnedChats: Chat[] = [];
+  public channelCounterId: number = 1;
 
   ngOnInit(): void {}
 
   public showAside(event?: any): void {
-    /*
-      добавить проверку на вторую открытую панель
-      закрывать при клике ЛКМ на свободном месте
-    */
-
-    // if (this.hideOptions === true) {
-    //   return;
-    // }
-
     this.hideNotifi = !this.hideNotifi;
   }
 
   public showOptions(): boolean {
-    /*
-      добавить проверку на вторую открытую панель
-      закрывать при клике ЛКМ на свободном месте
-    */
-
     this.hideOptions = !this.hideOptions;
     return true;
   }
 
-  public showRightbar(item: Chat): boolean {
-    /*
-      не закрывать райтбар по нажатию на название канала
-    */
-
-    this.hideRightbar = !this.hideRightbar;
+  public showRightbar(item: Chat): void {
+    this.hideRightbar = false;
     this.currentChat.emit(item);
-    return true;
   }
 
-  public openContextMenu(event: MouseEvent): void {
-    /*
-      меняется размер окна и появляется скролл, если вызвать меню в самом низу
-    */
-
-    event.preventDefault();
-    this.hideContextMenu = false;
-    this.contextMenuPosition = {
-      x: event.clientX - 10,
-      y: event.clientY - 10,
-    };
-  }
-
-  public closeContextMenu(): void {
-    this.hideContextMenu = true;
-  }
-
-  public createChannel(): void {
-    /*
-      добавить проверку на одинаковое название
-      передавать название канала из инпута в райтбар
-      передавать название канала из инпута в хедер
-    */
-
+  public createChannel(name?: string, pinned?: boolean): void {
     const temp: Chat = {
-      id: 0,
+      id: this.channelCounterId++,
       ico: '',
-      name: 'test',
+      name: name,
       msgs: 0,
+      pinned: pinned,
     };
 
-    this.chats.push(temp);
+    if (name) {
+      this.chats.push(temp);
+      this.channelName = '';
+      if (pinned) {
+        this.pinnedChats.push(temp);
+      }
+    }
+  }
+
+  public pin(pinned: boolean, name?: string): void {
+    /* 
+      сделать открепление канала
+      удалять закрепленный канал, если отсутствует канал в списке
+    */
+    const temp: Chat = {
+      id: this.channelCounterId++,
+      ico: '',
+      name: name,
+      msgs: 0,
+      pinned: pinned,
+    };
+
+    this.pinnedChats.push(temp);
+  }
+
+  public unpin(): void {
+    console.log('unpinned');
   }
 
   public removeChannel(chat: Chat): void {
@@ -105,5 +97,18 @@ export class MainLeftbarComponent implements OnInit {
     } else {
       this.selectedButton = button;
     }
+  }
+
+  public openContextMenu(event: MouseEvent): void {
+    event.preventDefault();
+    this.hideContextMenu = false;
+    this.contextMenuPosition = {
+      x: event.clientX - 10,
+      y: event.clientY - 10,
+    };
+  }
+
+  public closeContextMenu(): void {
+    this.hideContextMenu = true;
   }
 }

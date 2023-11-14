@@ -7,12 +7,13 @@ import { Chat } from 'src/app/shared/chat-db';
   styleUrls: ['./main-rightbar.component.scss'],
 })
 export class MainRightbarComponent implements OnInit {
-  @Output() rightbarListener: EventEmitter<void> = new EventEmitter();
   @Input() currentChat: Chat = {
     id: 0,
     ico: '',
     name: '',
   };
+
+  @Output() rightbarListener: EventEmitter<void> = new EventEmitter();
 
   public hideRightbar: boolean = false;
 

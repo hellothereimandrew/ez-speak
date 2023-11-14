@@ -4,9 +4,12 @@
     (currentChat)="getCurrentChat($event)"
   >
   </app-main-leftbar>
+
   <app-main-chat-section
     (rightbarListener)="showRightbar()"
+    [currentChat]="currentChat"
   ></app-main-chat-section>
+
   <app-main-rightbar
     *ngIf="!hideRightbar"
     (rightbarListener)="showRightbar()"

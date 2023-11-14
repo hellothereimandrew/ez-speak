@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Users } from 'src/app/shared/users-db';
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -11,6 +12,12 @@ export class AuthSignInComponent implements OnInit {
   public hide: boolean = true;
   public type: string = 'password';
   public isAutorized: boolean = false;
+  public user: Users = {
+    id: 0,
+    ico: '',
+    name: '',
+    role: '',
+  };
 
   constructor() {}
 
@@ -61,5 +68,9 @@ export class AuthSignInComponent implements OnInit {
       this.isAutorized = true;
       this.signInData.reset();
     }
+  }
+
+  public a(): void {
+    console.log();
   }
 }

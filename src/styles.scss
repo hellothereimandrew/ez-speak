@@ -28,6 +28,16 @@ body {
   }
 }
 
+.ez-create-input {
+  background: none;
+  outline: 0;
+  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+}
+
 .ez-select {
   width: 130px;
   padding: 2px;
@@ -93,7 +103,7 @@ body {
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 3px;
-  transition: 500ms;
+  cursor: pointer;
 }
 
 .active-stroke {
@@ -108,6 +118,22 @@ body {
   cursor: pointer;
 }
 
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 400ms;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 @font-face {
   font-family: "Nunito-Light";
   src: url("./assets/fonts/Nunito-Light.ttf");
@@ -117,10 +143,3 @@ body {
   font-family: "Nunito-Regular";
   src: url("./assets/fonts/Nunito-Regular.ttf");
 }
-
-// $main-text-font: "Nunito-Regular";
-// $main-text-color: rgb(255, 255, 255);
-// // $active: rgb(59, 147, 197);
-// $leftbar-color: rgb(16, 24, 28);
-// $chat-section-color: rgb(255, 255, 255);
-// background: linear-gradient(120deg, #5481c5 0%, #7a5a9a 60%);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Chat } from 'src/app/shared/chat-db';
 
 @Component({
@@ -7,12 +7,13 @@ import { Chat } from 'src/app/shared/chat-db';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  public hideRightbar: boolean = true;
-  public currentChat: Chat = {
+  @Input() public currentChat: Chat = {
     id: 0,
     ico: '',
     name: '',
   };
+
+  public hideRightbar: boolean = true;
 
   ngOnInit(): void {}
 

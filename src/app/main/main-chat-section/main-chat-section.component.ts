@@ -3,10 +3,12 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
+import { Chat } from 'src/app/shared/chat-db';
 import { Message } from 'src/app/shared/messages-db';
 
 @Component({
@@ -17,6 +19,12 @@ import { Message } from 'src/app/shared/messages-db';
 export class MainChatSectionComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollable') public scrollable!: ElementRef;
 
+  @Input() currentChat: Chat = {
+    id: 0,
+    ico: '',
+    name: '',
+  };
+
   @Output() rightbarListener = new EventEmitter<boolean>();
 
   public contextMenuPosition: any;
@@ -24,7 +32,6 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
   public isActive: boolean = false;
   public isPrivate: boolean = false;
   public openRightBar: boolean = false;
-  public currentChatHeader: string = 'EZ-Team';
   public messages: Message[] = [];
 
   ngOnInit(): void {}
@@ -34,10 +41,6 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
   }
 
   public sendMessage(event?: any): void {
-    /* 
-      не отправляется сообщение при нажатии на иконку
-    */
-
     let message: Message = {
       id: 1,
       isMine: true,
@@ -52,13 +55,11 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
       this.messages.push(message);
       event.target.value = '';
     }
+
     return;
   }
 
   public openContextMenu(event: any): void {
-    /*
-      меняется размер окна и появляется скролл, если вызвать меню в самом низу
-    */
     event.preventDefault();
     this.hideContextMenu = false;
     this.contextMenuPosition = {
@@ -72,18 +73,10 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
   }
 
   public showRightBar(): void {
-    /*
-      передавать название канала, аву и тд
-    */
-
     this.openRightBar = !this.openRightBar;
   }
 
   public scrollAlwaysBottom(): void {
-    /* 
-      Найти другой способ прокрутки вниз
-    */
-
     const scrollContainer = this.scrollable.nativeElement;
     scrollContainer.scrollTop = scrollContainer.scrollHeight;
   }

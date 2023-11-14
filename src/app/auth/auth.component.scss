@@ -57,5 +57,10 @@
         color: rrgb(70, 188, 255);
       }
     }
+
+    .version {
+      display: flex;
+      align-items: flex-end;
+    }
   }
 }

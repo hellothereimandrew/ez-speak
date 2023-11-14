@@ -147,17 +147,52 @@
     </div>
   </div>
 
-  <div class="leftbar__create-chat">
-    <input class="" type="text" placeholder="Введите название чата" />
+  <div *ngIf="showSearch" class="leftbar__search">
+    <input class="ez-create-input" type="text" placeholder="Поиск" />
   </div>
 
   <div class="leftbar__chat-container" (contextmenu)="openContextMenu($event)">
+    <div *ngIf="showControls" class="leftbar__create-chat">
+      <div>
+        <input
+          class="ez-create-input"
+          type="text"
+          placeholder="Введите название"
+          (keyup.enter)="createChannel(channelName)"
+          [(ngModel)]="channelName"
+        />
+      </div>
+      <!-- исправить ↓ -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button
+          style="margin-right: 10px"
+          class="ez-small-button"
+          (click)="createChannel(channelName)"
+        >
+          Добавить
+        </button>
+        <button class="ez-small-button" (click)="showControls = false">
+          Отмена
+        </button>
+      </div>
+    </div>
+
+    <div *ngFor="let item of pinnedChats" class="leftbar__chat">
+      <div class="leftbar__chat-ico">{{ item.ico }}</div>
+      <div class="leftbar__chat-name">{{ item.name }}</div>
+      <div *ngIf="item.msgs !== 0" class="leftbar__unread-msgs">
+        {{ item.msgs }}
+      </div>
+      <div class="X">&times;</div>
+      <div>pinned</div>
+    </div>
+
     <div
       *ngFor="let item of chats"
       class="leftbar__chat"
       (click)="rightbarListener.emit()"
     >
-      <div class="leftbar__chat-ico"></div>
+      <div class="leftbar__chat-ico">{{ item.ico }}</div>
       <div class="leftbar__chat-name" (click)="showRightbar(item)">
         {{ item.name }}
       </div>
@@ -165,6 +200,7 @@
         {{ item.msgs }}
       </div>
       <div class="X" (click)="removeChannel(item)">&times;</div>
+      <div (click)="pin(true, item.name)">p</div>
     </div>
   </div>
 
@@ -176,7 +212,11 @@
       left: contextMenuPosition?.x + 'px'
     }"
   >
-    <p class="ez-context-menu__item" (click)="createChannel()">Создать канал</p>
+    <p class="ez-context-menu__item" (click)="showControls = true">
+      Создать канал
+    </p>
+    <p class="ez-context-menu__item">Закрепить канал</p>
+    <p class="ez-context-menu__item" (click)="showSearch = true">Найти канал</p>
     <p class="ez-context-menu__item" routerLink="/options">Настроить канал</p>
     <p class="ez-context-menu__item">Удалить канал</p>
   </div>
