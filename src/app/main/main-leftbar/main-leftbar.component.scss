@@ -111,7 +111,6 @@
     align-items: center;
     padding: 8px;
 
-
     .leftbar__chat-ico {
       min-width: 45px;
       min-height: 45px;
@@ -142,5 +141,9 @@
         cursor: pointer;
       }
     }
+  }
+
+  .leftbar__pinned-chat {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.102);
   }
 }

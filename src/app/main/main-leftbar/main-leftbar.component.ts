@@ -49,29 +49,28 @@ export class MainLeftbarComponent implements OnInit {
     this.currentChat.emit(item);
   }
 
-  public createChannel(name?: string, pinned?: boolean): void {
+  public createChannel(name?: string): void {
     const temp: Chat = {
       id: this.channelCounterId++,
       ico: '',
       name: name,
       msgs: 0,
-      pinned: pinned,
+      pinned: false,
     };
 
     if (name) {
       this.chats.push(temp);
       this.channelName = '';
-      if (pinned) {
-        this.pinnedChats.push(temp);
-      }
     }
   }
 
+  public removeChannel(chat: Chat): void {
+    this.chats.splice(this.chats.indexOf(chat), 1);
+  }
+
   public pin(pinned: boolean, name?: string): void {
-    /* 
-      сделать открепление канала
-      удалять закрепленный канал, если отсутствует канал в списке
-    */
+    // const pinnedChats: Chat[] = this.chats;
+
     const temp: Chat = {
       id: this.channelCounterId++,
       ico: '',
@@ -83,12 +82,8 @@ export class MainLeftbarComponent implements OnInit {
     this.pinnedChats.push(temp);
   }
 
-  public unpin(): void {
-    console.log('unpinned');
-  }
-
-  public removeChannel(chat: Chat): void {
-    this.chats.splice(this.chats.indexOf(chat), 1);
+  public unpin(pinnedChat: Chat): void {
+    this.pinnedChats.splice(this.pinnedChats.indexOf(pinnedChat), 1);
   }
 
   public onSelect(button: string): void {

@@ -157,7 +157,7 @@
         <input
           class="ez-create-input"
           type="text"
-          placeholder="Введите название"
+          placeholder="Введите название канала"
           (keyup.enter)="createChannel(channelName)"
           [(ngModel)]="channelName"
         />
@@ -177,14 +177,24 @@
       </div>
     </div>
 
-    <div *ngFor="let item of pinnedChats" class="leftbar__chat">
-      <div class="leftbar__chat-ico">{{ item.ico }}</div>
-      <div class="leftbar__chat-name">{{ item.name }}</div>
-      <div *ngIf="item.msgs !== 0" class="leftbar__unread-msgs">
-        {{ item.msgs }}
+    <div
+      *ngIf="pinnedChats.length > 0"
+      class="leftbar__pinned-chat"
+      (click)="rightbarListener.emit()"
+    >
+      <div *ngFor="let item of pinnedChats">
+        <div class="leftbar__chat">
+          <div class="leftbar__chat-ico">{{ item.ico }}</div>
+          <div class="leftbar__chat-name" (click)="showRightbar(item)">
+            {{ item.name }}
+          </div>
+          <div *ngIf="item.msgs !== 0" class="leftbar__unread-msgs">
+            {{ item.msgs }}
+          </div>
+          <div class="X">&times;</div>
+          <div (click)="unpin(item)">&#9733;</div>
+        </div>
       </div>
-      <div class="X">&times;</div>
-      <div>pinned</div>
     </div>
 
     <div
@@ -200,7 +210,7 @@
         {{ item.msgs }}
       </div>
       <div class="X" (click)="removeChannel(item)">&times;</div>
-      <div (click)="pin(true, item.name)">p</div>
+      <div (click)="pin(true, item.name)">&#9734;</div>
     </div>
   </div>
 
