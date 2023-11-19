@@ -6,4 +6,5 @@ export interface Message {
   time: string;
   text: string;
   isMine: boolean;
+  pinned?: boolean;
 }

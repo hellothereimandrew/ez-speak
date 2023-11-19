@@ -118,19 +118,75 @@ body {
   cursor: pointer;
 }
 
-.fadeIn {
-  animation-name: fadeIn;
+.fade-in {
+  animation-name: fade-in;
   animation-duration: 400ms;
   animation-fill-mode: both;
 }
 
-@keyframes fadeIn {
+@keyframes fade-in {
   0% {
     opacity: 0;
+    transform: translateX(-250px);
   }
 
   100% {
     opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-right {
+  animation-name: fade-in-right;
+  animation-duration: 400ms;
+  animation-fill-mode: both;
+}
+
+@keyframes fade-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-out {
+  animation-name: fade-out;
+  animation-duration: 400ms;
+  animation-fill-mode: both;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-250px);
+  }
+}
+
+.fade-bottom {
+  animation-name: fade-bottom;
+  animation-duration: 400ms;
+  animation-fill-mode: both;
+}
+
+@keyframes fade-bottom {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

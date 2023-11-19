@@ -6,7 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./main-leftbar-aside-menu.component.scss'],
 })
 export class MainLeftbarAsideMenuComponent implements OnInit {
-  @Output() public hideOptions: EventEmitter<void> = new EventEmitter();
+  @Output() public hideOptions: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {}
 

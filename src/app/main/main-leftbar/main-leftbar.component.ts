@@ -54,6 +54,7 @@ export class MainLeftbarComponent implements OnInit {
       id: this.channelCounterId++,
       ico: '',
       name: name,
+      lastMsg: 'уже круче, чем телега!',
       msgs: 0,
       pinned: false,
     };
@@ -61,6 +62,7 @@ export class MainLeftbarComponent implements OnInit {
     if (name) {
       this.chats.push(temp);
       this.channelName = '';
+      console.log(this.chats);
     }
   }
 

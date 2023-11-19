@@ -25,19 +25,24 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
     name: '',
   };
 
-  @Output() rightbarListener = new EventEmitter<boolean>();
+  @Output() rightbarListener: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
+  @Output() chatSectionListener: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
 
   public contextMenuPosition: any;
   public hideContextMenu: boolean = true;
   public isActive: boolean = false;
   public isPrivate: boolean = false;
   public openRightBar: boolean = false;
+  public showPinnedMsg: boolean = false;
+  public showChatSection: boolean = false;
   public messages: Message[] = [];
 
   ngOnInit(): void {}
 
   ngAfterViewChecked() {
-    this.scrollAlwaysBottom();
+    this.scrollClaimedToBottom();
   }
 
   public sendMessage(event?: any): void {
@@ -49,6 +54,7 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString().slice(0, -3),
       text: event.target.value,
+      pinned: true,
     };
 
     if (event.target.value.length > 0) {
@@ -76,7 +82,7 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
     this.openRightBar = !this.openRightBar;
   }
 
-  public scrollAlwaysBottom(): void {
+  public scrollClaimedToBottom(): void {
     const scrollContainer = this.scrollable.nativeElement;
     scrollContainer.scrollTop = scrollContainer.scrollHeight;
   }

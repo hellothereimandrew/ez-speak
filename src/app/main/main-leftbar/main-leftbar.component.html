@@ -7,8 +7,12 @@
       />
     </div>
     <div class="leftbar__current-info">
-      <div class="leftbar__user-name">Андрей Дарий</div>
-      <div class="leftbar__user-role">Разработчик</div>
+      <div class="leftbar__user-name">
+        <p>Андрей Дарий</p>
+      </div>
+      <div class="leftbar__user-role">
+        <p>Разработчик</p>
+      </div>
     </div>
     <div class="leftbar__options" (click)="showOptions()">
       <svg
@@ -147,12 +151,23 @@
     </div>
   </div>
 
-  <div *ngIf="showSearch" class="leftbar__search">
-    <input class="ez-create-input" type="text" placeholder="Поиск" />
+  <div *ngIf="showSearch" class="leftbar__search fade-bottom">
+    <div>
+      <input class="ez-create-input" type="text" placeholder="Поиск" />
+      <!-- исправить ↓ -->
+      <div style="display: flex; justify-content: center; align-items: center">
+        <button style="margin-right: 10px" class="ez-small-button">
+          Найти
+        </button>
+        <button class="ez-small-button" (click)="showSearch = false">
+          Отмена
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="leftbar__chat-container" (contextmenu)="openContextMenu($event)">
-    <div *ngIf="showControls" class="leftbar__create-chat">
+    <div *ngIf="showControls" class="leftbar__create-chat fade-bottom">
       <div>
         <input
           class="ez-create-input"
@@ -169,7 +184,7 @@
           class="ez-small-button"
           (click)="createChannel(channelName)"
         >
-          Добавить
+          Создать
         </button>
         <button class="ez-small-button" (click)="showControls = false">
           Отмена
@@ -183,7 +198,7 @@
       (click)="rightbarListener.emit()"
     >
       <div *ngFor="let item of pinnedChats">
-        <div class="leftbar__chat">
+        <div class="leftbar__chat fade-bottom">
           <div class="leftbar__chat-ico">{{ item.ico }}</div>
           <div class="leftbar__chat-name" (click)="showRightbar(item)">
             {{ item.name }}
@@ -199,7 +214,7 @@
 
     <div
       *ngFor="let item of chats"
-      class="leftbar__chat"
+      class="leftbar__chat fade-bottom"
       (click)="rightbarListener.emit()"
     >
       <div class="leftbar__chat-ico">{{ item.ico }}</div>

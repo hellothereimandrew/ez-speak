@@ -4,6 +4,7 @@
   height: 92vh;
   background-color: rgba(16, 24, 28, 0.1);
   backdrop-filter: blur(10px);
+  z-index: 9999;
 
   .aside-notifi__header {
     position: relative;

@@ -13,7 +13,7 @@ export class MainRightbarComponent implements OnInit {
     name: '',
   };
 
-  @Output() rightbarListener: EventEmitter<void> = new EventEmitter();
+  @Output() rightbarListener: EventEmitter<void> = new EventEmitter<void>();
 
   public hideRightbar: boolean = false;
 

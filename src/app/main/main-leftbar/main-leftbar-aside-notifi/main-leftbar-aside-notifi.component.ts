@@ -7,7 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class MainLeftbarAsideNotifiComponent implements OnInit {
   @Output()
-  public hideNotifi: EventEmitter<void> = new EventEmitter();
+  public hideNotifi: EventEmitter<void> = new EventEmitter<void>();
 
   public notifiList = {
     date: new Date().toLocaleDateString(),
