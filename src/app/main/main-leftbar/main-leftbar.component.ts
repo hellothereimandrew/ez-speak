@@ -13,6 +13,7 @@ export class MainLeftbarComponent implements OnInit {
     ico: '',
     name: '',
     role: '',
+    status: '',
   };
 
   @Output() rightbarListener: EventEmitter<boolean> =
@@ -69,7 +70,6 @@ export class MainLeftbarComponent implements OnInit {
     if (name) {
       this.chats.push(temp);
       this.channelName = '';
-      console.log(this.chats);
     }
   }
 

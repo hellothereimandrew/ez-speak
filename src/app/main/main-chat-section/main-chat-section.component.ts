@@ -27,16 +27,16 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
 
   @Output() rightbarListener: EventEmitter<boolean> =
     new EventEmitter<boolean>();
-  @Output() chatSectionListener: EventEmitter<boolean> =
-    new EventEmitter<boolean>();
 
   public contextMenuPosition: any;
   public hideContextMenu: boolean = true;
+  public hideDropDown: boolean = true;
   public isActive: boolean = false;
   public isPrivate: boolean = false;
   public openRightBar: boolean = false;
   public showPinnedMsg: boolean = false;
   public showChatSection: boolean = false;
+
   public messages: Message[] = [];
 
   ngOnInit(): void {}
@@ -54,7 +54,7 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString().slice(0, -3),
       text: event.target.value,
-      pinned: true,
+      pinned: false,
     };
 
     if (event.target.value.length > 0) {
@@ -76,6 +76,11 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
 
   public closeContextMenu(): void {
     this.hideContextMenu = true;
+  }
+
+  public showDropDown(): void {
+    this.hideDropDown = !this.hideDropDown;
+    console.log(this.hideDropDown);
   }
 
   public showRightBar(): void {

@@ -69,8 +69,4 @@ export class AuthSignInComponent implements OnInit {
       this.signInData.reset();
     }
   }
-
-  public a(): void {
-    console.log();
-  }
 }

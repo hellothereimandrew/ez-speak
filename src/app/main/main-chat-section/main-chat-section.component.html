@@ -1,26 +1,40 @@
 <div class="chat-section" (click)="closeContextMenu()">
   <div class="header">
-    <div
-      *ngIf="currentChat.name"
-      class="header__current-chat"
-      (click)="rightbarListener.emit()"
-    >
-      {{ currentChat.name }}
-      <div style="cursor: pointer">
+    <div *ngIf="currentChat.name" class="header__current-chat">
+      <p class="header__current-chat-name" (click)="rightbarListener.emit()">
+        {{ currentChat.name }}
+      </p>
+      <div class="header__current-chat-props" (click)="showDropDown()">
         <svg
-          width="16"
-          height="9"
-          viewBox="0 0 16 9"
+          width="23"
+          height="5"
+          viewBox="0 0 23 5"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path
-            d="M1 1L8 8L15 1"
-            stroke="white"
-            stroke-opacity="0.3"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+          <ellipse
+            cx="2.55556"
+            cy="2.5"
+            rx="2.55556"
+            ry="2.5"
+            fill="white"
+            fill-opacity="0.3"
+          />
+          <ellipse
+            cx="11.5"
+            cy="2.5"
+            rx="2.55556"
+            ry="2.5"
+            fill="white"
+            fill-opacity="0.3"
+          />
+          <ellipse
+            cx="20.4445"
+            cy="2.5"
+            rx="2.55556"
+            ry="2.5"
+            fill="white"
+            fill-opacity="0.3"
           />
         </svg>
       </div>
@@ -122,5 +136,11 @@
     <p class="ez-context-menu__item">Выбрать</p>
     <p class="ez-context-menu__item">Изменить</p>
     <p class="ez-context-menu__item">Удалить</p>
+  </div>
+
+  <div *ngIf="!hideDropDown" class="ez-drop-down-menu">
+    <p>Пункт</p>
+    <p>Пункт</p>
+    <p>Пункт</p>
   </div>
 </div>

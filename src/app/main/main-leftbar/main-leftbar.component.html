@@ -202,6 +202,7 @@
           <div class="leftbar__chat-ico">{{ item.ico }}</div>
           <div class="leftbar__chat-name" (click)="showChatSection()">
             {{ item.name }}
+            {{ item.lastMsg }}
           </div>
           <div *ngIf="item.msgs !== 0" class="leftbar__unread-msgs">
             {{ item.msgs }}
@@ -214,12 +215,13 @@
 
     <div
       *ngFor="let item of chats"
-      class="leftbar__chat fade-bottom"
-      (click)="rightbarListener.emit()"
+      class="leftbar__chat-wrap fade-bottom"
+      (click)="chatSectionListener.emit()"
     >
       <div class="leftbar__chat-ico">{{ item.ico }}</div>
-      <div class="leftbar__chat-name" (click)="showRightbar(item)">
-        {{ item.name }}
+      <div class="leftbar__chat" (click)="showRightbar(item)">
+        <p>{{ item.name }}</p>
+        <p>{{ item.lastMsg }}</p>
       </div>
       <div *ngIf="item.msgs !== 0" class="leftbar__unread-msgs">
         {{ item.msgs }}

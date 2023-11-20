@@ -13,15 +13,20 @@ export class MainComponent implements OnInit {
     name: '',
   };
 
+  public hideChatSection: boolean = true;
   public hideRightbar: boolean = true;
 
   ngOnInit(): void {}
 
-  public showRightbar(): void {
-    this.hideRightbar = !this.hideRightbar;
+  public showChatSection(): void {
+    this.hideChatSection = !this.hideChatSection;
   }
 
   public getCurrentChat(chat: Chat): void {
     this.currentChat = chat;
+  }
+
+  public showRightbar(): void {
+    this.hideRightbar = !this.hideRightbar;
   }
 }

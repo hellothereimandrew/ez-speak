@@ -9,7 +9,20 @@
 
   .header__current-chat {
     display: flex;
-    cursor: pointer;
+    align-items: center;
+    width: 100%;
+
+    .header__current-chat-name {
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .header__current-chat-props {
+      display: flex;
+      padding-right: 20px;
+      cursor: pointer;
+    }
   }
 }
 

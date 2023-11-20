@@ -1,14 +1,19 @@
 <div class="main">
-  <app-main-leftbar (currentChat)="getCurrentChat($event)"> </app-main-leftbar>
+  <app-main-leftbar
+    (currentChat)="getCurrentChat($event)"
+    (chatSectionListener)="showChatSection()"
+  ></app-main-leftbar>
 
   <app-main-chat-section
-    (rightbarListener)="showRightbar()"
+    *ngIf="!hideChatSection"
     [currentChat]="currentChat"
+    (chatSectionListener)="showChatSection()"
+    (rightbarListener)="showRightbar()"
   ></app-main-chat-section>
 
   <app-main-rightbar
     *ngIf="!hideRightbar"
-    (rightbarListener)="showRightbar()"
     [currentChat]="currentChat"
+    (rightbarListener)="showRightbar()"
   ></app-main-rightbar>
 </div>
