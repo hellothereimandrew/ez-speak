@@ -17,12 +17,15 @@ export class MainLeftbarComponent implements OnInit {
 
   @Output() rightbarListener: EventEmitter<boolean> =
     new EventEmitter<boolean>();
+  @Output() chatSectionListener: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
   @Output() currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
   public hideNotifi: boolean = true;
   public hideOptions: boolean = true;
   public hideContextMenu: boolean = true;
   public hideRightbar: boolean = true;
+  public hideChatSection: boolean = true;
   public showControls: boolean = false;
   public showSearch: boolean = false;
   public pinned: boolean = false;
@@ -47,6 +50,10 @@ export class MainLeftbarComponent implements OnInit {
   public showRightbar(item: Chat): void {
     this.hideRightbar = false;
     this.currentChat.emit(item);
+  }
+
+  public showChatSection(): void {
+    this.hideChatSection = false;
   }
 
   public createChannel(name?: string): void {
