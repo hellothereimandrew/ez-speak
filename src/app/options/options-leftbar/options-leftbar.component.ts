@@ -6,7 +6,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./options-leftbar.component.scss'],
 })
 export class OptionsLeftbarComponent implements OnInit {
-  constructor() {}
-
   ngOnInit(): void {}
 }

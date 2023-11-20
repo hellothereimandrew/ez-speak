@@ -8,7 +8,5 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class MainLeftbarAsideMenuComponent implements OnInit {
   @Output() public hideOptions: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor() {}
-
   ngOnInit(): void {}
 }

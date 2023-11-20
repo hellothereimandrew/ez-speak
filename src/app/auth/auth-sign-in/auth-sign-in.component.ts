@@ -8,7 +8,6 @@ import { Users } from 'src/app/shared/users-db';
   styleUrls: ['./auth-sign-in.component.scss'],
 })
 export class AuthSignInComponent implements OnInit {
-  public authComponent = '';
   public hide: boolean = true;
   public type: string = 'password';
   public isAutorized: boolean = false;
@@ -19,12 +18,7 @@ export class AuthSignInComponent implements OnInit {
     role: '',
   };
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.submit();
-    this.isValid();
-  }
+  ngOnInit(): void {}
 
   signInData: FormGroup = new FormGroup({
     login: new FormControl('', [Validators.required]),
@@ -57,8 +51,8 @@ export class AuthSignInComponent implements OnInit {
       }
       return false;
     }
-    formIsValid = true;
-    return true;
+
+    return formIsValid;
   }
 
   public submit(): void {

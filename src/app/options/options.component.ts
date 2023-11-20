@@ -14,9 +14,7 @@ export class OptionsComponent implements OnInit {
     'channels',
   ];
 
-  constructor() {}
-
   ngOnInit(): void {}
 
-  public selectOptions(): void {}
+  public selectOption(): void {}
 }

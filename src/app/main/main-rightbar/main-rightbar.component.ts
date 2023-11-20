@@ -17,8 +17,6 @@ export class MainRightbarComponent implements OnInit {
 
   public hideRightbar: boolean = false;
 
-  constructor() {}
-
   ngOnInit(): void {}
 
   public showRightbar(): void {

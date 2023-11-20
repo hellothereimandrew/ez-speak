@@ -6,11 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
-  public buttons: string[] = ['sign-in', 'sign-up'];
   public selectedButton: string = '';
-  public alwaysSelected: boolean = true;
-
-  constructor() {}
 
   public onSelect(button: string, alwaysSelected: boolean = true): void {
     if (this.selectedButton === button) {

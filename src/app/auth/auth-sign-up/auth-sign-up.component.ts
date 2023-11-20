@@ -8,7 +8,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AuthSignUpComponent implements OnInit {
   public isAutorized: boolean = false;
-  constructor() {}
 
   ngOnInit(): void {}
 

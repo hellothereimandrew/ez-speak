@@ -18,8 +18,6 @@ export class MainLeftbarAsideNotifiComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  constructor() {}
-
   public clearNotifications(): void {
     // this.notifiList = [];
     console.log('clear');

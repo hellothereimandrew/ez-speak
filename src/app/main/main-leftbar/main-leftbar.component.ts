@@ -16,8 +16,6 @@ export class MainLeftbarComponent implements OnInit {
     status: '',
   };
 
-  @Output() rightbarListener: EventEmitter<boolean> =
-    new EventEmitter<boolean>();
   @Output() chatSectionListener: EventEmitter<boolean> =
     new EventEmitter<boolean>();
   @Output() currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
@@ -25,11 +23,9 @@ export class MainLeftbarComponent implements OnInit {
   public hideNotifi: boolean = true;
   public hideOptions: boolean = true;
   public hideContextMenu: boolean = true;
-  public hideRightbar: boolean = true;
   public hideChatSection: boolean = true;
   public showControls: boolean = false;
   public showSearch: boolean = false;
-  public pinned: boolean = false;
   public contextMenuPosition: any;
   public selectedButton: string = '';
   public channelName: string = '';
@@ -48,13 +44,9 @@ export class MainLeftbarComponent implements OnInit {
     return true;
   }
 
-  public showRightbar(item: Chat): void {
-    this.hideRightbar = false;
-    this.currentChat.emit(item);
-  }
-
-  public showChatSection(): void {
+  public showChatSection(item: Chat): void {
     this.hideChatSection = false;
+    this.currentChat.emit(item);
   }
 
   public createChannel(name?: string): void {
@@ -84,6 +76,7 @@ export class MainLeftbarComponent implements OnInit {
       id: this.channelCounterId++,
       ico: '',
       name: name,
+      lastMsg: 'уже круче, чем телега!',
       msgs: 0,
       pinned: pinned,
     };
