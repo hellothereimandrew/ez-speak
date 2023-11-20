@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ez-speak:build:production"
+              "buildTarget": "ez-speak:build:production"
             },
             "development": {
-              "browserTarget": "ez-speak:build:development"
+              "buildTarget": "ez-speak:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ez-speak:build"
+            "buildTarget": "ez-speak:build"
           }
         },
         "test": {
