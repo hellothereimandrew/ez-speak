@@ -18,6 +18,7 @@
     }
 
     .aside-options__fullscrean-opt {
+      display: flex;
       cursor: pointer;
     }
 
@@ -35,11 +36,47 @@
   }
 
   .options {
-    padding: 12px;
+    padding: 5px 12px 0 12px;
 
-    .aside-options-usual-header {
-      text-align: center;
-      margin-bottom: 5px;
+    .aside-options-usual {
+      margin-bottom: 10px;
+
+      .aside-options-usual-header {
+        text-align: center;
+        margin-bottom: 8px;
+      }
+
+      .aside-options-usual-wrap {
+        .aside-options-usual__theme {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+
+          .theme-picker {
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+
+            .theme-picker__item {
+              width: 25px;
+              height: 25px;
+              border: 1px solid white;
+              border-radius: 100%;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .aside-options-usual__background {
+          display: flex;
+          margin-bottom: 5px;
+        }
+
+        .aside-options-usual__font {
+          display: flex;
+          margin-bottom: 10px;
+        }
+      }
     }
 
     .aside-options-audio {
@@ -51,8 +88,9 @@
       }
 
       .aside-options-audio__wrap {
-
         .aside-options-audio__volume {
+          display: flex;
+          align-items: center;
           margin-bottom: 5px;
         }
 
@@ -61,7 +99,23 @@
         }
 
         .input-range {
-          width: 180px;
+          width: 50%;
+          margin-left: 5px;
+        }
+
+        .aside-options-audio__mic {
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+        }
+
+        .heading {
+          margin-bottom: 3px;
+        }
+
+        .input-range {
+          width: 50%;
+          margin-left: 5px;
         }
       }
     }
@@ -75,7 +129,6 @@
       }
 
       .aside-options-video__wrap {
-
         .heading {
           margin-bottom: 3px;
         }
@@ -88,10 +141,11 @@
     align-items: center;
 
     .aside-options-logout__text {
+      width: 100%;
+      text-align: center;
       margin-left: 8px;
 
       &:hover {
-        // font-family: Nunito-Regular;
         color: rgb(59, 147, 197);
         cursor: pointer;
       }

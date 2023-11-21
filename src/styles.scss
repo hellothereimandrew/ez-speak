@@ -4,13 +4,28 @@
   box-sizing: border-box;
   font-family: "Nunito-Light";
   color: rgb(240, 240, 240);
-  // cursor: default;
 }
 
 body {
   width: 100vw;
   height: 100vh;
   background-color: rgb(21, 29, 35);
+}
+
+.dark-theme {
+  color: rgb(240, 240, 240);
+  background-color: rgb(21, 29, 35);
+}
+
+.light-theme {
+  color: black;
+  background-color: black;
+}
+
+.combined-theme {
+  color: black;
+  background: black;
+  background-color: black;
 }
 
 .ez-input {
@@ -48,12 +63,6 @@ body {
   border: 0;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 3px;
-}
-
-.ez-select__option {
-  background: none;
-  outline: 0;
-  border: 0;
 }
 
 .ez-context-menu {

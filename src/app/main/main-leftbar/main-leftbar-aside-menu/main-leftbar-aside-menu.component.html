@@ -43,30 +43,49 @@
     <div class="aside-options-usual">
       <p class="aside-options-usual-header">Оформление</p>
       <div class="aside-options-usual-wrap">
-        <div style="display: flex" class="aside-options-usual__background">
-          <p class="">Тема</p>
-          <select class="ez-select">
-            <option class="ez-select__option" value="">Темная</option>
-            <option class="ez-select__option" value="">Светлая</option>
-            <option class="ez-select__option" value="">Комбинированная</option>
-          </select>
+        <div class="aside-options-usual__theme">
+          <p>Тема</p>
+          <!-- переделать на *ngFor ↓ -->
+          <div class="theme-picker">
+            <div class="theme-picker__item"></div>
+            <div class="theme-picker__item"></div>
+            <div class="theme-picker__item"></div>
+            <div class="theme-picker__item"></div>
+            <div class="theme-picker__item"></div>
+          </div>
         </div>
-        <div style="display: flex" class="aside-options-usual__background">
-          <p class="">Фон сообщений</p>
+
+        <div class="aside-options-usual__background">
+          <!-- исправить ↓ -->
+          <p style="margin-right: 10px">Фон сообщений</p>
           <input type="file" class="ez-small-button" />
+        </div>
+
+        <div class="aside-options-usual__font">
+          <!-- исправить ↓ -->
+          <p style="margin-right: 10px">Шрифт</p>
+          <input class="ez-input" type="text" value="{{ fontFamily }}" />
         </div>
       </div>
     </div>
+
+    <!-- <div class="aside-options-usual">
+      <p class="aside-options-usual-header">Настройки уведомлений</p>
+      <div style="display: flex">
+        <p>Выключить звук уведомлений</p>
+        <input type="checkbox" />
+      </div>
+    </div> -->
 
     <div class="aside-options-audio">
       <p class="aside-options-audio__header">Настройки звука</p>
       <div class="aside-options-audio__wrap">
         <div class="aside-options-audio__volume">
-          <p class="heading">Громкость звука</p>
+          <p class="heading">Звук</p>
           <input class="input-range" type="range" />
         </div>
         <div class="aside-options-audio__mic">
-          <p class="heading">Громкость микрофона</p>
+          <p class="heading">Микрофон</p>
           <input class="input-range" type="range" />
         </div>
       </div>
@@ -88,11 +107,11 @@
         </select>
       </div>
     </div>
+  </div>
 
-    <div class="aside-options-logout">
-      <p class="aside-options-logout__text" routerLink="">
-        Выйти из учетной записи
-      </p>
-    </div>
+  <div class="aside-options-logout">
+    <p class="aside-options-logout__text" routerLink="">
+      Выйти из учетной записи
+    </p>
   </div>
 </div>
