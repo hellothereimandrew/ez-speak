@@ -41,6 +41,7 @@ export class MainLeftbarComponent implements OnInit {
 
   public showOptions(): boolean {
     this.hideOptions = !this.hideOptions;
+
     return true;
   }
 

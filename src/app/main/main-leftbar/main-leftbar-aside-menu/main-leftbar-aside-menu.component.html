@@ -40,10 +40,10 @@
   </div>
 
   <div class="options">
-    <div class="aside-options-usual">
-      <p class="aside-options-usual-header">Оформление</p>
-      <div class="aside-options-usual-wrap">
-        <div class="aside-options-usual__theme">
+    <div class="aside-options-decor">
+      <p class="aside-options-decor-header">Оформление</p>
+      <div class="aside-options-decor-wrap">
+        <div class="aside-options-decor__theme">
           <p>Тема</p>
           <!-- переделать на *ngFor ↓ -->
           <div class="theme-picker">
@@ -53,6 +53,11 @@
             <div class="theme-picker__item"></div>
             <div class="theme-picker__item"></div>
           </div>
+        </div>
+
+        <div style="display: flex; margin-bottom: 10px">
+          <p>Цвет активных элементов</p>
+          <input type="color" />
         </div>
 
         <div class="aside-options-usual__background">
@@ -65,6 +70,11 @@
           <!-- исправить ↓ -->
           <p style="margin-right: 10px">Шрифт</p>
           <input class="ez-input" type="text" value="{{ fontFamily }}" />
+        </div>
+
+        <div style="display: flex">
+          <p>Цвет шрифта</p>
+          <input type="color" />
         </div>
       </div>
     </div>
@@ -84,10 +94,12 @@
           <p class="heading">Звук</p>
           <input class="input-range" type="range" />
         </div>
+        <!-- <p>Устройство ввода</p> -->
         <div class="aside-options-audio__mic">
           <p class="heading">Микрофон</p>
           <input class="input-range" type="range" />
         </div>
+        <!-- <p>Устройство вывода</p> -->
       </div>
     </div>
 

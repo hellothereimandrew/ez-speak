@@ -80,7 +80,6 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
 
   public showDropDown(): void {
     this.hideDropDown = !this.hideDropDown;
-    console.log(this.hideDropDown);
   }
 
   public showRightBar(): void {

@@ -10,23 +10,23 @@ export class MainLeftbarAsideMenuComponent implements OnInit {
 
   public activeTheme: boolean = false;
   public fontFamily: string = 'Nunito-Light';
-  public themeName: string = 'dark';
+  public themeName: string = 'dark-theme';
 
   ngOnInit(): void {}
 
-  public setAppTheme(themeName: string = 'dark'): string {
+  public setAppTheme(themeName: string = 'dark-theme'): string {
     localStorage.setItem('theme', themeName);
 
-    if (localStorage.getItem('theme') === 'dark') {
-      themeName = 'dark';
+    if (localStorage.getItem('theme') === 'dark-theme') {
+      themeName = 'dark-theme';
     }
 
-    if (localStorage.getItem('theme') === 'light') {
-      themeName = 'light';
+    if (localStorage.getItem('theme') === 'light-theme') {
+      themeName = 'light-theme';
     }
 
-    if (localStorage.getItem('theme') === 'combined') {
-      themeName = 'combined';
+    if (localStorage.getItem('theme') === 'combined-theme') {
+      themeName = 'combined-theme';
     }
 
     return themeName;

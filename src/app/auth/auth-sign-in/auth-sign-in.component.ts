@@ -46,9 +46,11 @@ export class AuthSignInComponent implements OnInit {
       if (this.signInData.controls['login'].invalid) {
         formIsValid = false;
       }
+
       if (this.signInData.controls['password'].invalid) {
         formIsValid = false;
       }
+
       return false;
     }
 
