@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Chat } from 'src/app/shared/chat-db';
+import {Component, Input, OnInit} from '@angular/core';
+import {Chat} from 'src/app/shared/chat-db';
 
 @Component({
   selector: 'app-main',

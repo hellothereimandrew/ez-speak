@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-options',
@@ -7,12 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OptionsComponent implements OnInit {
   public selectedOption: string = '';
-  public optionsList: string[] = [
-    'account',
-    'general',
-    'periphery',
-    'channels',
-  ];
+  public optionsList: string[] = ['account', 'general', 'periphery', 'channels'];
 
   ngOnInit(): void {}
 

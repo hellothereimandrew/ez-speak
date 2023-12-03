@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Users } from 'src/app/shared/users-db';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Users} from 'src/app/shared/users-db';
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -22,10 +22,7 @@ export class AuthSignInComponent implements OnInit {
 
   signInData: FormGroup = new FormGroup({
     login: new FormControl('', [Validators.required]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     checked: new FormControl(false),
   });
 

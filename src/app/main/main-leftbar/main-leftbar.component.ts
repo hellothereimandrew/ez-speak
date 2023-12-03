@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Chat } from 'src/app/shared/chat-db';
-import { Users } from 'src/app/shared/users-db';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Chat} from 'src/app/shared/chat-db';
+import {Users} from 'src/app/shared/users-db';
 
 @Component({
   selector: 'app-main-leftbar',
@@ -16,8 +16,7 @@ export class MainLeftbarComponent implements OnInit {
     status: '',
   };
 
-  @Output() chatSectionListener: EventEmitter<boolean> =
-    new EventEmitter<boolean>();
+  @Output() chatSectionListener: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
   public hideNotifi: boolean = true;

@@ -1,10 +1,7 @@
 <div class="leftbar" (click)="closeContextMenu()">
   <div class="leftbar__user-card">
     <div class="leftbar__user-ico">
-      <img
-        src="../assets/img/ZKoQpzcDggWg2ogpkHjR9JnzY9lbPC7wR_gI-BZX5ncn7VOpt-G_a2jJmQBzC4gx.jpg"
-        alt="alt"
-      />
+      <img src="../assets/img/ZKoQpzcDggWg2ogpkHjR9JnzY9lbPC7wR_gI-BZX5ncn7VOpt-G_a2jJmQBzC4gx.jpg" alt="alt" />
     </div>
     <div class="leftbar__current-info">
       <div class="leftbar__user-name">
@@ -21,8 +18,7 @@
         viewBox="0 0 27 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        [ngClass]="{ active: !hideOptions }"
-      >
+        [ngClass]="{active: !hideOptions}">
         <path
           d="M1.5 17H25.5M1 9H25M1 1H25"
           stroke="white"
@@ -31,21 +27,14 @@
           stroke-miterlimit="1.30541"
           stroke-linecap="round"
           stroke-linejoin="round"
-          [ngClass]="{ 'active-stroke': !hideOptions }"
-        />
+          [ngClass]="{'active-stroke': !hideOptions}" />
       </svg>
     </div>
   </div>
 
-  <app-main-leftbar-aside-notifi
-    *ngIf="!hideNotifi"
-    (hideNotifi)="showAside($event)"
-  ></app-main-leftbar-aside-notifi>
+  <app-main-leftbar-aside-notifi *ngIf="!hideNotifi" (hideNotifi)="showAside($event)"></app-main-leftbar-aside-notifi>
 
-  <app-main-leftbar-aside-menu
-    *ngIf="!hideOptions"
-    (hideOptions)="showOptions()"
-  ></app-main-leftbar-aside-menu>
+  <app-main-leftbar-aside-menu *ngIf="!hideOptions" (hideOptions)="showOptions()"></app-main-leftbar-aside-menu>
 
   <div class="leftbar__nav">
     <div class="leftbar__private">
@@ -55,15 +44,13 @@
         viewBox="0 0 31 21"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        (click)="onSelect('private')"
-      >
+        (click)="onSelect('private')">
         <path
           d="M27 1H5.26087C3.60402 1 2.26087 2.34315 2.26087 4V16.2L1.62985 18.1018C1.37034 18.8839 2.1151 19.6266 2.8965 19.3649L4.78261 18.7333H27C28.6569 18.7333 30 17.3902 30 15.7333V4C30 2.34315 28.6569 1 27 1Z"
           stroke="white"
           stroke-opacity="0.3"
           stroke-width="2"
-          [ngClass]="{ 'active-stroke': selectedButton === 'private' }"
-        />
+          [ngClass]="{'active-stroke': selectedButton === 'private'}" />
         <circle
           cx="9"
           cy="10"
@@ -71,8 +58,7 @@
           stroke="white"
           stroke-opacity="0.3"
           stroke-width="2"
-          [ngClass]="{ 'active-stroke': selectedButton === 'private' }"
-        />
+          [ngClass]="{'active-stroke': selectedButton === 'private'}" />
         <circle
           cx="16"
           cy="10"
@@ -80,8 +66,7 @@
           stroke="white"
           stroke-opacity="0.3"
           stroke-width="2"
-          [ngClass]="{ 'active-stroke': selectedButton === 'private' }"
-        />
+          [ngClass]="{'active-stroke': selectedButton === 'private'}" />
         <circle
           cx="23"
           cy="10"
@@ -89,8 +74,7 @@
           stroke="white"
           stroke-opacity="0.3"
           stroke-width="2"
-          [ngClass]="{ 'active-stroke': selectedButton === 'private' }"
-        />
+          [ngClass]="{'active-stroke': selectedButton === 'private'}" />
       </svg>
     </div>
 
@@ -101,16 +85,14 @@
         viewBox="0 0 25 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        (click)="onSelect('public')"
-      >
+        (click)="onSelect('public')">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
           d="M12.5006 12.4049L12.6302 12.405L12.9203 12.406C15.1371 12.4211 20.2031 12.6534 20.2031 16.2155C20.2031 19.7542 15.3137 19.9849 12.9548 20L12.0809 20C9.86394 19.9849 4.79694 19.7528 4.79694 16.1952C4.79694 12.6521 9.86394 12.421 12.0809 12.406L12.3709 12.405C12.4159 12.4049 12.4592 12.4049 12.5006 12.4049ZM12.5006 14.1917C9.77232 14.1917 6.51932 14.5395 6.51932 16.1952C6.51932 17.8135 9.57816 18.1918 12.2512 18.2133L12.5006 18.2143C15.2288 18.2143 18.4807 17.8677 18.4807 16.2155C18.4807 14.5431 15.2288 14.1917 12.5006 14.1917ZM21.6333 11.9215C24.4155 12.3539 25 13.7095 25 14.7708C25 15.4188 24.7543 16.6017 23.1123 17.2509C23.0112 17.2902 22.9079 17.3092 22.8057 17.3092C22.4589 17.3092 22.1317 17.0901 22.0008 16.7339C21.8308 16.2729 22.0547 15.7559 22.4991 15.5808C23.2776 15.2735 23.2776 14.934 23.2776 14.7708C23.2776 14.2491 22.638 13.8846 21.3773 13.6892C20.9076 13.6154 20.5827 13.1616 20.6527 12.672C20.7228 12.1836 21.1591 11.8584 21.6333 11.9215ZM4.34729 12.672C4.41733 13.1616 4.09237 13.6154 3.62274 13.6892C2.36196 13.8846 1.72238 14.2491 1.72238 14.7708C1.72238 14.934 1.72238 15.2723 2.50204 15.5808C2.94642 15.7559 3.17033 16.2729 3.00039 16.7339C2.86948 17.0901 2.54223 17.3092 2.19546 17.3092C2.09327 17.3092 1.98992 17.2902 1.88888 17.2509C0.245726 16.6005 0 15.4176 0 14.7708C0 13.7107 0.584461 12.3539 3.36783 11.9215C3.84206 11.8596 4.27609 12.1836 4.34729 12.672ZM12.5006 0C15.3942 0 17.7469 2.44191 17.7469 5.44249C17.7469 8.44306 15.3942 10.885 12.5006 10.885H12.4696C11.0687 10.8802 9.75625 10.3108 8.77334 9.28165C7.78814 8.25366 7.24961 6.88858 7.25531 5.43891C7.25531 2.44191 9.60812 0 12.5006 0ZM12.5006 1.78677C10.5577 1.78677 8.97771 3.42702 8.97771 5.44249C8.97429 6.41925 9.33484 7.33288 9.99508 8.02258C10.6553 8.71227 11.5349 9.09464 12.4719 9.09821L12.5006 9.99159V9.09821C14.4434 9.09821 16.0246 7.45915 16.0246 5.44249C16.0246 3.42702 14.4434 1.78677 12.5006 1.78677ZM19.6071 1.16676C21.6257 1.51101 23.0921 3.30254 23.0921 5.42641C23.0875 7.56457 21.5477 9.39898 19.5095 9.69558C19.4693 9.70154 19.4291 9.70392 19.3901 9.70392C18.9675 9.70392 18.5989 9.38111 18.5381 8.93442C18.4726 8.44485 18.7999 7.99339 19.2718 7.92549C20.466 7.75158 21.3674 6.67714 21.3697 5.42402C21.3697 4.18163 20.5108 3.13101 19.3269 2.9297C18.8585 2.84989 18.5404 2.3901 18.6173 1.9029C18.6954 1.41571 19.1352 1.08933 19.6071 1.16676ZM6.38383 1.9029C6.46076 2.3901 6.14269 2.84989 5.67421 2.9297C4.49036 3.13101 3.63147 4.18163 3.63147 5.42641C3.63376 6.67714 4.53514 7.75277 5.72818 7.92549C6.20011 7.99339 6.52736 8.44485 6.46191 8.93442C6.40105 9.38111 6.03246 9.70392 5.60991 9.70392C5.57087 9.70392 5.53068 9.70154 5.49049 9.69558C3.45234 9.39898 1.91368 7.56457 1.90909 5.42879C1.90909 3.30254 3.37541 1.51101 5.39403 1.16676C5.87745 1.08814 6.30575 1.4181 6.38383 1.9029Z"
           fill="white"
           fill-opacity="0.3"
-          [ngClass]="{ 'active-fill': selectedButton === 'public' }"
-        />
+          [ngClass]="{'active-fill': selectedButton === 'public'}" />
       </svg>
     </div>
 
@@ -121,14 +103,12 @@
         viewBox="0 0 22 22"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        (click)="onSelect('channel')"
-      >
+        (click)="onSelect('channel')">
         <path
           d="M3.68323 18.8136C3.68323 19.3659 4.13094 19.8136 4.68323 19.8136C5.23551 19.8136 5.68323 19.3659 5.68323 18.8136H3.68323ZM3.30445 5.08284C2.03101 5.08284 1.17806 5.92309 0.696225 6.84294C0.216678 7.75842 0.00295878 8.90749 3.05755e-05 9.99732C-0.00289673 11.0868 0.204528 12.2379 0.683734 13.1558C1.16729 14.0821 2.02476 14.9172 3.30446 14.9172V12.9172C3.03734 12.9172 2.73996 12.7729 2.45669 12.2303C2.16907 11.6793 1.99769 10.8718 2.00002 10.0027C2.00236 9.13393 2.17797 8.32442 2.46788 7.77097C2.7555 7.22188 3.05213 7.08284 3.30445 7.08284V5.08284ZM3.30445 7.08284C7.32657 7.08284 9.88448 6.44936 12.0466 5.46241C13.1107 4.9767 14.0596 4.41399 15.0042 3.83817C15.9576 3.25704 16.9044 2.66399 18.0217 2.06904L17.0817 0.30372C15.9002 0.932891 14.8925 1.56397 13.9632 2.13044C13.0252 2.70223 12.1634 3.21061 11.2161 3.64299C9.35573 4.49221 7.08885 5.08284 3.30445 5.08284V7.08284ZM17.0817 19.6963C17.5126 19.9257 17.9862 20.0437 18.4779 19.9852C18.9686 19.9269 19.3838 19.7041 19.7185 19.4116C20.3536 18.8564 20.7825 17.9792 21.0869 17.0633C21.7093 15.1906 22 12.5611 22 9.99999C22 7.4389 21.7093 4.80934 21.0869 2.93665C20.7825 2.02079 20.3536 1.1436 19.7185 0.588416C19.3838 0.295876 18.9686 0.073086 18.4779 0.0147715C17.9862 -0.0436729 17.5126 0.0742601 17.0817 0.30372L18.0217 2.06904C18.1655 1.99247 18.2307 1.99947 18.2419 2.00079C18.2541 2.00225 18.3058 2.00993 18.4022 2.09419C18.6292 2.2926 18.9187 2.75428 19.189 3.56748C19.7159 5.15291 20 7.54222 20 9.99999C20 12.4578 19.7159 14.8471 19.189 16.4325C18.9187 17.2457 18.6292 17.7074 18.4022 17.9058C18.3058 17.9901 18.2541 17.9977 18.2419 17.9992C18.2307 18.0005 18.1655 18.0075 18.0217 17.931L17.0817 19.6963ZM3.30446 14.9172C3.84355 14.9172 4.18546 14.8862 4.61662 14.9149L4.74984 12.9194C4.24151 12.8855 3.65242 12.9172 3.30446 12.9172V14.9172ZM4.68323 14.9172C9.87249 14.9172 12.302 17.1512 17.0817 19.6963L18.0217 17.931C13.606 15.5796 10.5241 12.9172 4.68323 12.9172V14.9172ZM3.68323 13.9172V18.8136H5.68323V13.9172H3.68323Z"
           fill="white"
           fill-opacity="0.3"
-          [ngClass]="{ 'active-fill': selectedButton === 'channel' }"
-        />
+          [ngClass]="{'active-fill': selectedButton === 'channel'}" />
       </svg>
     </div>
 
@@ -140,16 +120,14 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         (click)="showAside()"
-        [ngClass]="{ 'active-stroke': !hideNotifi }"
-      >
+        [ngClass]="{'active-stroke': !hideNotifi}">
         <path
-          [ngClass]="{ 'active-stroke': !hideNotifi }"
+          [ngClass]="{'active-stroke': !hideNotifi}"
           fill-rule="evenodd"
           clip-rule="evenodd"
           d="M7.12742 19.5503C7.6315 20.1407 8.27863 20.4651 8.95009 20.4651H8.95106C9.62544 20.4651 10.2755 20.1407 10.7805 19.5493C11.0511 19.2352 11.5123 19.2096 11.8111 19.493C12.1108 19.7765 12.1351 20.2625 11.8656 20.5767C11.0793 21.4945 10.0449 22 8.95106 22H8.94912C7.85824 21.999 6.82575 21.4935 6.04238 20.5756C5.77282 20.2615 5.79715 19.7754 6.09688 19.493C6.3966 19.2086 6.85786 19.2341 7.12742 19.5503ZM8.99855 0C13.3241 0 16.2299 3.54251 16.2299 6.8507C16.2299 8.55237 16.6415 9.27377 17.0784 10.0392C17.5105 10.7943 18 11.6518 18 13.2727C17.6604 17.4138 13.5489 17.7514 8.99855 17.7514C4.4482 17.7514 0.335755 17.4138 1.28807e-05 13.3381C-0.00289351 11.6518 0.486591 10.7943 0.91866 10.0392L1.07119 9.76918C1.44675 9.09046 1.76723 8.35218 1.76723 6.8507C1.76723 3.54251 4.67299 0 8.99855 0ZM8.99855 1.53488C5.59747 1.53488 3.22692 4.33656 3.22692 6.8507C3.22692 8.97805 2.66543 9.9614 2.16913 10.8291C1.77112 11.526 1.4568 12.0765 1.4568 13.2727C1.61931 15.2025 2.83086 16.2166 8.99855 16.2166C15.1322 16.2166 16.3817 15.1575 16.5432 13.2061C16.5403 12.0765 16.226 11.526 15.828 10.8291C15.3317 9.9614 14.7702 8.97805 14.7702 6.8507C14.7702 4.33656 12.3996 1.53488 8.99855 1.53488Z"
           fill="white"
-          fill-opacity="0.3"
-        />
+          fill-opacity="0.3" />
       </svg>
     </div>
   </div>
@@ -159,12 +137,8 @@
       <input class="ez-create-input" type="text" placeholder="Поиск" />
       <!-- исправить ↓ -->
       <div style="display: flex; justify-content: center; align-items: center">
-        <button style="margin-right: 10px" class="ez-small-button">
-          Найти
-        </button>
-        <button class="ez-small-button" (click)="showSearch = false">
-          Отмена
-        </button>
+        <button style="margin-right: 10px" class="ez-small-button">Найти</button>
+        <button class="ez-small-button" (click)="showSearch = false">Отмена</button>
       </div>
     </div>
   </div>
@@ -177,29 +151,16 @@
           type="text"
           placeholder="Введите название канала"
           (keyup.enter)="createChannel(channelName)"
-          [(ngModel)]="channelName"
-        />
+          [(ngModel)]="channelName" />
       </div>
       <!-- исправить ↓ -->
       <div style="display: flex; justify-content: center; align-items: center">
-        <button
-          style="margin-right: 10px"
-          class="ez-small-button"
-          (click)="createChannel(channelName)"
-        >
-          Создать
-        </button>
-        <button class="ez-small-button" (click)="showControls = false">
-          Отмена
-        </button>
+        <button style="margin-right: 10px" class="ez-small-button" (click)="createChannel(channelName)">Создать</button>
+        <button class="ez-small-button" (click)="showControls = false">Отмена</button>
       </div>
     </div>
 
-    <div
-      *ngIf="pinnedChats.length > 0"
-      class="leftbar__pinned-chat"
-      (click)="chatSectionListener.emit()"
-    >
+    <div *ngIf="pinnedChats.length > 0" class="leftbar__pinned-chat" (click)="chatSectionListener.emit()">
       <div *ngFor="let item of pinnedChats">
         <div class="leftbar__chat-wrap fade-bottom">
           <div class="leftbar__chat-ico">{{ item.ico }}</div>
@@ -216,11 +177,7 @@
       </div>
     </div>
 
-    <div
-      *ngFor="let item of chats"
-      class="leftbar__chat-wrap fade-bottom"
-      (click)="chatSectionListener.emit()"
-    >
+    <div *ngFor="let item of chats" class="leftbar__chat-wrap fade-bottom" (click)="chatSectionListener.emit()">
       <div class="leftbar__chat-ico">{{ item.ico }}</div>
       <div class="leftbar__chat" (click)="showChatSection(item)">
         <p>{{ item.name }}</p>
@@ -240,11 +197,8 @@
     [ngStyle]="{
       top: contextMenuPosition?.y + 'px',
       left: contextMenuPosition?.x + 'px'
-    }"
-  >
-    <p class="ez-context-menu__item" (click)="showControls = true">
-      Создать канал
-    </p>
+    }">
+    <p class="ez-context-menu__item" (click)="showControls = true">Создать канал</p>
     <p class="ez-context-menu__item">Закрепить канал</p>
     <p class="ez-context-menu__item" (click)="showSearch = true">Найти канал</p>
     <p class="ez-context-menu__item" routerLink="/options">Настроить канал</p>

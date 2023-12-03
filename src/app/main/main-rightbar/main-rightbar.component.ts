@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Chat } from 'src/app/shared/chat-db';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Chat} from 'src/app/shared/chat-db';
 
 @Component({
   selector: 'app-main-rightbar',

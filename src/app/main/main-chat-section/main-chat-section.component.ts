@@ -1,15 +1,6 @@
-import {
-  AfterViewChecked,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { Chat } from 'src/app/shared/chat-db';
-import { Message } from 'src/app/shared/messages-db';
+import {AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Chat} from 'src/app/shared/chat-db';
+import {Message} from 'src/app/shared/messages-db';
 
 @Component({
   selector: 'app-main-chat-section',
@@ -25,8 +16,7 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
     name: '',
   };
 
-  @Output() rightbarListener: EventEmitter<boolean> =
-    new EventEmitter<boolean>();
+  @Output() rightbarListener: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public contextMenuPosition: any;
   public hideContextMenu: boolean = true;
