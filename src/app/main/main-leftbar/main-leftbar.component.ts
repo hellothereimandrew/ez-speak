@@ -38,15 +38,14 @@ export class MainLeftbarComponent implements OnInit {
     this.hideNotifi = !this.hideNotifi;
   }
 
-  public showOptions(): boolean {
+  public showOptions(): void {
     this.hideOptions = !this.hideOptions;
-
-    return true;
   }
 
   public showChatSection(item: Chat): void {
     this.hideChatSection = false;
     this.currentChat.emit(item);
+    this.chatSectionListener.emit();
   }
 
   public createChannel(name?: string): void {

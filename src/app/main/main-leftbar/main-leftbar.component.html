@@ -160,7 +160,7 @@
       </div>
     </div>
 
-    <div *ngIf="pinnedChats.length > 0" class="leftbar__pinned-chat" (click)="chatSectionListener.emit()">
+    <div *ngIf="pinnedChats.length > 0" class="leftbar__pinned-chat">
       <div *ngFor="let item of pinnedChats">
         <div class="leftbar__chat-wrap fade-bottom">
           <div class="leftbar__chat-ico">{{ item.ico }}</div>
@@ -177,7 +177,7 @@
       </div>
     </div>
 
-    <div *ngFor="let item of chats" class="leftbar__chat-wrap fade-bottom" (click)="chatSectionListener.emit()">
+    <div *ngFor="let item of chats" class="leftbar__chat-wrap fade-bottom">
       <div class="leftbar__chat-ico">{{ item.ico }}</div>
       <div class="leftbar__chat" (click)="showChatSection(item)">
         <p>{{ item.name }}</p>
@@ -198,6 +198,7 @@
       top: contextMenuPosition?.y + 'px',
       left: contextMenuPosition?.x + 'px'
     }">
+    <!-- переделать на ngFor ↓ -->
     <p class="ez-context-menu__item" (click)="showControls = true">Создать канал</p>
     <p class="ez-context-menu__item">Закрепить канал</p>
     <p class="ez-context-menu__item" (click)="showSearch = true">Найти канал</p>

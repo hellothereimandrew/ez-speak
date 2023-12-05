@@ -7,26 +7,31 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class MainLeftbarAsideMenuComponent implements OnInit {
   @Output() public hideOptions: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public theme: EventEmitter<string> = new EventEmitter<string>();
 
-  public activeTheme: boolean = false;
+  public themeName: string = '';
+  public fontColor: string = '';
   public fontFamily: string = 'Nunito-Light';
-  public themeName: string = 'dark-theme';
 
   ngOnInit(): void {}
 
-  public setAppTheme(themeName: string = 'dark-theme'): string {
+  public setAppTheme(themeName: string): string {
     localStorage.setItem('theme', themeName);
+    this.theme.emit(themeName);
 
     if (localStorage.getItem('theme') === 'dark-theme') {
-      themeName = 'dark-theme';
+      this.themeName = themeName;
+      this.fontColor = '#f0f0f0';
     }
 
     if (localStorage.getItem('theme') === 'light-theme') {
-      themeName = 'light-theme';
+      this.themeName = themeName;
+      this.fontColor = '#f0f0f0';
     }
 
     if (localStorage.getItem('theme') === 'combined-theme') {
-      themeName = 'combined-theme';
+      this.themeName = themeName;
+      this.fontColor = '#f0f0f0';
     }
 
     return themeName;

@@ -2,21 +2,14 @@
   <div class="aside-options__header-box">
     <p class="aside-options__header">Быстрые настройки</p>
     <div class="aside-options__fullscrean-opt" routerLink="/options">
-      <svg
-        width="18"
-        height="16"
-        viewBox="0 0 18 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M14 9V15H1V3H8M7 9L17 1M17 1H13M17 1V5"
           stroke="white"
           stroke-opacity="0.3"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+          stroke-linejoin="round" />
       </svg>
     </div>
     <div class="aside-menu__close">
@@ -26,20 +19,13 @@
         viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        (click)="hideOptions.emit()"
-      >
-        <path
-          d="M1 1L15 15M15 1L1 15"
-          stroke="white"
-          stroke-opacity="0.3"
-          stroke-width="2"
-          stroke-linecap="round"
-        />
+        (click)="hideOptions.emit()">
+        <path d="M1 1L15 15M15 1L1 15" stroke="white" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" />
       </svg>
     </div>
   </div>
 
-  <div class="options">
+  <div class="options" [ngClass]="setAppTheme(themeName)">
     <div class="aside-options-decor">
       <p class="aside-options-decor-header">Оформление</p>
       <div class="aside-options-decor-wrap">
@@ -47,33 +33,33 @@
           <p>Тема</p>
           <!-- переделать на *ngFor ↓ -->
           <div class="theme-picker">
-            <div class="theme-picker__item"></div>
-            <div class="theme-picker__item"></div>
-            <div class="theme-picker__item"></div>
+            <div class="theme-picker__item" (click)="setAppTheme('dark-theme')"></div>
+            <div class="theme-picker__item" (click)="setAppTheme('light-theme')"></div>
+            <div class="theme-picker__item" (click)="setAppTheme('combined-theme')"></div>
             <div class="theme-picker__item"></div>
             <div class="theme-picker__item"></div>
           </div>
         </div>
 
         <div style="display: flex; margin-bottom: 10px">
-          <p>Цвет активных элементов</p>
-          <input type="color" />
-        </div>
-
-        <div style="display: flex">
-          <p>Цвет шрифта</p>
+          <p style="margin-right: 5px">Цвет активных элементов</p>
           <input type="color" />
         </div>
 
         <div class="aside-options-usual__font">
           <!-- исправить ↓ -->
-          <p style="margin-right: 10px">Шрифт</p>
+          <p style="margin-right: 5px">Шрифт</p>
           <input class="ez-input" type="text" value="{{ fontFamily }}" />
+        </div>
+
+        <div style="display: flex">
+          <p style="margin-right: 5px">Цвет шрифта</p>
+          <input type="color" />
         </div>
 
         <div class="aside-options-usual__background">
           <!-- исправить ↓ -->
-          <p style="margin-right: 10px">Фон сообщений</p>
+          <p style="margin-right: 5px">Фон сообщений</p>
           <input type="file" class="ez-small-button" />
         </div>
       </div>
@@ -122,8 +108,6 @@
   </div>
 
   <div class="aside-options-logout">
-    <p class="aside-options-logout__text" routerLink="">
-      Выйти из учетной записи
-    </p>
+    <p class="aside-options-logout__text" routerLink="">Выйти из учетной записи</p>
   </div>
 </div>
