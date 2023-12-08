@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {DecorationService} from 'src/app/services/decoration.service';
 import {Chat} from 'src/app/shared/chat-db';
 import {Users} from 'src/app/shared/users-db';
 
@@ -8,6 +9,8 @@ import {Users} from 'src/app/shared/users-db';
   styleUrls: ['./main-leftbar.component.scss'],
 })
 export class MainLeftbarComponent implements OnInit {
+  constructor(private decoreationServise: DecorationService) {}
+
   @Input() user: Users = {
     id: 0,
     ico: '',
@@ -32,7 +35,20 @@ export class MainLeftbarComponent implements OnInit {
   public pinnedChats: Chat[] = [];
   public channelCounterId: number = 1;
 
-  ngOnInit(): void {}
+  public currentTheme: string = '';
+  public currentFontFamily: string = '';
+  public currentFontColor: string = '';
+
+  ngOnInit(): void {
+    this.getAppTheme();
+  }
+
+  public getAppTheme(): void {
+    this.currentTheme = this.decoreationServise.currentTheme;
+    this.currentFontFamily = this.decoreationServise.fontFamily;
+    this.currentFontColor = this.decoreationServise.fontColor;
+    console.log(this.currentTheme);
+  }
 
   public showAside(event?: any): void {
     this.hideNotifi = !this.hideNotifi;

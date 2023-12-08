@@ -1,4 +1,5 @@
 import {AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {DecorationService} from 'src/app/services/decoration.service';
 import {Chat} from 'src/app/shared/chat-db';
 import {Message} from 'src/app/shared/messages-db';
 
@@ -8,6 +9,8 @@ import {Message} from 'src/app/shared/messages-db';
   styleUrls: ['./main-chat-section.component.scss'],
 })
 export class MainChatSectionComponent implements OnInit, AfterViewChecked {
+  constructor(private decoreationServise: DecorationService) {}
+
   @ViewChild('scrollable') public scrollable!: ElementRef;
 
   @Input() currentChat: Chat = {

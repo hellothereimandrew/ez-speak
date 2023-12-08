@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {DecorationService} from 'src/app/services/decoration.service';
 
 @Component({
   selector: 'app-main-leftbar-aside-menu',
@@ -6,34 +7,13 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./main-leftbar-aside-menu.component.scss'],
 })
 export class MainLeftbarAsideMenuComponent implements OnInit {
-  @Output() public hideOptions: EventEmitter<void> = new EventEmitter<void>();
-  @Output() public theme: EventEmitter<string> = new EventEmitter<string>();
+  constructor(private decoreationServise: DecorationService) {}
 
-  public themeName: string = '';
-  public fontColor: string = '';
-  public fontFamily: string = 'Nunito-Light';
+  @Output() public hideOptions: EventEmitter<void> = new EventEmitter<void>();
 
   ngOnInit(): void {}
 
-  public setAppTheme(themeName: string): string {
-    localStorage.setItem('theme', themeName);
-    this.theme.emit(themeName);
-
-    if (localStorage.getItem('theme') === 'dark-theme') {
-      this.themeName = themeName;
-      this.fontColor = '#f0f0f0';
-    }
-
-    if (localStorage.getItem('theme') === 'light-theme') {
-      this.themeName = themeName;
-      this.fontColor = '#f0f0f0';
-    }
-
-    if (localStorage.getItem('theme') === 'combined-theme') {
-      this.themeName = themeName;
-      this.fontColor = '#f0f0f0';
-    }
-
-    return themeName;
+  public setAppTheme(currentTheme: string): void {
+    this.decoreationServise.setAppTheme(currentTheme);
   }
 }

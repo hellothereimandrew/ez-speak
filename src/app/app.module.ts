@@ -16,6 +16,7 @@ import {OptionsComponent} from './options/options.component';
 import {OptionsLeftbarComponent} from './options/options-leftbar/options-leftbar.component';
 import {OptionsRightbarComponent} from './options/options-rightbar/options-rightbar.component';
 import {MainLeftbarAsideMenuComponent} from './main/main-leftbar/main-leftbar-aside-menu/main-leftbar-aside-menu.component';
+import {DecorationService} from './services/decoration.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import {MainLeftbarAsideMenuComponent} from './main/main-leftbar/main-leftbar-as
     MainLeftbarAsideMenuComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
-  providers: [],
+  providers: [DecorationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

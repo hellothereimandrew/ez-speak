@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {DecorationService} from 'src/app/services/decoration.service';
 import {Chat} from 'src/app/shared/chat-db';
 
 @Component({
@@ -7,6 +8,8 @@ import {Chat} from 'src/app/shared/chat-db';
   styleUrls: ['./main-rightbar.component.scss'],
 })
 export class MainRightbarComponent implements OnInit {
+  constructor(private decoreationServise: DecorationService) {}
+
   @Input() currentChat: Chat = {
     id: 0,
     ico: '',

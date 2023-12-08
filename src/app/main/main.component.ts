@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Chat} from 'src/app/shared/chat-db';
+import {DecorationService} from '../services/decoration.service';
 
 @Component({
   selector: 'app-main',
@@ -7,6 +8,8 @@ import {Chat} from 'src/app/shared/chat-db';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
+  constructor(private decoreationServise: DecorationService) {}
+
   @Input() public currentChat: Chat = {
     id: 0,
     ico: '',

@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="options" [ngClass]="setAppTheme(themeName)">
+  <div class="options">
     <div class="aside-options-decor">
       <p class="aside-options-decor-header">Оформление</p>
       <div class="aside-options-decor-wrap">
@@ -49,10 +49,10 @@
         <div class="aside-options-usual__font">
           <!-- исправить ↓ -->
           <p style="margin-right: 5px">Шрифт</p>
-          <input class="ez-input" type="text" value="{{ fontFamily }}" />
+          <input class="ez-input" type="text" />
         </div>
 
-        <div style="display: flex">
+        <div style="display: flex; margin-bottom: 10px">
           <p style="margin-right: 5px">Цвет шрифта</p>
           <input type="color" />
         </div>
