@@ -3,14 +3,17 @@
     <div class="leftbar__user-ico">
       <img src="../assets/img/ZKoQpzcDggWg2ogpkHjR9JnzY9lbPC7wR_gI-BZX5ncn7VOpt-G_a2jJmQBzC4gx.jpg" alt="alt" />
     </div>
+
     <div class="leftbar__current-info">
       <div class="leftbar__user-name">
         <p>Андрей Дарий</p>
       </div>
+
       <div class="leftbar__user-role">
         <p>Разработчик</p>
       </div>
     </div>
+
     <div class="leftbar__options" (click)="showOptions()">
       <svg
         width="27"
@@ -120,9 +123,9 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         (click)="showAside()"
-        [ngClass]="{'active-stroke': !hideNotifi}">
+        [ngClass]="{'active-fill': !hideNotifi}">
         <path
-          [ngClass]="{'active-stroke': !hideNotifi}"
+          [ngClass]="{'active-fill': !hideNotifi}"
           fill-rule="evenodd"
           clip-rule="evenodd"
           d="M7.12742 19.5503C7.6315 20.1407 8.27863 20.4651 8.95009 20.4651H8.95106C9.62544 20.4651 10.2755 20.1407 10.7805 19.5493C11.0511 19.2352 11.5123 19.2096 11.8111 19.493C12.1108 19.7765 12.1351 20.2625 11.8656 20.5767C11.0793 21.4945 10.0449 22 8.95106 22H8.94912C7.85824 21.999 6.82575 21.4935 6.04238 20.5756C5.77282 20.2615 5.79715 19.7754 6.09688 19.493C6.3966 19.2086 6.85786 19.2341 7.12742 19.5503ZM8.99855 0C13.3241 0 16.2299 3.54251 16.2299 6.8507C16.2299 8.55237 16.6415 9.27377 17.0784 10.0392C17.5105 10.7943 18 11.6518 18 13.2727C17.6604 17.4138 13.5489 17.7514 8.99855 17.7514C4.4482 17.7514 0.335755 17.4138 1.28807e-05 13.3381C-0.00289351 11.6518 0.486591 10.7943 0.91866 10.0392L1.07119 9.76918C1.44675 9.09046 1.76723 8.35218 1.76723 6.8507C1.76723 3.54251 4.67299 0 8.99855 0ZM8.99855 1.53488C5.59747 1.53488 3.22692 4.33656 3.22692 6.8507C3.22692 8.97805 2.66543 9.9614 2.16913 10.8291C1.77112 11.526 1.4568 12.0765 1.4568 13.2727C1.61931 15.2025 2.83086 16.2166 8.99855 16.2166C15.1322 16.2166 16.3817 15.1575 16.5432 13.2061C16.5403 12.0765 16.226 11.526 15.828 10.8291C15.3317 9.9614 14.7702 8.97805 14.7702 6.8507C14.7702 4.33656 12.3996 1.53488 8.99855 1.53488Z"
@@ -153,6 +156,7 @@
           (keyup.enter)="createChannel(channelName)"
           [(ngModel)]="channelName" />
       </div>
+      
       <!-- исправить ↓ -->
       <div style="display: flex; justify-content: center; align-items: center">
         <button style="margin-right: 10px" class="ez-small-button" (click)="createChannel(channelName)">Создать</button>
@@ -166,7 +170,7 @@
           <div class="leftbar__chat-ico">{{ item.ico }}</div>
           <div class="leftbar__chat" (click)="showChatSection(item)">
             <p>{{ item.name }}</p>
-            <p>{{ item.lastMsg }}</p>
+            <p *ngIf="item.lastMsg">{{ item.lastMsg }}</p>
           </div>
           <div *ngIf="item.msgs !== 0" class="leftbar__unread-msgs">
             {{ item.msgs }}

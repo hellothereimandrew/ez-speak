@@ -6,10 +6,8 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
   templateUrl: './auth-sign-up.component.html',
   styleUrls: ['./auth-sign-up.component.scss'],
 })
-export class AuthSignUpComponent implements OnInit {
+export class AuthSignUpComponent {
   public isAutorized: boolean = false;
-
-  ngOnInit(): void {}
 
   signUpData: FormGroup = new FormGroup({
     login: new FormControl('', Validators.required),
@@ -24,22 +22,31 @@ export class AuthSignUpComponent implements OnInit {
     if (this.signUpData.invalid) {
       if (this.signUpData.controls['login'].invalid) {
         formIsValid = false;
+
         return false;
       }
+
       if (this.signUpData.controls['password'].invalid) {
         formIsValid = false;
+
         return false;
       }
+
       if (this.signUpData.controls['confirmPassword'].invalid) {
         formIsValid = false;
+
         return false;
       }
+
       if (this.signUpData.controls['email'].invalid) {
         formIsValid = false;
+
         return false;
       }
     }
+
     formIsValid = true;
+    
     return true;
   }
 

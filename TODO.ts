@@ -34,13 +34,14 @@
     Добавить возможность создавать свои кнопки-папки (каналы, лс и прочее),
 
     ? При нажатии на иконку пользователя перекидывать в настройки аккаунта или выводить инфу в отдельном окне,
+    ? Добавить возможность создавать свои папки,
+    ? Сделать расширяющуюся панель, если папок > 5,
     ? Сделать дочерний роут (/main/options),
 
     main-leftbar-aside-menu {
       Доработать верстку быстрых настроек,
 
       ? Добавить кнопки выключения звука/голоса,
-      ? Заменить селект тем на иконки,
     }
 
     main-leftbar-aside-notifi {
@@ -167,6 +168,8 @@
 /* 
   errors {
     Неизвестная ошибка связанная с райтбаром (инпут, оутпут) 
-    Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+    Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received,
+    
+    Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.
   }
 */

@@ -13,19 +13,19 @@ export class DecorationService {
 
     if (localStorage.getItem('theme') === 'dark-theme') {
       this.currentTheme = currentTheme;
-      this.fontFamily = '';
+      this.fontFamily = 'Nunito-Light';
       this.fontColor = '#f0f0f0';
     }
 
     if (localStorage.getItem('theme') === 'light-theme') {
       this.currentTheme = currentTheme;
-      this.fontFamily = '';
+      this.fontFamily = 'Nunito-Light';
       this.fontColor = '#f0f0f0';
     }
 
     if (localStorage.getItem('theme') === 'combined-theme') {
       this.currentTheme = currentTheme;
-      this.fontFamily = '';
+      this.fontFamily = 'Nunito-Light';
       this.fontColor = '#f0f0f0';
     }
 
