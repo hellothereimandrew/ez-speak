@@ -9,8 +9,6 @@ import {Users} from 'src/app/shared/users-db';
   styleUrls: ['./main-leftbar.component.scss'],
 })
 export class MainLeftbarComponent implements OnInit {
-  constructor(private decoreationServise: DecorationService) {}
-
   @Input() user: Users = {
     id: 0,
     ico: '',
@@ -29,25 +27,17 @@ export class MainLeftbarComponent implements OnInit {
   public showControls: boolean = false;
   public showSearch: boolean = false;
   public contextMenuPosition: any;
+  public selectedTheme: string = '';
   public selectedButton: string = '';
   public channelName: string = '';
   public chats: Chat[] = [];
   public pinnedChats: Chat[] = [];
   public channelCounterId: number = 1;
 
-  public currentTheme: string = '';
-  public currentFontFamily: string = '';
-  public currentFontColor: string = '';
+  constructor(private decoreationServise: DecorationService) {}
 
   ngOnInit(): void {
-    this.getAppTheme();
-  }
-
-  public getAppTheme(): void {
-    this.currentTheme = this.decoreationServise.currentTheme;
-    this.currentFontFamily = this.decoreationServise.fontFamily;
-    this.currentFontColor = this.decoreationServise.fontColor;
-    console.log(this.currentTheme);
+    this.selectedTheme = this.decoreationServise.getAppTheme();
   }
 
   public showAside(event?: any): void {

@@ -8,8 +8,6 @@ import {Chat} from 'src/app/shared/chat-db';
   styleUrls: ['./main-rightbar.component.scss'],
 })
 export class MainRightbarComponent implements OnInit {
-  constructor(private decoreationServise: DecorationService) {}
-
   @Input() currentChat: Chat = {
     id: 0,
     ico: '',
@@ -18,9 +16,18 @@ export class MainRightbarComponent implements OnInit {
 
   @Output() rightbarListener: EventEmitter<void> = new EventEmitter<void>();
 
+  public selectedTheme: string = '';
   public hideRightbar: boolean = false;
 
-  ngOnInit(): void {}
+  constructor(private decoreationServise: DecorationService) {}
+
+  ngOnInit(): void {
+    this.getAppTheme();
+  }
+
+  public getAppTheme(): void {
+    this.selectedTheme = this.decoreationServise.getAppTheme();
+  }
 
   public showRightbar(): void {
     this.hideRightbar = !this.hideRightbar;

@@ -7,9 +7,9 @@ import {DecorationService} from 'src/app/services/decoration.service';
   styleUrls: ['./main-leftbar-aside-menu.component.scss'],
 })
 export class MainLeftbarAsideMenuComponent implements OnInit {
-  constructor(private decoreationServise: DecorationService) {}
-
   @Output() public hideOptions: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(private decoreationServise: DecorationService) {}
 
   ngOnInit(): void {}
 

@@ -1,5 +1,5 @@
 <div class="chat-section" (click)="closeContextMenu()">
-  <div class="header">
+  <div class="header {{ selectedTheme }}">
     <div *ngIf="currentChat.name" class="header__current-chat">
       <p class="header__current-chat-name" (click)="rightbarListener.emit()">
         {{ currentChat.name }}

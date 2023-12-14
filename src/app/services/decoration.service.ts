@@ -8,7 +8,7 @@ export class DecorationService {
     localStorage.setItem('theme', themeName);
   }
 
-  public getAppTheme(): string {
+  public getAppTheme(): any {
     return localStorage.getItem('theme');
   }
 }

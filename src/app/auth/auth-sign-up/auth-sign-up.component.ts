@@ -7,14 +7,14 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
   styleUrls: ['./auth-sign-up.component.scss'],
 })
 export class AuthSignUpComponent {
-  public isAutorized: boolean = false;
-
-  signUpData: FormGroup = new FormGroup({
+  public signUpData: FormGroup = new FormGroup({
     login: new FormControl('', Validators.required),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
     email: new FormControl('', [Validators.required, Validators.email]),
   });
+
+  public isAutorized: boolean = false;
 
   public isValid(): boolean {
     let formIsValid: boolean = true;
@@ -46,7 +46,7 @@ export class AuthSignUpComponent {
     }
 
     formIsValid = true;
-    
+
     return true;
   }
 

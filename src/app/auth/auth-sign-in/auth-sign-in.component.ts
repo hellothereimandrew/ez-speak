@@ -8,6 +8,12 @@ import {Users} from 'src/app/shared/users-db';
   styleUrls: ['./auth-sign-in.component.scss'],
 })
 export class AuthSignInComponent implements OnInit {
+  public signInData: FormGroup = new FormGroup({
+    login: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    checked: new FormControl(false),
+  });
+
   public hide: boolean = true;
   public type: string = 'password';
   public isAutorized: boolean = false;
@@ -19,12 +25,6 @@ export class AuthSignInComponent implements OnInit {
   };
 
   ngOnInit(): void {}
-
-  signInData: FormGroup = new FormGroup({
-    login: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    checked: new FormControl(false),
-  });
 
   public showPass(): void {
     this.hide = !this.hide;

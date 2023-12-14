@@ -1,4 +1,4 @@
-<div class="leftbar" (click)="closeContextMenu()">
+<div class="leftbar {{ selectedTheme }}" (click)="closeContextMenu()">
   <div class="leftbar__user-card">
     <div class="leftbar__user-ico">
       <img src="../assets/img/ZKoQpzcDggWg2ogpkHjR9JnzY9lbPC7wR_gI-BZX5ncn7VOpt-G_a2jJmQBzC4gx.jpg" alt="alt" />
@@ -156,7 +156,7 @@
           (keyup.enter)="createChannel(channelName)"
           [(ngModel)]="channelName" />
       </div>
-      
+
       <!-- исправить ↓ -->
       <div style="display: flex; justify-content: center; align-items: center">
         <button style="margin-right: 10px" class="ez-small-button" (click)="createChannel(channelName)">Создать</button>

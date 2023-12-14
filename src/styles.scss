@@ -1,9 +1,19 @@
+$dark-color: rgb(224, 224, 224) !default;
+$dark-bgc: rgb(16, 24, 28) !default;
+$dark-br: 1px solid rgba(255, 255, 255, 0.102) !default;
+$dark-active-color: rgb(70, 188, 255) !default;
+
+$light-color: rgb(48, 48, 48);
+$light-bg: rgb(237, 238, 240);
+$light-bgc: rgb(205, 212, 225);
+$light-br: 1px solid rgba(0, 0, 0, 0.102);
+$light-active-color: rgb(48, 48, 48);
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Nunito-Light";
-  color: rgb(240, 240, 240);
 }
 
 body {
@@ -15,13 +25,15 @@ body {
 }
 
 .dark-theme {
-  color: rgb(240, 240, 240);
-  background-color: rgba(0, 0, 0, 0.1);
+  color: $dark-color;
+  background-color: $dark-bgc;
+  border-right: $dark-br;
 }
 
 .light-theme {
-  color: rgb(39, 39, 39) !important;
-  background-color: rgb(185, 185, 185) !important;
+  color: $light-color !important;
+  background-color: $light-bgc !important;
+  border-right: $light-br !important;
 }
 
 .combined-theme {
@@ -138,7 +150,7 @@ body {
 }
 
 .active-stroke {
-  stroke: rgb(59, 147, 197);
+  stroke: rgb(70, 188, 255);
   stroke-opacity: 1;
   cursor: pointer;
 }

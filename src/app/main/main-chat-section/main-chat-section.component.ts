@@ -9,10 +9,6 @@ import {Message} from 'src/app/shared/messages-db';
   styleUrls: ['./main-chat-section.component.scss'],
 })
 export class MainChatSectionComponent implements OnInit, AfterViewChecked {
-  constructor(private decoreationServise: DecorationService) {}
-
-  @ViewChild('scrollable') public scrollable!: ElementRef;
-
   @Input() currentChat: Chat = {
     id: 0,
     ico: '',
@@ -20,6 +16,8 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
   };
 
   @Output() rightbarListener: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @ViewChild('scrollable') public scrollable!: ElementRef;
 
   public contextMenuPosition: any;
   public hideContextMenu: boolean = true;
@@ -29,10 +27,18 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
   public openRightBar: boolean = false;
   public showPinnedMsg: boolean = false;
   public showChatSection: boolean = false;
-
+  public selectedTheme: string = '';
   public messages: Message[] = [];
 
-  ngOnInit(): void {}
+  constructor(private decoreationServise: DecorationService) {}
+
+  ngOnInit(): void {
+    this.getAppTheme();
+  }
+
+  public getAppTheme(): void {
+    this.selectedTheme = this.decoreationServise.getAppTheme();
+  }
 
   ngAfterViewChecked() {
     this.scrollClaimedToBottom();
