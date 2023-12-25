@@ -1,4 +1,15 @@
-import {AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {Subscription} from 'rxjs';
 import {DecorationService} from 'src/app/services/decoration.service';
 import {Chat} from 'src/app/shared/chat-db';
 import {Message} from 'src/app/shared/messages-db';
@@ -8,7 +19,7 @@ import {Message} from 'src/app/shared/messages-db';
   templateUrl: './main-chat-section.component.html',
   styleUrls: ['./main-chat-section.component.scss'],
 })
-export class MainChatSectionComponent implements OnInit, AfterViewChecked {
+export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Input() currentChat: Chat = {
     id: 0,
     ico: '',
@@ -29,15 +40,14 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
   public showChatSection: boolean = false;
   public selectedTheme: string = '';
   public messages: Message[] = [];
+  public themeSubscription: Subscription = new Subscription();
 
   constructor(private decoreationServise: DecorationService) {}
 
   ngOnInit(): void {
-    this.getAppTheme();
-  }
-
-  public getAppTheme(): void {
-    this.selectedTheme = this.decoreationServise.getAppTheme();
+    this.themeSubscription = this.decoreationServise.selectedTheme$.subscribe((theme) => {
+      this.selectedTheme = theme;
+    });
   }
 
   ngAfterViewChecked() {
@@ -88,5 +98,9 @@ export class MainChatSectionComponent implements OnInit, AfterViewChecked {
   public scrollClaimedToBottom(): void {
     const scrollContainer = this.scrollable.nativeElement;
     scrollContainer.scrollTop = scrollContainer.scrollHeight;
+  }
+
+  ngOnDestroy(): void {
+    this.themeSubscription.unsubscribe();
   }
 }

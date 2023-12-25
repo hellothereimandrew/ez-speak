@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Subscription} from 'rxjs';
 import {DecorationService} from 'src/app/services/decoration.service';
 import {Chat} from 'src/app/shared/chat-db';
 
@@ -7,7 +8,7 @@ import {Chat} from 'src/app/shared/chat-db';
   templateUrl: './main-rightbar.component.html',
   styleUrls: ['./main-rightbar.component.scss'],
 })
-export class MainRightbarComponent implements OnInit {
+export class MainRightbarComponent implements OnInit, OnDestroy {
   @Input() currentChat: Chat = {
     id: 0,
     ico: '',
@@ -18,20 +19,21 @@ export class MainRightbarComponent implements OnInit {
 
   public selectedTheme: string = '';
   public hideRightbar: boolean = false;
+  public themeSubscription: Subscription = new Subscription();
 
   constructor(private decoreationServise: DecorationService) {}
 
   ngOnInit(): void {
-    this.getAppTheme();
-  }
-
-  public getAppTheme(): void {
-    this.selectedTheme = this.decoreationServise.getAppTheme();
+    this.themeSubscription = this.decoreationServise.selectedTheme$.subscribe((theme) => {
+      this.selectedTheme = theme;
+    });
   }
 
   public showRightbar(): void {
     this.hideRightbar = !this.hideRightbar;
   }
 
-  public a(): void {}
+  ngOnDestroy(): void {
+    this.themeSubscription.unsubscribe();
+  }
 }

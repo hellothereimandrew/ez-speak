@@ -2,14 +2,14 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-right: 1px solid rgba(255, 255, 255, 0.102);
-  background-color: rgb(16, 24, 28);
+  border-right: var(--border);
+  background-color: var(--background);
 
   .leftbar__user-card {
     display: flex;
     align-items: center;
     padding: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.102);
+    border-bottom: var(--border);
 
     .leftbar__user-ico {
       width: 45px;
@@ -47,7 +47,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.102);
+    border-bottom: var(--border);
 
     .leftbar__private,
     .leftbar__group,
@@ -63,7 +63,7 @@
 
   .leftbar__create-chat {
     padding: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.102);
+    border-bottom: var(--border);
 
     input {
       width: 100%;
@@ -93,7 +93,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.102);
+    border-bottom: var(--border);
 
     input {
       width: 100%;
@@ -140,6 +140,6 @@
   }
 
   .leftbar__pinned-chat {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.102);
+    border-bottom: var(--border);
   }
 }

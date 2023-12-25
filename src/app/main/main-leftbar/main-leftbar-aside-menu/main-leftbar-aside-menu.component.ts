@@ -14,6 +14,6 @@ export class MainLeftbarAsideMenuComponent implements OnInit {
   ngOnInit(): void {}
 
   public setAppTheme(currentTheme: string): void {
-    this.decoreationServise.setAppTheme(currentTheme);
+    this.decoreationServise.selectedTheme = currentTheme;
   }
 }

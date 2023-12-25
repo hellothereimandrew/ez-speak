@@ -1,14 +1,18 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DecorationService {
-  public setAppTheme(themeName: string): void {
-    localStorage.setItem('theme', themeName);
+  private currentTheme = new BehaviorSubject<string>(localStorage.getItem('theme') || '');
+
+  public get selectedTheme$(): Observable<string> {
+    return this.currentTheme.asObservable();
   }
 
-  public getAppTheme(): any {
-    return localStorage.getItem('theme');
+  public set selectedTheme(theme: string) {
+    this.currentTheme.next(theme);
+    localStorage.setItem('theme', theme);
   }
 }
