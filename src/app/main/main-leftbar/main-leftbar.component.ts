@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {DecorationService} from 'src/app/services/decoration.service';
 import {Chat} from 'src/app/shared/chat-db';
@@ -10,7 +10,7 @@ import {Users} from 'src/app/shared/users-db';
   styleUrls: ['./main-leftbar.component.scss'],
 })
 export class MainLeftbarComponent implements OnInit, OnDestroy {
-  @Input() user: Users = {
+  @Input() public user: Users = {
     id: 0,
     ico: '',
     name: '',
@@ -18,23 +18,34 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     status: '',
   };
 
-  @Output() chatSectionListener: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
+  @Output() public chatSectionListener: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
+  @HostListener('document:mousemove', ['$event']) public resizeLeftbar(event: MouseEvent): void {
+    if (this.isResized) {
+      this.currentLeftbarWidth = event.clientX;
+    } else {
+      this.isResized = false;
+    }
+  }
+
+  public leftbarRef!: ElementRef;
   public hideNotifi: boolean = true;
   public hideOptions: boolean = true;
   public hideContextMenu: boolean = true;
   public hideChatSection: boolean = true;
   public showControls: boolean = false;
   public showSearch: boolean = false;
+  public isResized: boolean = false;
   public selectedTheme: string = '';
   public selectedButton: string = '';
   public channelName: string = '';
   public chats: Chat[] = [];
   public pinnedChats: Chat[] = [];
   public channelCounterId: number = 1;
-  public contextMenuPosition: any;
+  public currentLeftbarWidth: number = 289;
   public themeSubscription: Subscription = new Subscription();
+  public contextMenuPosition: any;
 
   constructor(private decoreationServise: DecorationService) {}
 
@@ -44,26 +55,14 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  public showAside(event?: any): void {
-    this.hideNotifi = !this.hideNotifi;
-  }
-
-  public showOptions(): void {
-    this.hideOptions = !this.hideOptions;
-  }
-
-  public showChatSection(item: Chat): void {
-    this.hideChatSection = false;
-    this.currentChat.emit(item);
-    this.chatSectionListener.emit();
-  }
-
   public createChannel(name?: string): void {
     const temp: Chat = {
       id: this.channelCounterId++,
       ico: '',
       name: name,
-      lastMsg: 'уже круче, чем телега!',
+      time: new Date().toLocaleTimeString().slice(0, -3),
+      userName: 'Андрей Дарий',
+      lastMsg: 'Уже круче, чем телега!',
       msgs: 0,
       pinned: false,
     };
@@ -78,7 +77,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     this.chats.splice(this.chats.indexOf(chat), 1);
   }
 
-  public pin(pinned: boolean, name?: string): void {
+  public pin(pinned: boolean, name?: string, chat?: Chat): void {
     // const pinnedChats: Chat[] = this.chats;
 
     const temp: Chat = {
@@ -95,6 +94,30 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
 
   public unpin(pinnedChat: Chat): void {
     this.pinnedChats.splice(this.pinnedChats.indexOf(pinnedChat), 1);
+  }
+
+  public showAside(event?: any): void {
+    // if (event) {
+    //   this.hideNotifi = false;
+    //   this.hideOptions = true;
+    //   console.log('hidden');
+    // }
+    this.hideNotifi = !this.hideNotifi;
+  }
+
+  public showOptions(event?: any): void {
+    // if (event) {
+    //   this.hideOptions = false;
+    //   this.hideNotifi = true;
+    //   console.log('hidden');
+    // }
+    this.hideOptions = !this.hideOptions;
+  }
+
+  public showChatSection(item: Chat): void {
+    this.hideChatSection = false;
+    this.currentChat.emit(item);
+    this.chatSectionListener.emit();
   }
 
   public onSelect(button: string): void {

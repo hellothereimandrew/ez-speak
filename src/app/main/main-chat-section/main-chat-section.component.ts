@@ -20,13 +20,13 @@ import {Message} from 'src/app/shared/messages-db';
   styleUrls: ['./main-chat-section.component.scss'],
 })
 export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChecked {
-  @Input() currentChat: Chat = {
+  @Input() public currentChat: Chat = {
     id: 0,
     ico: '',
     name: '',
   };
 
-  @Output() rightbarListener: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public rightbarListener: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @ViewChild('scrollable') public scrollable!: ElementRef;
 
@@ -74,7 +74,7 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
     return;
   }
 
-  public openContextMenu(event: any): void {
+  public openContextMenu(event: MouseEvent): void {
     event.preventDefault();
     this.hideContextMenu = false;
     this.contextMenuPosition = {
@@ -87,8 +87,12 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
     this.hideContextMenu = true;
   }
 
-  public showDropDown(): void {
-    this.hideDropDown = !this.hideDropDown;
+  public openDropDown(): void {
+    this.hideDropDown = false;
+  }
+
+  public closeDropDown(): void {
+    this.hideDropDown = true;
   }
 
   public showRightBar(): void {

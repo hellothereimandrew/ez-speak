@@ -36,6 +36,18 @@ body {
   background-color: black;
 }
 
+.flex {
+  display: flex;
+
+  &-align {
+    &-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
 .ez-input {
   padding-left: 15px;
   background: none;
@@ -136,7 +148,6 @@ body {
   height: 25px;
   margin-bottom: 5px;
   outline: 0;
-  // background: linear-gradient(120deg, #5481c5 0%, #7a5a9a 60%);
   background: none;
   border: var(--border);
   border-radius: 3px;

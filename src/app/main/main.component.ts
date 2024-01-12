@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Chat} from 'src/app/shared/chat-db';
 import {DecorationService} from '../services/decoration.service';
 import {Subscription} from 'rxjs';
+import {Users} from '../shared/users-db';
 
 @Component({
   selector: 'app-main',
@@ -9,6 +10,14 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit, OnDestroy {
+  @Input() public user: Users = {
+    id: 0,
+    ico: '',
+    name: '',
+    role: '',
+    status: '',
+  };
+
   @Input() public currentChat: Chat = {
     id: 0,
     ico: '',

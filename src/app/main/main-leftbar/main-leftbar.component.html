@@ -1,4 +1,5 @@
-<div class="leftbar {{ selectedTheme }}" (click)="closeContextMenu()">
+<div class="leftbar {{ selectedTheme }}" (click)="closeContextMenu()" [ngStyle]="{width: currentLeftbarWidth + 'px'}">
+  <div class="leftbar-splitter" (click)="isResized = !isResized" [ngStyle]="{left: currentLeftbarWidth + 'px'}"></div>
   <div class="leftbar__user-card">
     <div class="leftbar__user-ico">
       <img src="../assets/img/ZKoQpzcDggWg2ogpkHjR9JnzY9lbPC7wR_gI-BZX5ncn7VOpt-G_a2jJmQBzC4gx.jpg" alt="alt" />
@@ -138,8 +139,7 @@
   <div *ngIf="showSearch" class="leftbar__search fade-bottom">
     <div>
       <input class="ez-create-input" type="text" placeholder="Поиск" />
-      <!-- исправить ↓ -->
-      <div style="display: flex; justify-content: center; align-items: center">
+      <div class="flex-align-center">
         <button style="margin-right: 10px" class="ez-small-button">Найти</button>
         <button class="ez-small-button" (click)="showSearch = false">Отмена</button>
       </div>
@@ -157,8 +157,7 @@
           [(ngModel)]="channelName" />
       </div>
 
-      <!-- исправить ↓ -->
-      <div style="display: flex; justify-content: center; align-items: center">
+      <div class="flex-align-center">
         <button style="margin-right: 10px" class="ez-small-button" (click)="createChannel(channelName)">Создать</button>
         <button class="ez-small-button" (click)="showControls = false">Отмена</button>
       </div>
@@ -184,8 +183,14 @@
     <div *ngFor="let item of chats" class="leftbar__chat-wrap fade-bottom">
       <div class="leftbar__chat-ico">{{ item.ico }}</div>
       <div class="leftbar__chat" (click)="showChatSection(item)">
-        <p>{{ item.name }}</p>
-        <p>{{ item.lastMsg }}</p>
+        <div class="flex">
+          <p>{{ item.name }}</p>
+          <p>{{ item.time }}</p>
+        </div>
+        <div class="flex">
+          <p>{{ item.userName + ': ' }}</p>
+          <p class="leftbar__chat-last-msg">{{ item.lastMsg }}</p>
+        </div>
       </div>
       <div *ngIf="item.msgs !== 0" class="leftbar__unread-msgs">
         {{ item.msgs }}
@@ -202,7 +207,6 @@
       top: contextMenuPosition?.y + 'px',
       left: contextMenuPosition?.x + 'px'
     }">
-    <!-- переделать на ngFor ↓ -->
     <p class="ez-context-menu__item" (click)="showControls = true">Создать канал</p>
     <p class="ez-context-menu__item">Закрепить канал</p>
     <p class="ez-context-menu__item" (click)="showSearch = true">Найти канал</p>

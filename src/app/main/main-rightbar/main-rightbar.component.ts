@@ -9,13 +9,13 @@ import {Chat} from 'src/app/shared/chat-db';
   styleUrls: ['./main-rightbar.component.scss'],
 })
 export class MainRightbarComponent implements OnInit, OnDestroy {
-  @Input() currentChat: Chat = {
+  @Input() public currentChat: Chat = {
     id: 0,
     ico: '',
     name: '',
   };
 
-  @Output() rightbarListener: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public rightbarListener: EventEmitter<void> = new EventEmitter<void>();
 
   public selectedTheme: string = '';
   public hideRightbar: boolean = false;

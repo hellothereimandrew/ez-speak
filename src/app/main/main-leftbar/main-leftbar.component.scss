@@ -2,8 +2,14 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-right: var(--border);
   background-color: var(--background);
+
+  .leftbar-splitter {
+    position: absolute;
+    height: inherit;
+    border-right: var(--border);
+    cursor: ew-resize;
+  }
 
   .leftbar__user-card {
     display: flex;
@@ -40,6 +46,8 @@
     .leftbar__options {
       cursor: pointer;
     }
+
+
   }
 
   .leftbar__nav {
@@ -118,6 +126,12 @@
     .leftbar__chat {
       margin-right: 10px;
       cursor: pointer;
+
+      .leftbar__chat-last-msg {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
 
     .leftbar__unread-msgs {
