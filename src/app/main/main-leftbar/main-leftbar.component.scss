@@ -46,27 +46,13 @@
     .leftbar__options {
       cursor: pointer;
     }
-
-
   }
 
   .leftbar__nav {
     display: flex;
     justify-content: space-around;
-    align-items: center;
     padding: 10px;
     border-bottom: var(--border);
-
-    .leftbar__private,
-    .leftbar__group,
-    .leftbar__channel,
-    .leftbar__notifications {
-      display: flex;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
   }
 
   .leftbar__create-chat {

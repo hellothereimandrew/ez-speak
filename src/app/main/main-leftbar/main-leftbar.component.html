@@ -1,5 +1,5 @@
-<div class="leftbar {{ selectedTheme }}" (click)="closeContextMenu()" [ngStyle]="{width: currentLeftbarWidth + 'px'}">
-  <div class="leftbar-splitter" (click)="isResized = !isResized" [ngStyle]="{left: currentLeftbarWidth + 'px'}"></div>
+<div class="leftbar {{ selectedTheme }}" [ngStyle]="{width: leftbarWidth + 'px'}" (click)="closeContextMenu()">
+  <div class="leftbar-splitter" [ngStyle]="{left: leftbarWidth + 'px'}" (click)="isResized = !isResized"></div>
   <div class="leftbar__user-card">
     <div class="leftbar__user-ico">
       <img src="../assets/img/ZKoQpzcDggWg2ogpkHjR9JnzY9lbPC7wR_gI-BZX5ncn7VOpt-G_a2jJmQBzC4gx.jpg" alt="alt" />
@@ -36,12 +36,16 @@
     </div>
   </div>
 
-  <app-main-leftbar-aside-notifi *ngIf="!hideNotifi" (hideNotifi)="showAside($event)"></app-main-leftbar-aside-notifi>
+  <app-main-leftbar-aside-notifi *ngIf="!hideNotifi" (hideNotifi)="showNotifi()"></app-main-leftbar-aside-notifi>
 
   <app-main-leftbar-aside-menu *ngIf="!hideOptions" (hideOptions)="showOptions()"></app-main-leftbar-aside-menu>
 
-  <div class="leftbar__nav">
-    <div class="leftbar__private">
+  <div
+    style="cursor: pointer"
+    class="leftbar__nav"
+    [ngStyle]="{height: leftbarNavHeight + 'px'}"
+    (click)="openExpandedPanel()">
+    <div style="cursor: pointer" class="flex">
       <svg
         width="31"
         height="21"
@@ -82,7 +86,7 @@
       </svg>
     </div>
 
-    <div class="leftbar__group">
+    <div style="cursor: pointer" class="flex">
       <svg
         width="25"
         height="20"
@@ -100,7 +104,7 @@
       </svg>
     </div>
 
-    <div class="leftbar__channel">
+    <div style="cursor: pointer" class="flex">
       <svg
         width="22"
         height="22"
@@ -116,14 +120,14 @@
       </svg>
     </div>
 
-    <div class="leftbar__notifications">
+    <div style="cursor: pointer" class="flex">
       <svg
         width="18"
         height="22"
         viewBox="0 0 18 22"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        (click)="showAside()"
+        (click)="showNotifi()"
         [ngClass]="{'active-fill': !hideNotifi}">
         <path
           [ngClass]="{'active-fill': !hideNotifi}"
@@ -134,6 +138,17 @@
           fill-opacity="0.3" />
       </svg>
     </div>
+
+    <!-- <div style="cursor: pointer" class="flex">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M11 1V11M11 21V11M11 11H21M11 11H1"
+          stroke="white"
+          stroke-opacity="0.3"
+          stroke-width="2"
+          stroke-linecap="round" />
+      </svg>
+    </div> -->
   </div>
 
   <div *ngIf="showSearch" class="leftbar__search fade-bottom">
@@ -166,37 +181,55 @@
     <div *ngIf="pinnedChats.length > 0" class="leftbar__pinned-chat">
       <div *ngFor="let item of pinnedChats">
         <div class="leftbar__chat-wrap fade-bottom">
-          <div class="leftbar__chat-ico">{{ item.ico }}</div>
+          <div class="leftbar__chat-ico">{{ item?.ico }}</div>
           <div class="leftbar__chat" (click)="showChatSection(item)">
-            <p>{{ item.name }}</p>
-            <p *ngIf="item.lastMsg">{{ item.lastMsg }}</p>
+            <div class="flex">
+              <p style="margin-right: 5px">{{ item?.name }}</p>
+              <div *ngIf="item?.msgs !== 0" class="leftbar__unread-msgs">
+                {{ item?.msgs }}
+              </div>
+            </div>
+
+            <div class="flex">
+              <p style="margin-right: 5px; white-space: nowrap">{{ item?.userName + ': ' }}</p>
+              <div class="flex">
+                <p style="margin-right: 5px; white-space: nowrap" class="leftbar__chat-last-msg">{{ item?.lastMsg }}</p>
+                <p>{{ item?.time }}</p>
+              </div>
+            </div>
           </div>
-          <div *ngIf="item.msgs !== 0" class="leftbar__unread-msgs">
-            {{ item.msgs }}
+
+          <div class="flex">
+            <div (click)="unpinChannel(item)">&#9733;</div>
+            <div class="X">&times;</div>
           </div>
-          <div class="X">&times;</div>
-          <div (click)="unpin(item)">&#9733;</div>
         </div>
       </div>
     </div>
 
     <div *ngFor="let item of chats" class="leftbar__chat-wrap fade-bottom">
-      <div class="leftbar__chat-ico">{{ item.ico }}</div>
+      <div class="leftbar__chat-ico">{{ item?.ico }}</div>
       <div class="leftbar__chat" (click)="showChatSection(item)">
         <div class="flex">
-          <p>{{ item.name }}</p>
-          <p>{{ item.time }}</p>
+          <p style="margin-right: 5px">{{ item?.name }}</p>
+          <div *ngIf="item?.msgs !== 0" class="leftbar__unread-msgs">
+            {{ item?.msgs }}
+          </div>
         </div>
+
         <div class="flex">
-          <p>{{ item.userName + ': ' }}</p>
-          <p class="leftbar__chat-last-msg">{{ item.lastMsg }}</p>
+          <p style="margin-right: 5px; white-space: nowrap">{{ item?.userName + ': ' }}</p>
+          <div class="flex">
+            <p style="margin-right: 5px; white-space: nowrap" class="leftbar__chat-last-msg">{{ item?.lastMsg }}</p>
+            <p>{{ item?.time }}</p>
+          </div>
         </div>
       </div>
-      <div *ngIf="item.msgs !== 0" class="leftbar__unread-msgs">
-        {{ item.msgs }}
+
+      <div class="flex">
+        <div (click)="pinChannel(item)">&#9734;</div>
+        <div class="X" (click)="removeChannel(item)">&times;</div>
       </div>
-      <div class="X" (click)="removeChannel(item)">&times;</div>
-      <div (click)="pin(true, item.name)">&#9734;</div>
     </div>
   </div>
 

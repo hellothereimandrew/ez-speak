@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {DecorationService} from 'src/app/services/decoration.service';
 import {Chat} from 'src/app/shared/chat-db';
@@ -21,29 +21,51 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   @Output() public chatSectionListener: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
-  @HostListener('document:mousemove', ['$event']) public resizeLeftbar(event: MouseEvent): void {
+  @HostListener('window:mousemove', ['$event']) public resizeLeftbar(event: MouseEvent): void {
     if (this.isResized) {
-      this.currentLeftbarWidth = event.clientX;
+      this.leftbarWidth = event.clientX;
+
+      if (this.leftbarWidth <= 289) {
+        this.leftbarWidth = 289;
+        this.isResized = false;
+      }
     } else {
       this.isResized = false;
     }
   }
 
-  public leftbarRef!: ElementRef;
+  @HostListener('window:keyup', ['$event']) public setHotKeys(event: KeyboardEvent): void {
+    event.preventDefault();
+
+    if (event.shiftKey && event.code === 'KeyQ') {
+      this.hideOptions = !this.hideOptions;
+    }
+
+    if (event.shiftKey && event.code === 'KeyE') {
+      this.hideNotifi = !this.hideNotifi;
+    }
+  }
+
   public hideNotifi: boolean = true;
   public hideOptions: boolean = true;
   public hideContextMenu: boolean = true;
   public hideChatSection: boolean = true;
+  public hideExpandedPanel: boolean = true;
   public showControls: boolean = false;
   public showSearch: boolean = false;
   public isResized: boolean = false;
+
   public selectedTheme: string = '';
   public selectedButton: string = '';
   public channelName: string = '';
+
   public chats: Chat[] = [];
   public pinnedChats: Chat[] = [];
+
   public channelCounterId: number = 1;
-  public currentLeftbarWidth: number = 289;
+  public leftbarWidth: number = 289;
+  public leftbarNavHeight: number = 43;
+
   public themeSubscription: Subscription = new Subscription();
   public contextMenuPosition: any;
 
@@ -77,40 +99,22 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     this.chats.splice(this.chats.indexOf(chat), 1);
   }
 
-  public pin(pinned: boolean, name?: string, chat?: Chat): void {
-    // const pinnedChats: Chat[] = this.chats;
-
-    const temp: Chat = {
-      id: this.channelCounterId++,
-      ico: '',
-      name: name,
-      lastMsg: 'уже круче, чем телега!',
-      msgs: 0,
-      pinned: pinned,
-    };
-
-    this.pinnedChats.push(temp);
+  public pinChannel(currentChat?: Chat): void {
+    let pinnedChat: any = currentChat;
+    pinnedChat.pinned = true;
+    this.pinnedChats.push(pinnedChat);
   }
 
-  public unpin(pinnedChat: Chat): void {
+  public unpinChannel(pinnedChat: Chat): void {
+    pinnedChat.pinned = false;
     this.pinnedChats.splice(this.pinnedChats.indexOf(pinnedChat), 1);
   }
 
-  public showAside(event?: any): void {
-    // if (event) {
-    //   this.hideNotifi = false;
-    //   this.hideOptions = true;
-    //   console.log('hidden');
-    // }
+  public showNotifi(): void {
     this.hideNotifi = !this.hideNotifi;
   }
 
-  public showOptions(event?: any): void {
-    // if (event) {
-    //   this.hideOptions = false;
-    //   this.hideNotifi = true;
-    //   console.log('hidden');
-    // }
+  public showOptions(): void {
     this.hideOptions = !this.hideOptions;
   }
 
@@ -125,6 +129,17 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
       this.selectedButton = '';
     } else {
       this.selectedButton = button;
+    }
+  }
+
+  public openExpandedPanel() {
+    const defaultNavHeight: number = 43;
+    this.hideExpandedPanel = !this.hideExpandedPanel;
+
+    if (!this.hideExpandedPanel) {
+      this.leftbarNavHeight = defaultNavHeight * 2;
+    } else {
+      this.leftbarNavHeight = defaultNavHeight;
     }
   }
 
