@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {DecorationService} from 'src/app/services/decoration.service';
-import {Chat} from 'src/app/shared/chat-db';
+import {DecorationService} from 'src/app/shared/services/decoration.service';
+import {Chat} from 'src/app/shared/interfaces/chat-db';
 
 @Component({
   selector: 'app-main-rightbar',

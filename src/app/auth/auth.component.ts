@@ -8,7 +8,7 @@ import {Component} from '@angular/core';
 export class AuthComponent {
   public selectedButton: string = '';
 
-  public onSelect(button: string, alwaysSelected: boolean = true): void {
+  public onSelect(button: string): void {
     if (this.selectedButton === button) {
       this.selectedButton = '';
     } else {

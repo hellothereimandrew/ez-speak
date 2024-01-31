@@ -1,11 +1,3 @@
-:root {
-  --font-family: "Nunito-Light";
-  --font-color: rgb(224, 224, 224);
-  --background: rgb(16, 24, 28);
-  --background-secondary: rgb(21, 29, 35);
-  --border: 1px solid rgba(255, 255, 255, 0.102);
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -19,7 +11,16 @@ body {
   height: 100vh;
 }
 
+:root {
+  --font-family: "Nunito-Light";
+  --font-color: rgb(224, 224, 224);
+  --background: rgb(16, 24, 28);
+  --background-secondary: rgb(21, 29, 35);
+  --border: 1px solid rgba(255, 255, 255, 0.102);
+}
+
 .light-theme {
+  --font-family: "Nunito-Light";
   --font-color: rgb(48, 48, 48);
   --background: rgb(220, 225, 233);
   --background-secondary: rgb(227, 229, 233);
@@ -163,6 +164,10 @@ body {
 .active-fill {
   fill: rgb(70, 188, 255);
   fill-opacity: 1;
+  cursor: pointer;
+}
+
+.pointer {
   cursor: pointer;
 }
 

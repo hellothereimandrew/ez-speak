@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {Users} from 'src/app/shared/users-db';
+import {Users} from 'src/app/shared/interfaces/users-db';
 
 @Component({
   selector: 'app-auth-sign-in',
   templateUrl: './auth-sign-in.component.html',
   styleUrls: ['./auth-sign-in.component.scss'],
 })
-export class AuthSignInComponent implements OnInit {
+export class AuthSignInComponent {
   public signInData: FormGroup = new FormGroup({
     login: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -23,8 +23,6 @@ export class AuthSignInComponent implements OnInit {
     name: '',
     role: '',
   };
-
-  ngOnInit(): void {}
 
   public showPass(): void {
     this.hide = !this.hide;

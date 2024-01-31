@@ -1,5 +1,6 @@
 .main {
   display: flex;
+  overflow-y: hidden;
   user-select: none;
   background: url(../../assets/img/background.png) no-repeat;
   background-position: 55%;

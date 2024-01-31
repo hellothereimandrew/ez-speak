@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {DecorationService} from 'src/app/services/decoration.service';
+import {DecorationService} from 'src/app/shared/services/decoration.service';
 
 @Component({
   selector: 'app-main-leftbar-aside-menu',

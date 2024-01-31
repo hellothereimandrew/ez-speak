@@ -10,9 +10,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import {Subscription} from 'rxjs';
-import {DecorationService} from 'src/app/services/decoration.service';
-import {Chat} from 'src/app/shared/chat-db';
-import {Message} from 'src/app/shared/messages-db';
+import {DecorationService} from 'src/app/shared/services/decoration.service';
+import {Chat} from 'src/app/shared/interfaces/chat-db';
+import {Message} from 'src/app/shared/interfaces/messages-db';
 
 @Component({
   selector: 'app-main-chat-section',
