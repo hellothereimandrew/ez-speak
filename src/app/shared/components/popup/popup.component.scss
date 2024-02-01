@@ -1,0 +1,19 @@
+.popup {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 150px;
+  top: 43%;
+  left: 41%;
+  border: var(--border);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+
+  .popup__header {
+    margin-bottom: 20px;
+  }
+}
