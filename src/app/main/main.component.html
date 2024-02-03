@@ -8,6 +8,7 @@
   <app-main-chat-section
     *ngIf="!hideChatSection"
     [currentChat]="currentChat"
+    [showChatSection]="hideChatSection"
     (rightbarListener)="showRightbar()"></app-main-chat-section>
 
   <app-main-rightbar
@@ -15,3 +16,5 @@
     [currentChat]="currentChat"
     (rightbarListener)="showRightbar()"></app-main-rightbar>
 </div>
+
+<create-folder [hideFolderPopup]="hideFolderPopup" (folderNameEmitter)="getFolderName($event)"></create-folder>

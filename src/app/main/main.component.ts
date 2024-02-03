@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
 import {Chat} from 'src/app/shared/interfaces/chat-db';
 import {DecorationService} from '../shared/services/decoration.service';
 import {Subscription} from 'rxjs';
@@ -26,6 +26,14 @@ export class MainComponent implements OnInit, OnDestroy {
     name: '',
   };
 
+  @HostListener('window:keyup', ['$event']) public setHotkeys(event: KeyboardEvent): void {
+    event.preventDefault();
+
+    if (!this.hideChatSection && event.code === 'Escape') {
+      this.hideChatSection = !this.hideChatSection;
+    }
+  }
+
   constructor(private decoreationServise: DecorationService) {}
 
   public hideChatSection: boolean = true;
@@ -50,6 +58,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   public showFolderPopUp(): void {
     this.hideFolderPopup = !this.hideFolderPopup;
+    console.log(this.hideFolderPopup);
   }
 
   public showChatSection(): void {

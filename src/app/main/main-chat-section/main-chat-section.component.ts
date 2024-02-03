@@ -26,23 +26,27 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
     name: '',
   };
 
+  @Input() public showChatSection: boolean = false;
+
   @Output() public rightbarListener: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @ViewChild('scrollable') public scrollable!: ElementRef;
 
-  public contextMenuPosition: any;
+  constructor(private decoreationServise: DecorationService) {}
+
   public hideContextMenu: boolean = true;
   public hideDropDown: boolean = true;
   public isActive: boolean = false;
   public isPrivate: boolean = false;
   public openRightBar: boolean = false;
   public showPinnedMsg: boolean = false;
-  public showChatSection: boolean = false;
-  public selectedTheme: string = '';
-  public messages: Message[] = [];
-  public themeSubscription: Subscription = new Subscription();
 
-  constructor(private decoreationServise: DecorationService) {}
+  public selectedTheme: string = '';
+
+  public messages: Message[] = [];
+
+  public contextMenuPosition: any;
+  public themeSubscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.themeSubscription = this.decoreationServise.selectedTheme$.subscribe((theme) => {

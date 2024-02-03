@@ -12,8 +12,6 @@ import {PopupData} from 'src/app/shared/interfaces/popup-data';
   styleUrls: ['./main-leftbar.component.scss'],
 })
 export class MainLeftbarComponent implements OnInit, OnDestroy {
-  @Input() public folderName: string = '';
-
   @Input() public user: Users = {
     id: 0,
     ico: '',
@@ -22,8 +20,12 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     status: '',
   };
 
+  @Input() public folderName: string = '';
+
   @Output() public chatSectionListener: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   @Output() public showCreateFolder: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   @Output() public currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
   @HostListener('window:mousemove', ['$event']) public resizeLeftbar(event: MouseEvent): void {
@@ -82,6 +84,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
 
   public chats: Chat[] = [];
   public pinnedChats: Chat[] = [];
+  public test: Chat = {};
   public customFolders: Folder[] = [];
   public defaultFolders: Folder[] = [
     {
@@ -135,6 +138,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     };
 
     if (name) {
+      this.test = temp;
       this.chats.push(temp);
       this.channelName = '';
     }
