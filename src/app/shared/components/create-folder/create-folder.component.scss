@@ -1,0 +1,55 @@
+.create-folder {
+  position: absolute;
+  top: 43%;
+  left: 43%;
+  padding: 10px 20px 10px 20px;
+  border: var(--border);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+
+  .create-folder-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+
+    .create-folder-input {
+      width: 100%;
+      text-align: center;
+      background: none;
+      font-size: 14px;
+      outline: 0;
+      border: 0;
+      border-bottom: var(--border);
+    }
+
+    .create-folder-ico {
+      position: absolute;
+      right: 5%;
+    }
+  }
+
+  .create-folder-wrap {
+    .create-folder-input {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+
+  .added-users {
+    margin-bottom: 20px;
+
+    .added-users-header {
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .added-users-list {
+      .added-users-list__item {
+        display: flex;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

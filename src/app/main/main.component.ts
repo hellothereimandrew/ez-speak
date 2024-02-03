@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Chat} from 'src/app/shared/chat-db';
-import {DecorationService} from '../services/decoration.service';
+import {Chat} from 'src/app/shared/interfaces/chat-db';
+import {DecorationService} from '../shared/services/decoration.service';
 import {Subscription} from 'rxjs';
-import {Users} from '../shared/users-db';
+import {Users} from '../shared/interfaces/users-db';
 
 @Component({
   selector: 'app-main',
@@ -10,6 +10,8 @@ import {Users} from '../shared/users-db';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit, OnDestroy {
+  @Input() folderName: string = '';
+
   @Input() public user: Users = {
     id: 0,
     ico: '',
@@ -28,6 +30,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   public hideChatSection: boolean = true;
   public hideRightbar: boolean = true;
+  public hideFolderPopup: boolean = true;
   public selectedTheme: string = '';
   public themeSubscription: Subscription = new Subscription();
 
@@ -37,12 +40,20 @@ export class MainComponent implements OnInit, OnDestroy {
     });
   }
 
-  public showChatSection(): void {
-    this.hideChatSection = !this.hideChatSection;
-  }
-
   public getCurrentChat(chat: Chat): void {
     this.currentChat = chat;
+  }
+
+  public getFolderName(folderName: string): void {
+    this.folderName = folderName;
+  }
+
+  public showFolderPopUp(): void {
+    this.hideFolderPopup = !this.hideFolderPopup;
+  }
+
+  public showChatSection(): void {
+    this.hideChatSection = !this.hideChatSection;
   }
 
   public showRightbar(): void {

@@ -11,6 +11,7 @@ import {MainLeftbarAsideNotifiComponent} from './main-leftbar/main-leftbar-aside
 import {MainLeftbarComponent} from './main-leftbar/main-leftbar.component';
 import {MainRightbarComponent} from './main-rightbar/main-rightbar.component';
 import {MainComponent} from './main.component';
+import {DecorationService} from '../shared/services/decoration.service';
 
 @NgModule({
   declarations: [
@@ -24,5 +25,6 @@ import {MainComponent} from './main.component';
     CreateFolderComponent,
   ],
   imports: [CommonModule, BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
+  providers: [DecorationService],
 })
 export class MainModule {}

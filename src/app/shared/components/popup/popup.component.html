@@ -1,9 +1,9 @@
-<div *ngIf="popupService.showPopup" class="popup">
+<div *ngIf="showPopup" class="popup">
   <p class="popup__header">{{ popupData.message }}</p>
   <div class="popup__buttons">
-    <button style="margin-right: 15px" class="ez-button" (click)="popupService.confirmed()">
+    <button style="margin-right: 15px" class="ez-button" (click)="confirmed()">
       {{ popupData.firstButton }}
     </button>
-    <button class="ez-button" (click)="popupService.canceled()">{{ popupData.secondButton }}</button>
+    <button class="ez-button" (click)="showPopup = false">{{ popupData.secondButton }}</button>
   </div>
 </div>

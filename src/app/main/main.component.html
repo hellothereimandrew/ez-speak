@@ -1,5 +1,9 @@
 <div class="main {{ selectedTheme }}">
-  <app-main-leftbar (currentChat)="getCurrentChat($event)" (chatSectionListener)="showChatSection()"></app-main-leftbar>
+  <app-main-leftbar
+    [folderName]="folderName"
+    (currentChat)="getCurrentChat($event)"
+    (chatSectionListener)="showChatSection()"
+    (showCreateFolder)="showFolderPopUp()"></app-main-leftbar>
 
   <app-main-chat-section
     *ngIf="!hideChatSection"

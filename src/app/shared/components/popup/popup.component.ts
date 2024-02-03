@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {PopupService} from 'src/app/shared/services/popup.service';
+import {PopupData} from '../../interfaces/popup-data';
 
 @Component({
   selector: 'popup',
@@ -9,19 +9,19 @@ import {PopupService} from 'src/app/shared/services/popup.service';
 export class PopupComponent {
   @Input() public showPopup: boolean = false;
 
-  @Input() public popupData: {
-    message: string;
-    firstButton: string;
-    secondButton: string;
-    confirmed: boolean;
-    canceled: boolean;
-  } = {
+  @Input() public popupData: PopupData = {
     message: '',
     firstButton: '',
     secondButton: '',
-    confirmed: false,
-    canceled: false,
+    confirmed: () => {},
   };
 
-  constructor(public popupService: PopupService) {}
+  public confirmed(): void {
+    if (this.popupData.confirmed) {
+      this.popupData.confirmed();
+      this.showPopup = false;
+    }
+
+    this.showPopup = false;
+  }
 }

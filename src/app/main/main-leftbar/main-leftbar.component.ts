@@ -1,8 +1,10 @@
 import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {DecorationService} from 'src/app/services/decoration.service';
-import {Chat} from 'src/app/shared/chat-db';
-import {Users} from 'src/app/shared/users-db';
+import {DecorationService} from 'src/app/shared/services/decoration.service';
+import {Chat} from 'src/app/shared/interfaces/chat-db';
+import {Folder} from 'src/app/shared/interfaces/folder';
+import {Users} from 'src/app/shared/interfaces/users-db';
+import {PopupData} from 'src/app/shared/interfaces/popup-data';
 
 @Component({
   selector: 'app-main-leftbar',
@@ -10,6 +12,8 @@ import {Users} from 'src/app/shared/users-db';
   styleUrls: ['./main-leftbar.component.scss'],
 })
 export class MainLeftbarComponent implements OnInit, OnDestroy {
+  @Input() public folderName: string = '';
+
   @Input() public user: Users = {
     id: 0,
     ico: '',
@@ -19,6 +23,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   };
 
   @Output() public chatSectionListener: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public showCreateFolder: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
   @HostListener('window:mousemove', ['$event']) public resizeLeftbar(event: MouseEvent): void {
@@ -46,6 +51,8 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     }
   }
 
+  constructor(private decoreationService: DecorationService) {}
+
   public hideNotifi: boolean = true;
   public hideOptions: boolean = true;
   public hideContextMenu: boolean = true;
@@ -54,25 +61,63 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   public showControls: boolean = false;
   public showSearch: boolean = false;
   public isResized: boolean = false;
+  public showPopup: boolean = false;
 
   public selectedTheme: string = '';
   public selectedButton: string = '';
   public channelName: string = '';
 
-  public chats: Chat[] = [];
-  public pinnedChats: Chat[] = [];
-
   public channelCounterId: number = 1;
-  public leftbarWidth: number = 289;
   public leftbarNavHeight: number = 43;
+  public leftbarWidth: number = 289;
 
   public themeSubscription: Subscription = new Subscription();
   public contextMenuPosition: any;
 
-  constructor(private decoreationServise: DecorationService) {}
+  public popupData: PopupData = {
+    message: '',
+    firstButton: '',
+    secondButton: '',
+  };
+
+  public chats: Chat[] = [];
+  public pinnedChats: Chat[] = [];
+  public customFolders: Folder[] = [];
+  public defaultFolders: Folder[] = [
+    {
+      id: 1,
+      ico: 'private.svg',
+      name: 'Личные сообщения',
+    },
+
+    {
+      id: 2,
+      ico: 'group.svg',
+      name: 'Группы',
+    },
+
+    {
+      id: 3,
+      ico: 'group.svg',
+      name: 'Каналы',
+    },
+
+    {
+      id: 4,
+      ico: 'notifi.svg',
+      name: 'Уведомления',
+    },
+
+    {
+      id: 5,
+      ico: 'plus.svg',
+      name: 'Добавить папку',
+    },
+  ];
 
   ngOnInit(): void {
-    this.themeSubscription = this.decoreationServise.selectedTheme$.subscribe((theme) => {
+    this.openExpandedPanel();
+    this.themeSubscription = this.decoreationService.selectedTheme$.subscribe((theme) => {
       this.selectedTheme = theme;
     });
   }
@@ -95,7 +140,22 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  public removeChannel(chat: Chat): void {
+  public openPopup(chat: Chat): void {
+    this.showPopup = true;
+
+    const popupData: PopupData = {
+      message: 'Вы уверены, что хотите удалить канал?',
+      firstButton: 'Да',
+      secondButton: 'Нет',
+      confirmed: () => {
+        this.removeChannel(chat);
+      },
+    };
+
+    this.popupData = popupData;
+  }
+
+  public removeChannel(chat: Chat): any {
     this.chats.splice(this.chats.indexOf(chat), 1);
   }
 
@@ -110,12 +170,30 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     this.pinnedChats.splice(this.pinnedChats.indexOf(pinnedChat), 1);
   }
 
-  public showNotifi(): void {
-    this.hideNotifi = !this.hideNotifi;
+  public createNewFolder() {
+    this.showCreateFolder.emit();
+
+    const newFolder: Folder = {
+      id: 0,
+      ico: '',
+      name: this.folderName,
+    };
+
+    if (this.defaultFolders.length >= 5) {
+      this.customFolders.push(newFolder);
+      this.openExpandedPanel();
+    }
   }
 
-  public showOptions(): void {
-    this.hideOptions = !this.hideOptions;
+  public openExpandedPanel() {
+    const defaultNavHeight: number = 43;
+
+    if (this.customFolders.length > 0) {
+      this.hideExpandedPanel = false;
+      this.leftbarNavHeight = defaultNavHeight * 2;
+    } else {
+      this.leftbarNavHeight = defaultNavHeight;
+    }
   }
 
   public showChatSection(item: Chat): void {
@@ -132,17 +210,6 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  public openExpandedPanel() {
-    const defaultNavHeight: number = 43;
-    this.hideExpandedPanel = !this.hideExpandedPanel;
-
-    if (!this.hideExpandedPanel) {
-      this.leftbarNavHeight = defaultNavHeight * 2;
-    } else {
-      this.leftbarNavHeight = defaultNavHeight;
-    }
-  }
-
   public openContextMenu(event: MouseEvent): void {
     event.preventDefault();
     this.hideContextMenu = false;
@@ -154,6 +221,14 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
 
   public closeContextMenu(): void {
     this.hideContextMenu = true;
+  }
+
+  public showNotifi(): void {
+    this.hideNotifi = !this.hideNotifi;
+  }
+
+  public showOptions(): void {
+    this.hideOptions = !this.hideOptions;
   }
 
   public ngOnDestroy(): void {

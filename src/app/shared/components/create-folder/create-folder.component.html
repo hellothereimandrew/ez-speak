@@ -1,0 +1,43 @@
+<div *ngIf="!hideFolderPopup" class="create-folder">
+  <div class="create-folder-header">
+    <input class="create-folder-input" type="text" placeholder="Новая папка" [(ngModel)]="folderName" />
+    <div class="flex-align-center pointer create-folder-ico">
+      <svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M8.63636 1H1V19H29V4H12L8.63636 1Z"
+          stroke="white"
+          stroke-opacity="0.3"
+          stroke-width="2"
+          stroke-linejoin="round" />
+      </svg>
+    </div>
+  </div>
+
+  <div class="added-users">
+    <p class="added-users-header">Добавленные пользователи</p>
+
+    <div class="added-users-list">
+      <div class="added-users-list__item">
+        <div></div>
+        <p>admin</p>
+      </div>
+
+      <div class="added-users-list__item">
+        <div></div>
+        <p>admin</p>
+      </div>
+
+      <div class="added-users-list__item">
+        <div></div>
+        <p>admin</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="">
+    <div class="create-folder-buttons">
+      <button style="margin-right: 15px" class="ez-button" (click)="emitFolder()">Сохранить</button>
+      <button class="ez-button" (click)="hideFolderPopup = true">Отмена</button>
+    </div>
+  </div>
+</div>
