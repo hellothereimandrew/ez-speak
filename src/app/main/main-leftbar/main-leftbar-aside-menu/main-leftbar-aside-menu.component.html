@@ -63,13 +63,13 @@
         <div class="aside-options-usual__background">
           <!-- исправить ↓ -->
           <p style="margin-right: 5px">Фон сообщений</p>
-          <input type="file" class="ez-small-button" />
+          <input type="file" class="ez-small-button" (change)="setBackground($event)" />
         </div>
       </div>
     </div>
 
     <!-- <div class="aside-options-usual">
-      <p class="aside-options-usual-header">Настройки уведомлений</p>
+      <p class="aside-options-usual-header">Уведомления</p>
       <div style="display: flex">
         <p>Выключить звук уведомлений</p>
         <input type="checkbox" />
@@ -77,7 +77,7 @@
     </div> -->
 
     <div class="aside-options-audio">
-      <p class="aside-options-audio__header">Настройки звука</p>
+      <p class="aside-options-audio__header">Аудио</p>
       <div class="aside-options-audio__wrap">
         <div class="aside-options-audio__volume">
           <p class="heading">Звук</p>
@@ -94,7 +94,7 @@
     </div>
 
     <div class="aside-options-video">
-      <p class="aside-options-video__header">Настройки видео</p>
+      <p class="aside-options-video__header">Видео</p>
       <div class="aside-options-video__wrap">
         <p class="heading">Параметр1</p>
         <select class="ez-select">

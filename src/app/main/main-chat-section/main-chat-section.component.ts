@@ -42,15 +42,21 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
   public showPinnedMsg: boolean = false;
 
   public selectedTheme: string = '';
+  public selectedBackground: string = '';
 
   public messages: Message[] = [];
 
   public contextMenuPosition: any;
   public themeSubscription: Subscription = new Subscription();
+  public backgroundSubscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.themeSubscription = this.decoreationServise.selectedTheme$.subscribe((theme) => {
       this.selectedTheme = theme;
+    });
+
+    this.backgroundSubscription = this.decoreationServise.selectedImage$.subscribe((image) => {
+      this.selectedBackground = image;
     });
   }
 
@@ -110,5 +116,6 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
 
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
+    this.backgroundSubscription.unsubscribe();
   }
 }

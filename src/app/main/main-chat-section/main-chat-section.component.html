@@ -41,10 +41,14 @@
       <p>Закреплённое сообщение</p>
       <p>Уже лучше чем телеграм!</p>
     </div>
+
     <span (click)="showPinnedMsg = false">&times;</span>
   </div>
 
-  <div *ngIf="!isPrivate" class="current-chat-public">
+  <div
+    *ngIf="!isPrivate"
+    class="current-chat-public"
+    [ngStyle]="{background: ' url(' + selectedBackground + ') no-repeat'}">
     <div #scrollable class="messages-list">
       <div
         *ngFor="let item of messages"
@@ -54,12 +58,13 @@
         <div class="my-message__ico">
           <img src="{{ item.ico }}" alt="alt" />
         </div>
+
         <div>
           <div style="display: flex">
             <div class="my-message__name">{{ item.user }}</div>
-            <!-- <div class="my-message__date">{{ item.date }}</div> -->
             <div class="my-message__time">{{ item.time }}</div>
           </div>
+
           <div class="my-message__text">{{ item.text }}</div>
         </div>
       </div>
