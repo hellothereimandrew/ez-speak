@@ -48,17 +48,6 @@
     }
   }
 
-  .leftbar__nav {
-    border-bottom: var(--border);
-
-    .leftbar__nav-default-folders,
-    .leftbar__nav-custom-folders {
-      display: flex;
-      justify-content: space-around;
-      padding: 10px;
-    }
-  }
-
   .leftbar__create-chat {
     padding: 10px;
     border-bottom: var(--border);

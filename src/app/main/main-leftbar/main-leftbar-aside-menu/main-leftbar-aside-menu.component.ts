@@ -15,8 +15,8 @@ export class MainLeftbarAsideMenuComponent {
     this.decoreationServise.selectedTheme = currentTheme;
   }
 
-  public setBackground(event: any): void {
-    const fileName: string = event.target.files[0].name;
+  public setBackground(event?: any): void {
+    const fileName: string = event.target?.files[0]?.name;
     this.decoreationServise.selectedImage = `../../assets/img/${fileName}`;
   }
 }

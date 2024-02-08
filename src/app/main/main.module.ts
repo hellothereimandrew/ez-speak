@@ -9,6 +9,7 @@ import {MainChatSectionComponent} from './main-chat-section/main-chat-section.co
 import {MainLeftbarAsideMenuComponent} from './main-leftbar/main-leftbar-aside-menu/main-leftbar-aside-menu.component';
 import {MainLeftbarAsideNotifiComponent} from './main-leftbar/main-leftbar-aside-notifi/main-leftbar-aside-notifi.component';
 import {MainLeftbarComponent} from './main-leftbar/main-leftbar.component';
+import {MainLeftbarNavigationComponent} from './main-leftbar/main-leftbar-navigation/main-leftbar-navigation.component';
 import {MainRightbarComponent} from './main-rightbar/main-rightbar.component';
 import {MainComponent} from './main.component';
 import {DecorationService} from '../shared/services/decoration.service';
@@ -17,6 +18,7 @@ import {DecorationService} from '../shared/services/decoration.service';
   declarations: [
     MainComponent,
     MainLeftbarComponent,
+    MainLeftbarNavigationComponent,
     MainLeftbarAsideMenuComponent,
     MainLeftbarAsideNotifiComponent,
     MainChatSectionComponent,

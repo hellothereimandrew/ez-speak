@@ -1,0 +1,12 @@
+.leftbar__nav {
+  height: 100vh;
+  border-right: var(--border);
+
+  .leftbar__nav-default-folders,
+  .leftbar__nav-custom-folders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+}
