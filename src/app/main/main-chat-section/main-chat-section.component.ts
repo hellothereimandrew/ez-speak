@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription, take, takeUntil} from 'rxjs';
 import {DecorationService} from 'src/app/shared/services/decoration.service';
 import {Chat} from 'src/app/shared/interfaces/chat-db';
 import {Message} from 'src/app/shared/interfaces/messages-db';
@@ -49,19 +49,22 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
   public contextMenuPosition: any;
   public themeSubscription: Subscription = new Subscription();
   public backgroundSubscription: Subscription = new Subscription();
+  public unsubscribe: Subject<any> = new Subject();
 
   ngOnInit(): void {
-    this.themeSubscription = this.decoreationServise.selectedTheme$.subscribe((theme) => {
+    this.themeSubscription = this.decoreationServise.selectedTheme$.pipe(take(1)).subscribe((theme) => {
       this.selectedTheme = theme;
     });
 
-    this.backgroundSubscription = this.decoreationServise.selectedImage$.subscribe((image) => {
-      this.selectedBackground = image;
-    });
+    this.backgroundSubscription = this.decoreationServise.selectedImage$
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((image) => {
+        this.selectedBackground = image;
+      });
   }
 
   ngAfterViewChecked() {
-    this.scrollClaimedToBottom();
+    // this.scrollClaimedToBottom();
   }
 
   public sendMessage(event?: any): void {

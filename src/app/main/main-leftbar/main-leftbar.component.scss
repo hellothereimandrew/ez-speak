@@ -18,10 +18,10 @@
     border-bottom: var(--border);
 
     .leftbar__user-ico {
-      width: 45px;
+      width: 60px;
       height: 45px;
       margin-right: 12px;
-      border-radius: 30px;
+      border-radius: 100%;
       border: 2px solid rgb(59, 147, 197);
       overflow: hidden;
 
@@ -32,7 +32,7 @@
     }
 
     .leftbar__current-info {
-      width: 65%;
+      width: 100%;
 
       .leftbar__user-name {
         font-size: 16px;
@@ -44,7 +44,9 @@
     }
 
     .leftbar__options {
-      cursor: pointer;
+      display: flex;
+      justify-content: flex-end;
+
     }
   }
 
@@ -60,7 +62,8 @@
   }
 
   .leftbar__chat-container {
-    height: 88vh;
+    width: 100%;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;

@@ -30,7 +30,8 @@ export class MainComponent implements OnInit, OnDestroy {
     event.preventDefault();
 
     if (!this.hideChatSection && event.code === 'Escape') {
-      this.hideChatSection = !this.hideChatSection;
+      this.hideChatSection = true;
+      this.hideRightbar = true;
     }
   }
 
@@ -62,7 +63,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   public showChatSection(): void {
-    this.hideChatSection = !this.hideChatSection;
+    this.hideChatSection = false;
   }
 
   public showRightbar(): void {

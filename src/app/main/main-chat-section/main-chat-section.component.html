@@ -45,16 +45,17 @@
     <span (click)="showPinnedMsg = false">&times;</span>
   </div>
 
+  <div class="flex"></div>
   <div
     *ngIf="!isPrivate"
-    class="current-chat-public"
-    [ngStyle]="{background: ' url(' + selectedBackground + ') no-repeat'}">
+    [ngStyle]="{background: ' url(' + selectedBackground + ') 0% 0% / cover no-repeat '}"
+    class="current-chat-public">
     <div #scrollable class="messages-list">
       <div
         *ngFor="let item of messages"
+        class="my-message"
         (contextmenu)="openContextMenu($event)"
-        (click)="openContextMenu($event)"
-        class="my-message">
+        (click)="openContextMenu($event)">
         <div class="my-message__ico">
           <img src="{{ item.ico }}" alt="alt" />
         </div>
@@ -70,6 +71,28 @@
       </div>
     </div>
 
+    <div class="messages-wrap">
+      <div class="send-msg-img">
+        <svg
+          class="flex"
+          width="23"
+          height="21"
+          viewBox="0 0 23 21"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          (input)="sendMessage($event)">
+          <path
+            d="M1 0.999999L22 10.5L0.999999 20L8 10.5L1 0.999999Z"
+            fill="white"
+            fill-opacity="0.1"
+            stroke="white"
+            stroke-opacity="0.3"
+            stroke-linejoin="round" />
+        </svg>
+      </div>
+      <textarea class="messages-wrap-input" (keyup.enter)="sendMessage($event)"></textarea>
+    </div>
+
     <div hidden class="scroll-to-bottom">
       <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -81,28 +104,6 @@
           stroke-linejoin="round" />
       </svg>
     </div>
-  </div>
-
-  <div class="messages-wrap">
-    <div class="send-msg-img">
-      <svg
-        style="display: flex"
-        width="23"
-        height="21"
-        viewBox="0 0 23 21"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        (input)="sendMessage($event)">
-        <path
-          d="M1 0.999999L22 10.5L0.999999 20L8 10.5L1 0.999999Z"
-          fill="white"
-          fill-opacity="0.1"
-          stroke="white"
-          stroke-opacity="0.3"
-          stroke-linejoin="round" />
-      </svg>
-    </div>
-    <textarea class="messages-wrap-input" (keyup.enter)="sendMessage($event)"></textarea>
   </div>
 
   <div
