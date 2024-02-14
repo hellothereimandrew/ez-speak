@@ -17,22 +17,23 @@
     padding: 8px;
     border-bottom: var(--border);
 
-    .leftbar__user-ico {
-      width: 60px;
-      height: 45px;
-      margin-right: 12px;
-      border-radius: 100%;
-      border: 2px solid rgb(59, 147, 197);
-      overflow: hidden;
-
-      img {
-        width: inherit;
-        height: inherit;
-      }
-    }
-
-    .leftbar__current-info {
+    .leftbar__user-info {
+      display: flex;
+      align-items: center;
       width: 100%;
+
+      .leftbar__user-ico {
+        height: 45px;
+        margin-right: 12px;
+        border-radius: 100%;
+        border: 2px solid rgb(59, 147, 197);
+        overflow: hidden;
+
+        img {
+          width: inherit;
+          height: inherit;
+        }
+      }
 
       .leftbar__user-name {
         font-size: 16px;
