@@ -9,10 +9,13 @@ import {DecorationService} from 'src/app/shared/services/decoration.service';
 export class MainLeftbarAsideMenuComponent {
   @Output() public hideOptions: EventEmitter<void> = new EventEmitter<void>();
 
+  public selectedTheme: string = '';
+
   constructor(private decoreationServise: DecorationService) {}
 
   public setAppTheme(currentTheme: string): void {
     this.decoreationServise.selectedTheme = currentTheme;
+    this.selectedTheme = currentTheme;
   }
 
   public setBackground(event?: any): void {

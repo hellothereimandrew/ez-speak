@@ -70,7 +70,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   public leftbarWidth: number = 346;
 
   public themeSubscription: Subscription = new Subscription();
-  public contextMenuPosition: any;
+  public contextMenuPosition: {x: number; y: number} = {x: 0, y: 0};
 
   public popupData: PopupData = {
     message: '',

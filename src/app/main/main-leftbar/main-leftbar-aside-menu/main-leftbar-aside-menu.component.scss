@@ -60,7 +60,7 @@
             .theme-picker__item {
               width: 25px;
               height: 25px;
-              border: 1px solid white;
+              border: 2px solid rgba(255, 255, 255, 0.3);
               border-radius: 100%;
               cursor: pointer;
             }
@@ -146,9 +146,13 @@
       margin-left: 8px;
 
       &:hover {
-        color: rgb(59, 147, 197);
+        color: var(--active);
         cursor: pointer;
       }
     }
+  }
+
+  .active {
+    border: 2px solid var(--active) !important;
   }
 }

@@ -14,9 +14,19 @@ body {
 :root {
   --font-family: "Nunito-Light";
   --font-color: rgb(224, 224, 224);
+  --background: rgb(35, 37, 41);
+  --background-secondary: rgb(41, 44, 49);
+  --border: 1px solid rgba(255, 255, 255, 0.102);
+  --active: rgb(70, 188, 255);
+}
+
+.dark-blue-theme {
+  --font-family: "Nunito-Light";
+  --font-color: rgb(224, 224, 224);
   --background: rgb(16, 24, 28);
   --background-secondary: rgb(21, 29, 35);
   --border: 1px solid rgba(255, 255, 255, 0.102);
+  --active: rgb(70, 188, 255);
 }
 
 .light-theme {
@@ -25,6 +35,7 @@ body {
   --background: rgb(220, 225, 233);
   --background-secondary: rgb(227, 229, 233);
   --border: 1px solid rgba(0, 0, 0, 0.102);
+  --active: rgb(90, 90, 90);
 
   color: var(--font-color);
   background-color: var(--border);
@@ -101,7 +112,7 @@ body {
     margin-bottom: 5px;
 
     &:hover {
-      color: #3b93c5;
+      color: var(--active);
       cursor: pointer;
     }
   }
@@ -121,7 +132,7 @@ body {
     margin-bottom: 5px;
 
     &:hover {
-      color: #3b93c5;
+      color: var(--active);
       cursor: pointer;
     }
   }
@@ -133,12 +144,12 @@ body {
   margin-bottom: 5px;
   outline: 0;
   background: none;
-  border: 2px solid rgb(70, 188, 255);
+  border: 2px solid var(--active);
   border-radius: 10px;
   transition: 500ms;
 
   &:hover {
-    background: rgb(70, 188, 255);
+    background: var(--active);
     transition: 500ms;
     cursor: pointer;
   }
@@ -156,13 +167,13 @@ body {
 }
 
 .active-stroke {
-  stroke: rgb(70, 188, 255);
+  stroke: var(--active);
   stroke-opacity: 1;
   cursor: pointer;
 }
 
 .active-fill {
-  fill: rgb(70, 188, 255);
+  fill: var(--active);
   fill-opacity: 1;
   cursor: pointer;
 }

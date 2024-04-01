@@ -32,18 +32,32 @@
       <div class="aside-options-decor-wrap">
         <div class="aside-options-decor__theme">
           <p>Тема</p>
-          <!-- переделать на *ngFor ↓ -->
           <div class="theme-picker">
-            <div class="theme-picker__item" (click)="setAppTheme('dark-theme')"></div>
-            <div class="theme-picker__item" (click)="setAppTheme('light-theme')"></div>
+            <div
+              style="background-color: rgb(35, 37, 41)"
+              class="theme-picker__item"
+              [ngClass]="{active: selectedTheme === 'dark-theme'}"
+              (click)="setAppTheme('dark-theme')"></div>
+
+            <div
+              style="background-color: rgb(16, 24, 28)"
+              class="theme-picker__item"
+              [ngClass]="{active: selectedTheme === 'dark-blue-theme'}"
+              (click)="setAppTheme('dark-blue-theme')"></div>
+
+            <div
+              style="background-color: rgb(220, 225, 233)"
+              class="theme-picker__item"
+              [ngClass]="{active: selectedTheme === 'light-theme'}"
+              (click)="setAppTheme('light-theme')"></div>
+
             <div class="theme-picker__item" (click)="setAppTheme('combined-theme')"></div>
-            <div class="theme-picker__item"></div>
             <div class="theme-picker__item"></div>
           </div>
         </div>
 
         <!-- исправить ↓ -->
-        <div style="display: flex; margin-bottom: 10px">
+        <div class="flex" style="margin-bottom: 10px">
           <p style="margin-right: 5px">Цвет активных элементов</p>
           <input type="color" />
         </div>
@@ -55,7 +69,7 @@
         </div>
 
         <!-- исправить ↓ -->
-        <div style="display: flex; margin-bottom: 10px">
+        <div class="flex" style="margin-bottom: 10px">
           <p style="margin-right: 5px">Цвет шрифта</p>
           <input type="color" />
         </div>

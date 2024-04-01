@@ -35,12 +35,22 @@
         }
       }
 
-      .leftbar__user-name {
-        font-size: 16px;
-      }
+      .leftbar__user {
+        width: 80%;
 
-      .leftbar__user-role {
-        font-size: 14px;
+        .leftbar__user-name {
+          background: none;
+          outline: 0;
+          border: 0;
+          font-size: 16px;
+        }
+
+        .leftbar__user-role {
+          background: none;
+          outline: 0;
+          border: 0;
+          font-size: 14px;
+        }
       }
     }
 

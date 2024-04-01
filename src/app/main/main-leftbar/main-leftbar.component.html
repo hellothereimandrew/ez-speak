@@ -6,10 +6,10 @@
       <div class="leftbar__user-ico">
         <img src="../assets/img/ZKoQpzcDggWg2ogpkHjR9JnzY9lbPC7wR_gI-BZX5ncn7VOpt-G_a2jJmQBzC4gx.jpg" alt="alt" />
       </div>
-
-      <div class="leftbar__user-name">
-        <p>Андрей Дарий</p>
-        <p class="leftbar__user-role">Разработчик</p>
+      <!-- переименовать класс ↓ -->
+      <div class="leftbar__user">
+        <input type="text" class="leftbar__user-name" value="Андрей Дарий" />
+        <input type="text" class="leftbar__user-role" value="Разработчик" />
       </div>
     </div>
 
@@ -138,8 +138,8 @@
     *ngIf="!hideContextMenu"
     class="ez-context-menu"
     [ngStyle]="{
-      top: contextMenuPosition?.y + 'px',
-      left: contextMenuPosition?.x + 'px'
+      top: contextMenuPosition.y + 'px',
+      left: contextMenuPosition.x + 'px'
     }">
     <p class="ez-context-menu__item" (click)="showSearch = true">Поиск</p>
     <p class="ez-context-menu__item" (click)="showControls = true">Создать канал</p>
