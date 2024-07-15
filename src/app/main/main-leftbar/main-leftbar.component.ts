@@ -2,8 +2,9 @@ import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output}
 import {Subscription, take} from 'rxjs';
 import {DecorationService} from 'src/app/shared/services/decoration.service';
 import {Chat} from 'src/app/shared/interfaces/chat-db';
-import {Users} from 'src/app/shared/interfaces/users-db';
 import {PopupData} from 'src/app/shared/interfaces/popup-data';
+import {AuthService} from '../../auth/auth.service';
+import {User} from '../../shared/interfaces/user';
 
 @Component({
   selector: 'app-main-leftbar',
@@ -11,21 +12,43 @@ import {PopupData} from 'src/app/shared/interfaces/popup-data';
   styleUrls: ['./main-leftbar.component.scss'],
 })
 export class MainLeftbarComponent implements OnInit, OnDestroy {
-  @Input() public user: Users = {
-    id: 0,
-    ico: '',
-    name: '',
-    role: '',
-    status: '',
-  };
-
   @Input() public folderName: string = '';
 
   @Output() public chatSectionListener: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   @Output() public currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
-  @HostListener('window:mousemove', ['$event']) public resizeLeftbar(event: MouseEvent): void {
+  public hideNotifi: boolean = true;
+  public hideOptions: boolean = true;
+  public hideContextMenu: boolean = true;
+  public hideChatSection: boolean = true;
+  public showControls: boolean = false;
+  public showSearch: boolean = false;
+  public isResized: boolean = false;
+  public showPopup: boolean = false;
+  public showCreateFolder: boolean = false;
+  public selectedTheme: string = '';
+  public channelName: string = '';
+  public channelCounterId: number = 1;
+  public leftbarWidth: number = 346;
+  public themeSubscription: Subscription = new Subscription();
+  public contextMenuPosition: {x: number; y: number} = {x: 0, y: 0};
+  public popupData: PopupData = {
+    message: '',
+    firstButton: '',
+    secondButton: '',
+  };
+  public chats: Chat[] = [];
+  public pinnedChats: Chat[] = [];
+
+  public user!: User;
+
+  constructor(
+    private authService: AuthService,
+    private decoreationService: DecorationService,
+  ) {}
+
+  @HostListener('window:mousemove', ['$event'])
+  public resizeLeftbar(event: MouseEvent): void {
     if (this.isResized) {
       this.leftbarWidth = event.clientX;
 
@@ -38,7 +61,8 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('window:keyup', ['$event']) public setHotKeys(event: KeyboardEvent): void {
+  @HostListener('window:keyup', ['$event'])
+  public setHotKeys(event: KeyboardEvent): void {
     event.preventDefault();
 
     if (event.shiftKey && event.code === 'KeyQ') {
@@ -50,41 +74,20 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(private decoreationService: DecorationService) {}
-
-  public hideNotifi: boolean = true;
-  public hideOptions: boolean = true;
-  public hideContextMenu: boolean = true;
-  public hideChatSection: boolean = true;
-  public showControls: boolean = false;
-  public showSearch: boolean = false;
-  public isResized: boolean = false;
-  public showPopup: boolean = false;
-  public showCreateFolder: boolean = false;
-
-  public selectedTheme: string = '';
-  public selectedButton: string = '';
-  public channelName: string = '';
-
-  public channelCounterId: number = 1;
-  public leftbarWidth: number = 346;
-
-  public themeSubscription: Subscription = new Subscription();
-  public contextMenuPosition: {x: number; y: number} = {x: 0, y: 0};
-
-  public popupData: PopupData = {
-    message: '',
-    firstButton: '',
-    secondButton: '',
-  };
-
-  public chats: Chat[] = [];
-  public pinnedChats: Chat[] = [];
-
   ngOnInit(): void {
+    this.getUserInfo();
+
     this.themeSubscription = this.decoreationService.selectedTheme$.pipe(take(1)).subscribe((theme) => {
       this.selectedTheme = theme;
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.themeSubscription.unsubscribe();
+  }
+
+  public getUserInfo(): void {
+    this.user = JSON.parse(this.authService.getUser);
   }
 
   public createChannel(name?: string): void {
@@ -93,7 +96,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
       ico: '',
       name: name,
       time: new Date().toLocaleTimeString().slice(0, -3),
-      userName: 'Андрей Дарий',
+      userName: this.user.name,
       lastMsg: 'Уже круче, чем телега!',
       msgs: 0,
       pinned: false,
@@ -103,21 +106,6 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
       this.chats.push(temp);
       this.channelName = '';
     }
-  }
-
-  public openPopup(chat: Chat): void {
-    this.showPopup = true;
-
-    const popupData: PopupData = {
-      message: 'Вы уверены, что хотите удалить канал?',
-      firstButton: 'Да',
-      secondButton: 'Нет',
-      confirmed: () => {
-        this.removeChannel(chat);
-      },
-    };
-
-    this.popupData = popupData;
   }
 
   public removeChannel(chat: Chat): any {
@@ -141,14 +129,6 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     this.chatSectionListener.emit();
   }
 
-  public onSelect(button: string): void {
-    if (this.selectedButton === button) {
-      this.selectedButton = '';
-    } else {
-      this.selectedButton = button;
-    }
-  }
-
   public openContextMenu(event: MouseEvent): void {
     event.preventDefault();
     this.hideContextMenu = false;
@@ -158,11 +138,20 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     };
   }
 
-  public closeContextMenu(): void {
-    this.hideContextMenu = true;
+  public openPopup(chat: Chat): void {
+    this.showPopup = true;
+
+    this.popupData = {
+      message: 'Вы уверены, что хотите удалить канал?',
+      firstButton: 'Да',
+      secondButton: 'Нет',
+      confirmed: () => {
+        this.removeChannel(chat);
+      },
+    };
   }
 
-  public ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
+  public closeContextMenu(): void {
+    this.hideContextMenu = true;
   }
 }

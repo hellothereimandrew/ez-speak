@@ -2,7 +2,7 @@ import {Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
 import {Chat} from 'src/app/shared/interfaces/chat-db';
 import {DecorationService} from '../shared/services/decoration.service';
 import {Subscription} from 'rxjs';
-import {Users} from '../shared/interfaces/users-db';
+import {User} from '../shared/interfaces/user';
 
 @Component({
   selector: 'app-main',
@@ -12,7 +12,7 @@ import {Users} from '../shared/interfaces/users-db';
 export class MainComponent implements OnInit, OnDestroy {
   @Input() folderName: string = '';
 
-  @Input() public user: Users = {
+  @Input() public user: User = {
     id: 0,
     ico: '',
     name: '',
@@ -25,8 +25,16 @@ export class MainComponent implements OnInit, OnDestroy {
     ico: '',
     name: '',
   };
+  public hideChatSection: boolean = true;
+  public hideRightbar: boolean = true;
+  public hideFolderPopup: boolean = true;
+  public selectedTheme: string = '';
+  public themeSubscription: Subscription = new Subscription();
 
-  @HostListener('window:keyup', ['$event']) public setHotkeys(event: KeyboardEvent): void {
+  constructor(private decoreationServise: DecorationService) {}
+
+  @HostListener('window:keyup', ['$event'])
+  public setHotkeys(event: KeyboardEvent): void {
     event.preventDefault();
 
     if (!this.hideChatSection && event.code === 'Escape') {
@@ -34,14 +42,6 @@ export class MainComponent implements OnInit, OnDestroy {
       this.hideRightbar = true;
     }
   }
-
-  constructor(private decoreationServise: DecorationService) {}
-
-  public hideChatSection: boolean = true;
-  public hideRightbar: boolean = true;
-  public hideFolderPopup: boolean = true;
-  public selectedTheme: string = '';
-  public themeSubscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.themeSubscription = this.decoreationServise.selectedTheme$.subscribe((theme) => {

@@ -1,36 +1,34 @@
-import {Component} from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {Users} from 'src/app/shared/interfaces/users-db';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-auth-sign-in',
   templateUrl: './auth-sign-in.component.html',
   styleUrls: ['./auth-sign-in.component.scss'],
 })
-export class AuthSignInComponent {
+export class AuthSignInComponent implements OnInit {
   public signInData: FormGroup = new FormGroup({
-    login: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    checked: new FormControl(false),
   });
 
   public hide: boolean = true;
-  public type: string = 'password';
   public isAutorized: boolean = false;
-  public user: Users = {
-    id: 0,
-    ico: '',
-    name: '',
-    role: '',
-  };
+  public checked: boolean = false;
+  public type: string = 'password';
 
-  public showPass(): void {
-    this.hide = !this.hide;
-    if (this.hide) {
-      this.type = 'password';
-    } else {
-      this.hide = false;
-      this.type = 'text';
+  constructor(private authService: AuthService) {}
+
+  public ngOnInit(): void {
+    this.getUserInfo();
+  }
+
+  public getUserInfo(): void {
+    this.checked = this.authService.checked;
+
+    if (this.checked) {
+      this.signInData.patchValue(JSON.parse(this.authService.getUser));
     }
   }
 
@@ -38,15 +36,11 @@ export class AuthSignInComponent {
     let formIsValid: boolean = true;
 
     if (this.signInData.invalid) {
-      if (this.signInData.controls['login'].invalid) {
+      if (this.signInData.controls['name'].invalid || this.signInData.controls['password'].invalid) {
         formIsValid = false;
       }
 
-      if (this.signInData.controls['password'].invalid) {
-        formIsValid = false;
-      }
-
-      return false;
+      return formIsValid;
     }
 
     return formIsValid;
@@ -58,6 +52,22 @@ export class AuthSignInComponent {
     } else {
       this.isAutorized = true;
       this.signInData.reset();
+    }
+    this.setUser();
+  }
+
+  public setUser(): void {
+    this.authService.checked = this.checked;
+    this.authService.setUser = JSON.stringify(this.signInData.getRawValue());
+  }
+
+  public showPass(): void {
+    this.hide = !this.hide;
+    if (this.hide) {
+      this.type = 'password';
+    } else {
+      this.hide = false;
+      this.type = 'text';
     }
   }
 }
