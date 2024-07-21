@@ -9,13 +9,12 @@ import {AuthService} from '../auth.service';
 })
 export class AuthSignInComponent implements OnInit {
   public signInData: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    checked: new FormControl(false),
   });
 
   public hide: boolean = true;
-  public isAutorized: boolean = false;
-  public checked: boolean = false;
   public type: string = 'password';
 
   constructor(private authService: AuthService) {}
@@ -25,40 +24,39 @@ export class AuthSignInComponent implements OnInit {
   }
 
   public getUserInfo(): void {
-    this.checked = this.authService.checked;
-
-    if (this.checked) {
-      this.signInData.patchValue(JSON.parse(this.authService.getUser));
-    }
+    this.signInData.patchValue(JSON.parse(this.authService?.getUser));
   }
 
   public isValid(): boolean {
-    let formIsValid: boolean = true;
-
     if (this.signInData.invalid) {
-      if (this.signInData.controls['name'].invalid || this.signInData.controls['password'].invalid) {
-        formIsValid = false;
-      }
-
-      return formIsValid;
+      this.authService.isAuthorized = false;
+      return false;
+    } else {
+      this.authService.isAuthorized = true;
+      return true;
     }
-
-    return formIsValid;
   }
 
   public submit(): void {
+    this.signInData.markAllAsTouched();
+
     if (!this.isValid()) {
-      this.isAutorized = false;
+      return;
     } else {
-      this.isAutorized = true;
-      this.signInData.reset();
+      this.saveUserInfo();
     }
-    this.setUser();
   }
 
-  public setUser(): void {
-    this.authService.checked = this.checked;
-    this.authService.setUser = JSON.stringify(this.signInData.getRawValue());
+  public saveUserInfo(): void {
+    const user: any = this.signInData.getRawValue();
+
+    if (user.checked) {
+      this.authService.setUser = JSON.stringify(user);
+    } else {
+      this.signInData.reset();
+      this.authService.setUser = '';
+      localStorage.removeItem('currentUser');
+    }
   }
 
   public showPass(): void {

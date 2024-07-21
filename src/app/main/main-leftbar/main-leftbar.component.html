@@ -1,5 +1,9 @@
 <div (click)="closeContextMenu()" [ngStyle]="{width: leftbarWidth + 'px'}" class="leftbar {{ selectedTheme }}">
-  <div (click)="isResized = !isResized" [ngStyle]="{left: leftbarWidth + 'px'}" class="leftbar-splitter"></div>
+  <div
+    (mousedown)="isResized = true"
+    (mouseup)="isResized = false"
+    [ngStyle]="{left: leftbarWidth + 'px'}"
+    class="leftbar-splitter"></div>
 
   <div class="leftbar__user-card">
     <div class="leftbar__user-info">
@@ -43,9 +47,7 @@
     *ngIf="!hideOptions"></app-main-leftbar-aside-menu>
 
   <div (contextmenu)="openContextMenu($event)" class="flex">
-    <app-main-leftbar-navigation
-      (notifiEmitter)="hideNotifi = !hideNotifi"
-      (showCreateFolder)="showCreateFolder = !showCreateFolder"></app-main-leftbar-navigation>
+    <app-main-leftbar-navigation (notifiEmitter)="hideNotifi = !hideNotifi"></app-main-leftbar-navigation>
 
     <div class="leftbar__chat-container">
       <div *ngIf="showControls" class="leftbar__create-chat fade-bottom">

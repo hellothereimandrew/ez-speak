@@ -12,7 +12,6 @@ export class MainLeftbarNavigationComponent implements OnInit {
   @Output() public notifiEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public createFolderEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  public hideExpandedPanel: boolean = true;
   public hideNotifi: boolean = true;
 
   public selectedButton: string = '';

@@ -12,29 +12,29 @@ body {
 }
 
 :root {
-  --font-family: "Nunito-Light";
+  --font-family: 'Nunito-Light';
   --font-color: rgb(224, 224, 224);
   --background: rgb(35, 37, 41);
   --background-secondary: rgb(41, 44, 49);
-  --border: 1px solid rgba(255, 255, 255, 0.102);
+  --border: 1px solid rgba(255, 255, 255, 0.1);
   --active: rgb(70, 188, 255);
 }
 
 .dark-blue-theme {
-  --font-family: "Nunito-Light";
+  --font-family: 'Nunito-Light';
   --font-color: rgb(224, 224, 224);
   --background: rgb(16, 24, 28);
   --background-secondary: rgb(21, 29, 35);
-  --border: 1px solid rgba(255, 255, 255, 0.102);
+  --border: 1px solid rgba(255, 255, 255, 0.1);
   --active: rgb(70, 188, 255);
 }
 
 .light-theme {
-  --font-family: "Nunito-Light";
+  --font-family: 'Nunito-Light';
   --font-color: rgb(48, 48, 48);
   --background: rgb(220, 225, 233);
   --background-secondary: rgb(227, 229, 233);
-  --border: 1px solid rgba(0, 0, 0, 0.102);
+  --border: 1px solid rgba(0, 0, 0, 0.1);
   --active: rgb(90, 90, 90);
 
   color: var(--font-color);
@@ -67,11 +67,11 @@ body {
   border: 0;
   border-bottom: var(--border);
 
-  &.ng-valid.ng-dirty {
+  &.ng-valid.ng-touched {
     border-bottom: 2px solid rgb(102, 204, 180);
   }
 
-  &.ng-invalid.ng-dirty {
+  &.ng-invalid.ng-touched {
     border-bottom: 2px solid rgb(206, 60, 60);
   }
 }
@@ -255,11 +255,11 @@ body {
 }
 
 @font-face {
-  font-family: "Nunito-Light";
-  src: url("./assets/fonts/Nunito-Light.ttf");
+  font-family: 'Nunito-Light';
+  src: url('./assets/fonts/Nunito-Light.ttf');
 }
 
 @font-face {
-  font-family: "Nunito-Regular";
-  src: url("./assets/fonts/Nunito-Regular.ttf");
+  font-family: 'Nunito-Regular';
+  src: url('./assets/fonts/Nunito-Regular.ttf');
 }

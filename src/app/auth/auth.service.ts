@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {User} from '../shared/interfaces/user';
+import {ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  public checked: boolean = false;
+  public isAuthorized: boolean = false;
   public user!: User;
 
   public get getUser(): string {
@@ -15,4 +17,11 @@ export class AuthService {
   public set setUser(user: string) {
     localStorage.setItem('currentUser', user);
   }
+
+  public canActivate: CanActivateFn = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+  ): Observable<boolean> | Promise<boolean> | boolean => {
+    return this.isAuthorized;
+  };
 }

@@ -5,6 +5,7 @@ import {Chat} from 'src/app/shared/interfaces/chat-db';
 import {PopupData} from 'src/app/shared/interfaces/popup-data';
 import {AuthService} from '../../auth/auth.service';
 import {User} from '../../shared/interfaces/user';
+import {StateService} from '../../shared/services/state.service';
 
 @Component({
   selector: 'app-main-leftbar',
@@ -44,6 +45,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
+    private stateService: StateService,
     private decoreationService: DecorationService,
   ) {}
 
@@ -105,6 +107,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     if (name) {
       this.chats.push(temp);
       this.channelName = '';
+      this.showControls = false;
     }
   }
 
