@@ -1,61 +1,37 @@
-import {Component} from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-auth-sign-up',
   templateUrl: './auth-sign-up.component.html',
   styleUrls: ['./auth-sign-up.component.scss'],
 })
-export class AuthSignUpComponent {
+export class AuthSignUpComponent implements OnInit {
   public signUpData: FormGroup = new FormGroup({
-    login: new FormControl('', Validators.required),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    name: new FormControl('1', Validators.required),
+    password: new FormControl('111111', [Validators.required, Validators.minLength(6)]),
+    confirmPassword: new FormControl('111111', [Validators.required, Validators.minLength(6)]),
+    email: new FormControl('1@a.ru', [Validators.required, Validators.email]),
   });
 
-  public isAutorized: boolean = false;
+  public isAuthorized: boolean = false;
+  public selectedButton: string = '';
+
+  constructor(private authService: AuthService) {}
+
+  public ngOnInit() {}
 
   public isValid(): boolean {
-    let formIsValid: boolean = true;
-
-    if (this.signUpData.invalid) {
-      if (this.signUpData.controls['login'].invalid) {
-        formIsValid = false;
-
-        return false;
-      }
-
-      if (this.signUpData.controls['password'].invalid) {
-        formIsValid = false;
-
-        return false;
-      }
-
-      if (this.signUpData.controls['confirmPassword'].invalid) {
-        formIsValid = false;
-
-        return false;
-      }
-
-      if (this.signUpData.controls['email'].invalid) {
-        formIsValid = false;
-
-        return false;
-      }
-    }
-
-    formIsValid = true;
-
-    return true;
+    return !this.signUpData.invalid;
   }
 
   public submit(): void {
     if (!this.isValid()) {
-      this.isAutorized = false;
+      this.isAuthorized = !this.signUpData.invalid;
     } else {
-      this.isAutorized = true;
-      this.signUpData.reset();
+      this.setUser();
+      this.isAuthorized = !this.signUpData.invalid;
     }
   }
 }

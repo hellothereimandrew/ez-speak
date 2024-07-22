@@ -11,6 +11,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     width: 450px;
     height: 600px;
     user-select: none;
@@ -58,6 +59,8 @@
     .version {
       display: flex;
       align-items: flex-end;
+      position: absolute;
+      bottom: 10px;
     }
   }
 }

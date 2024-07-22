@@ -46,17 +46,17 @@
     </div>
 
     <div class="slider">
-      <p
+      <span
         (click)="onSelect('sign-in')"
         [ngClass]="{
           active: selectedButton === 'sign-in'
         }"
         class="slider__sign-in">
         Авторизация
-      </p>
-      <p (click)="onSelect('sign-up')" [ngClass]="{active: selectedButton === 'sign-up'}" class="slider__sign-up">
+      </span>
+      <span (click)="onSelect('sign-up')" [ngClass]="{active: selectedButton === 'sign-up'}" class="slider__sign-up">
         Регистрация
-      </p>
+      </span>
     </div>
 
     <app-auth-sign-in *ngIf="selectedButton === 'sign-in'"></app-auth-sign-in>

@@ -1,21 +1,21 @@
 <div [formGroup]="signUpData" class="sign-up">
   <div class="username">
-    <input formControlName="login" placeholder="Придумайте логин" class="ez-input" type="text" />
+    <input class="ez-input" formControlName="name" placeholder="Придумайте логин" type="text" />
   </div>
 
   <div class="password">
-    <input formControlName="password" placeholder="Придумайте пароль" class="ez-input" type="password" />
+    <input class="ez-input" formControlName="password" placeholder="Придумайте пароль" type="password" />
   </div>
 
   <div class="confirm-password">
-    <input formControlName="confirmPassword" placeholder="Подтвердите пароль" class="ez-input" type="password" />
+    <input class="ez-input" formControlName="confirmPassword" placeholder="Подтвердите пароль" type="password" />
   </div>
 
   <div class="email">
-    <input formControlName="email" placeholder="Введите ваш email" class="ez-input" type="text" />
+    <input class="ez-input" formControlName="email" placeholder="Введите ваш email" type="text" />
   </div>
 
-  <div (click)="submit()" class="submit">
-    <button class="ez-button">Далее</button>
+  <div>
+    <button (click)="submit()" class="ez-button">Далее</button>
   </div>
 </div>

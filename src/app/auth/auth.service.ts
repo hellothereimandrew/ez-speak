@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {User} from '../shared/interfaces/user';
 import {ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 
@@ -8,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class AuthService {
   public isAuthorized: boolean = false;
-  public user!: User;
+  public selectedButton: string = '';
 
   public get getUser(): string {
     return localStorage.getItem('currentUser') || '';
@@ -16,6 +15,14 @@ export class AuthService {
 
   public set setUser(user: string) {
     localStorage.setItem('currentUser', user);
+  }
+
+  public set setActiveButton(button: string) {
+    this.selectedButton = button;
+  }
+
+  public getActiveButton(): string {
+    return this.selectedButton;
   }
 
   public canActivate: CanActivateFn = (

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -14,58 +15,51 @@ export class AuthSignInComponent implements OnInit {
     checked: new FormControl(false),
   });
 
-  public hide: boolean = true;
-  public type: string = 'password';
+  public showPassword: boolean = false;
+  public inputType: string = 'password';
+  public selectedButton: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   public ngOnInit(): void {
     this.getUserInfo();
   }
 
   public getUserInfo(): void {
-    this.signInData.patchValue(JSON.parse(this.authService?.getUser));
-  }
+    const user: any = JSON.parse(this.authService?.getUser);
 
-  public isValid(): boolean {
-    if (this.signInData.invalid) {
-      this.authService.isAuthorized = false;
-      return false;
-    } else {
-      this.authService.isAuthorized = true;
-      return true;
+    if (user.checked) {
+      this.signInData.patchValue(JSON.parse(this.authService?.getUser));
     }
   }
 
-  public submit(): void {
+  public isValid(): boolean {
     this.signInData.markAllAsTouched();
+    this.authService.isAuthorized = !this.signInData.invalid;
 
-    if (!this.isValid()) {
-      return;
-    } else {
+    return this.authService.isAuthorized;
+  }
+
+  public submit(): void {
+    if (this.isValid()) {
       this.saveUserInfo();
+      this.navigateToApp();
     }
   }
 
   public saveUserInfo(): void {
-    const user: any = this.signInData.getRawValue();
+    this.authService.setUser = JSON.stringify(this.signInData.getRawValue());
+  }
 
-    if (user.checked) {
-      this.authService.setUser = JSON.stringify(user);
-    } else {
-      this.signInData.reset();
-      this.authService.setUser = '';
-      localStorage.removeItem('currentUser');
-    }
+  public navigateToApp(): void {
+    this.router.navigate([`/main`]);
   }
 
   public showPass(): void {
-    this.hide = !this.hide;
-    if (this.hide) {
-      this.type = 'password';
-    } else {
-      this.hide = false;
-      this.type = 'text';
-    }
+    this.showPassword = !this.showPassword;
+    this.inputType = this.showPassword ? 'text' : 'password';
   }
 }
