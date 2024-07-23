@@ -45,7 +45,6 @@ body {
 .combined-theme {
   color: black;
   background: black;
-  background-color: black;
 }
 
 .flex {
@@ -182,13 +181,21 @@ body {
   cursor: pointer;
 }
 
-.fade-in {
-  animation-name: fade-in;
-  animation-duration: 400ms;
-  animation-fill-mode: both;
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
-@keyframes fade-in {
+.fade-in {
+  animation: fade-in 1s ease 0s 1 normal forwards;
+}
+
+@keyframes fade-in-left {
   0% {
     opacity: 0;
     transform: translateX(-250px);
@@ -200,8 +207,8 @@ body {
   }
 }
 
-.fade-in-right {
-  animation-name: fade-in-right;
+.fade-in-left {
+  animation-name: fade-in-left;
   animation-duration: 400ms;
   animation-fill-mode: both;
 }
@@ -218,10 +225,8 @@ body {
   }
 }
 
-.fade-out {
-  animation-name: fade-out;
-  animation-duration: 400ms;
-  animation-fill-mode: both;
+.fade-in-right {
+  animation: fade-in-right 1s ease 0s 1 normal forwards;
 }
 
 @keyframes fade-out {
@@ -236,8 +241,8 @@ body {
   }
 }
 
-.fade-bottom {
-  animation-name: fade-bottom;
+.fade-out {
+  animation-name: fade-out;
   animation-duration: 400ms;
   animation-fill-mode: both;
 }
@@ -252,6 +257,12 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.fade-bottom {
+  animation-name: fade-bottom;
+  animation-duration: 400ms;
+  animation-fill-mode: both;
 }
 
 @font-face {
