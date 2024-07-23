@@ -1,20 +1,12 @@
 <div class="main {{ selectedTheme }}">
   <app-main-leftbar
-    [folderName]="folderName"
     (currentChat)="getCurrentChat($event)"
-    (chatSectionListener)="showChatSection()"
-    (showCreateFolder)="showFolderPopUp()"></app-main-leftbar>
+    (showCreateFolder)="showFolderPopup()"
+    [folderName]="folderName"></app-main-leftbar>
 
-  <app-main-chat-section
-    *ngIf="!hideChatSection"
-    [currentChat]="currentChat"
-    [showChatSection]="hideChatSection"
-    (rightbarListener)="showRightbar()"></app-main-chat-section>
+  <app-main-chat-section *ngIf="!stateService.hideChatSection" [currentChat]="currentChat"></app-main-chat-section>
 
-  <app-main-rightbar
-    *ngIf="!hideRightbar"
-    [currentChat]="currentChat"
-    (rightbarListener)="showRightbar()"></app-main-rightbar>
+  <app-main-rightbar *ngIf="stateService.openRightbar" [currentChat]="currentChat"></app-main-rightbar>
 </div>
 
-<create-folder [hideFolderPopup]="hideFolderPopup" (folderNameEmitter)="getFolderName($event)"></create-folder>
+<create-folder (folderNameEmitter)="getFolderName($event)" [hideFolderPopup]="hideFolderPopup"></create-folder>

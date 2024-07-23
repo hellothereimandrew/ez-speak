@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {Subscription} from 'rxjs';
 import {DecorationService} from 'src/app/shared/services/decoration.service';
 import {Chat} from 'src/app/shared/interfaces/chat-db';
+import {StateService} from '../../shared/services/state.service';
 
 @Component({
   selector: 'app-main-rightbar',
@@ -18,19 +19,17 @@ export class MainRightbarComponent implements OnInit, OnDestroy {
   @Output() public rightbarListener: EventEmitter<void> = new EventEmitter<void>();
 
   public selectedTheme: string = '';
-  public hideRightbar: boolean = false;
   public themeSubscription: Subscription = new Subscription();
 
-  constructor(private decoreationServise: DecorationService) {}
+  constructor(
+    public stateService: StateService,
+    public decorationService: DecorationService,
+  ) {}
 
   ngOnInit(): void {
-    this.themeSubscription = this.decoreationServise.selectedTheme$.subscribe((theme) => {
+    this.themeSubscription = this.decorationService.selectedTheme$.subscribe((theme) => {
       this.selectedTheme = theme;
     });
-  }
-
-  public showRightbar(): void {
-    this.hideRightbar = !this.hideRightbar;
   }
 
   ngOnDestroy(): void {

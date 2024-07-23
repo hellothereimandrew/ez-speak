@@ -2,9 +2,7 @@
   display: flex;
   overflow-y: hidden;
   user-select: none;
-  background: url(../../assets/img/background.png) no-repeat;
-  background-position: 55%;
-  background-color: var(--background-secondary);
+  background: var(--background-secondary) url(../../assets/img/background.png) no-repeat 55%;
 }
 
 app-main-leftbar {

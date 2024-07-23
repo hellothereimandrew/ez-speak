@@ -13,6 +13,7 @@ import {Subject, Subscription, take, takeUntil} from 'rxjs';
 import {DecorationService} from 'src/app/shared/services/decoration.service';
 import {Chat} from 'src/app/shared/interfaces/chat-db';
 import {Message} from 'src/app/shared/interfaces/messages-db';
+import {StateService} from '../../shared/services/state.service';
 
 @Component({
   selector: 'app-main-chat-section',
@@ -26,37 +27,29 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
     name: '',
   };
 
-  @Input() public showChatSection: boolean = false;
-
-  @Output() public rightbarListener: EventEmitter<boolean> = new EventEmitter<boolean>();
-
   @ViewChild('scrollable') public scrollable!: ElementRef;
-
-  constructor(private decoreationServise: DecorationService) {}
-
-  public hideContextMenu: boolean = true;
-  public hideDropDown: boolean = true;
-  public isActive: boolean = false;
-  public isPrivate: boolean = false;
-  public openRightBar: boolean = false;
-  public showPinnedMsg: boolean = false;
 
   public selectedTheme: string = '';
   public selectedBackground: string = '';
-
-  public messages: Message[] = [];
-
+  public hideContextMenu: boolean = true;
+  public hideDropdown: boolean = true;
   public contextMenuPosition: any;
+  public messages: Message[] = [];
   public themeSubscription: Subscription = new Subscription();
   public backgroundSubscription: Subscription = new Subscription();
   public unsubscribe: Subject<any> = new Subject();
 
+  constructor(
+    public stateService: StateService,
+    public decorationServise: DecorationService,
+  ) {}
+
   ngOnInit(): void {
-    this.themeSubscription = this.decoreationServise.selectedTheme$.pipe(take(1)).subscribe((theme) => {
+    this.themeSubscription = this.decorationServise.selectedTheme$.pipe(take(1)).subscribe((theme) => {
       this.selectedTheme = theme;
     });
 
-    this.backgroundSubscription = this.decoreationServise.selectedImage$
+    this.backgroundSubscription = this.decorationServise.selectedImage$
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((image) => {
         this.selectedBackground = image;
@@ -100,16 +93,16 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
     this.hideContextMenu = true;
   }
 
-  public openDropDown(): void {
-    this.hideDropDown = false;
+  public openDropdown(): void {
+    this.hideDropdown = false;
   }
 
-  public closeDropDown(): void {
-    this.hideDropDown = true;
+  public closeDropdown(): void {
+    this.hideDropdown = true;
   }
 
   public showRightBar(): void {
-    this.openRightBar = !this.openRightBar;
+    this.stateService.openRightbar = !this.stateService.openRightbar;
   }
 
   public scrollClaimedToBottom(): void {

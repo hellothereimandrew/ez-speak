@@ -15,18 +15,10 @@ import {StateService} from '../../shared/services/state.service';
 export class MainLeftbarComponent implements OnInit, OnDestroy {
   @Input() public folderName: string = '';
 
-  @Output() public chatSectionListener: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
-  public hideNotifi: boolean = true;
-  public hideOptions: boolean = true;
   public hideContextMenu: boolean = true;
-  public hideChatSection: boolean = true;
-  public showControls: boolean = false;
-  public showSearch: boolean = false;
-  public isResized: boolean = false;
   public showPopup: boolean = false;
-  public showCreateFolder: boolean = false;
   public selectedTheme: string = '';
   public channelName: string = '';
   public channelCounterId: number = 1;
@@ -44,22 +36,22 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   public user!: User;
 
   constructor(
+    public decorationService: DecorationService,
+    public stateService: StateService,
     private authService: AuthService,
-    private stateService: StateService,
-    private decoreationService: DecorationService,
   ) {}
 
   @HostListener('window:mousemove', ['$event'])
   public resizeLeftbar(event: MouseEvent): void {
-    if (this.isResized) {
+    if (this.stateService.isResized) {
       this.leftbarWidth = event.clientX;
 
       if (this.leftbarWidth <= 346) {
         this.leftbarWidth = 346;
-        this.isResized = false;
+        this.stateService.isResized = false;
       }
     } else {
-      this.isResized = false;
+      this.stateService.isResized = false;
     }
   }
 
@@ -68,18 +60,18 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     event.preventDefault();
 
     if (event.shiftKey && event.code === 'KeyQ') {
-      this.hideOptions = !this.hideOptions;
+      this.stateService.hideOptions = !this.stateService.hideOptions;
     }
 
     if (event.shiftKey && event.code === 'KeyE') {
-      this.hideNotifi = !this.hideNotifi;
+      this.stateService.hideNotifications = !this.stateService.hideNotifications;
     }
   }
 
   ngOnInit(): void {
     this.getUserInfo();
 
-    this.themeSubscription = this.decoreationService.selectedTheme$.pipe(take(1)).subscribe((theme) => {
+    this.themeSubscription = this.decorationService.selectedTheme$.pipe(take(1)).subscribe((theme) => {
       this.selectedTheme = theme;
     });
   }
@@ -107,7 +99,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     if (name) {
       this.chats.push(temp);
       this.channelName = '';
-      this.showControls = false;
+      this.stateService.showControls = false;
     }
   }
 
@@ -127,9 +119,8 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   }
 
   public showChatSection(item: Chat): void {
-    this.hideChatSection = false;
+    this.stateService.hideChatSection = false;
     this.currentChat.emit(item);
-    this.chatSectionListener.emit();
   }
 
   public openContextMenu(event: MouseEvent): void {

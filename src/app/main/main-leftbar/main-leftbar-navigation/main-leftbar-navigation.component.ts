@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Folder} from 'src/app/shared/interfaces/folder';
+import {StateService} from '../../../shared/services/state.service';
 
 @Component({
   selector: 'app-main-leftbar-navigation',
@@ -9,13 +10,9 @@ import {Folder} from 'src/app/shared/interfaces/folder';
 export class MainLeftbarNavigationComponent implements OnInit {
   @Input() public folderName: string = '';
 
-  @Output() public notifiEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public createFolderEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  public hideNotifi: boolean = true;
-
   public selectedButton: string = '';
-
   public customFolders: Folder[] = [];
   public defaultFolders: Folder[] = [
     {
@@ -49,6 +46,8 @@ export class MainLeftbarNavigationComponent implements OnInit {
     },
   ];
 
+  constructor(public stateService: StateService) {}
+
   ngOnInit(): void {}
 
   public createNewFolder() {
@@ -71,10 +70,5 @@ export class MainLeftbarNavigationComponent implements OnInit {
     } else {
       this.selectedButton = button;
     }
-  }
-
-  public showNotifi(): void {
-    this.hideNotifi = !this.hideNotifi;
-    this.notifiEmitter.emit();
   }
 }

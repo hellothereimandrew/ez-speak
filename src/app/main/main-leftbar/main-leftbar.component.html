@@ -1,7 +1,7 @@
 <div (click)="closeContextMenu()" [ngStyle]="{width: leftbarWidth + 'px'}" class="leftbar {{ selectedTheme }}">
   <div
-    (mousedown)="isResized = true"
-    (mouseup)="isResized = false"
+    (mousedown)="stateService.isResized = true"
+    (mouseup)="stateService.isResized = false"
     [ngStyle]="{left: leftbarWidth + 'px'}"
     class="leftbar-splitter"></div>
 
@@ -17,16 +17,16 @@
       </div>
     </div>
 
-    <div (click)="hideOptions = !hideOptions" class="leftbar__options pointer" title="Настройки">
+    <div (click)="stateService.hideOptions = false" class="leftbar__options pointer" title="Настройки">
       <svg
-        [ngClass]="{active: !hideOptions}"
+        [ngClass]="{active: !stateService.hideOptions}"
         fill="none"
         height="18"
         viewBox="0 0 27 18"
         width="27"
         xmlns="http://www.w3.org/2000/svg">
         <path
-          [ngClass]="{'active-stroke': !hideOptions}"
+          [ngClass]="{'active-stroke': !stateService.hideOptions}"
           d="M1.5 17H25.5M1 9H25M1 1H25"
           stroke="white"
           stroke-linecap="round"
@@ -38,19 +38,15 @@
     </div>
   </div>
 
-  <app-main-leftbar-aside-notifi
-    (hideNotifi)="hideNotifi = !hideNotifi"
-    *ngIf="!hideNotifi"></app-main-leftbar-aside-notifi>
+  <app-main-leftbar-aside-menu *ngIf="!stateService.hideOptions"></app-main-leftbar-aside-menu>
 
-  <app-main-leftbar-aside-menu
-    (hideOptions)="hideOptions = !hideOptions"
-    *ngIf="!hideOptions"></app-main-leftbar-aside-menu>
+  <app-main-leftbar-aside-notifi *ngIf="!stateService.hideNotifications"></app-main-leftbar-aside-notifi>
 
   <div (contextmenu)="openContextMenu($event)" class="flex">
-    <app-main-leftbar-navigation (notifiEmitter)="hideNotifi = !hideNotifi"></app-main-leftbar-navigation>
+    <app-main-leftbar-navigation></app-main-leftbar-navigation>
 
     <div class="leftbar__chat-container">
-      <div *ngIf="showControls" class="leftbar__create-chat fade-bottom">
+      <div *ngIf="stateService.showControls" class="leftbar__create-chat fade-bottom">
         <div>
           <input
             (keyup.enter)="createChannel(channelName)"
@@ -64,16 +60,16 @@
           <button (click)="createChannel(channelName)" class="ez-small-button" style="margin-right: 10px">
             Создать
           </button>
-          <button (click)="showControls = false" class="ez-small-button">Отмена</button>
+          <button (click)="stateService.showControls = false" class="ez-small-button">Отмена</button>
         </div>
       </div>
 
-      <div *ngIf="showSearch" class="leftbar__search fade-bottom">
+      <div *ngIf="stateService.showSearch" class="leftbar__search fade-bottom">
         <div>
           <input class="ez-create-input" placeholder="Поиск" type="text" />
           <div class="flex-align-center">
             <button class="ez-small-button" style="margin-right: 10px">Найти</button>
-            <button (click)="showSearch = false" class="ez-small-button">Отмена</button>
+            <button (click)="stateService.showSearch = false" class="ez-small-button">Отмена</button>
           </div>
         </div>
       </div>
@@ -149,8 +145,8 @@
       left: contextMenuPosition.x + 'px'
     }"
     class="ez-context-menu">
-    <p (click)="showSearch = true" class="ez-context-menu__item">Поиск</p>
-    <p (click)="showControls = true" class="ez-context-menu__item">Создать канал</p>
+    <p (click)="stateService.showSearch = true" class="ez-context-menu__item">Поиск</p>
+    <p (click)="stateService.showControls = true" class="ez-context-menu__item">Создать канал</p>
     <p class="ez-context-menu__item">Создать папку</p>
     <p class="ez-context-menu__item">Закрепить канал</p>
     <p class="ez-context-menu__item" routerLink="/options">Перейти в настройки</p>

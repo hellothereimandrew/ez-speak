@@ -9,7 +9,7 @@
     position: absolute;
     top: 7px;
     right: 3px;
-    fill: rgb(70, 188, 255);
+    fill: var(--active);
     cursor: pointer;
     transition: 500ms;
   }
@@ -20,6 +20,7 @@
 
     .remember-me__checkbox {
       margin-right: 5px;
+      cursor: pointer;
     }
   }
 
@@ -29,7 +30,7 @@
     transition: 500ms;
 
     &:hover {
-      color: #46bcff;
+      color: var(--active);
       transition: 500ms;
       cursor: pointer;
     }
