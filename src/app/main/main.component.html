@@ -2,7 +2,8 @@
   <app-main-leftbar
     (currentChat)="getCurrentChat($event)"
     (showCreateFolder)="showFolderPopup()"
-    [folderName]="folderName"></app-main-leftbar>
+    [folderName]="folderName"
+  ></app-main-leftbar>
 
   <app-main-chat-section *ngIf="!stateService.hideChatSection" [currentChat]="currentChat"></app-main-chat-section>
 

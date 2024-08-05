@@ -1,14 +1,4 @@
-import {
-  AfterViewChecked,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subject, Subscription, take, takeUntil} from 'rxjs';
 import {DecorationService} from 'src/app/shared/services/decoration.service';
 import {Chat} from 'src/app/shared/interfaces/chat-db';
@@ -45,7 +35,7 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
   ) {}
 
   ngOnInit(): void {
-    this.themeSubscription = this.decorationServise.selectedTheme$.pipe(take(1)).subscribe((theme) => {
+    this.themeSubscription = this.decorationServise.selectedTheme$.pipe(take(1)).subscribe((theme: string): void => {
       this.selectedTheme = theme;
     });
 
@@ -58,6 +48,11 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
 
   ngAfterViewChecked() {
     // this.scrollClaimedToBottom();
+  }
+
+  ngOnDestroy(): void {
+    this.themeSubscription.unsubscribe();
+    this.backgroundSubscription.unsubscribe();
   }
 
   public sendMessage(event?: any): void {
@@ -108,10 +103,5 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
   public scrollClaimedToBottom(): void {
     const scrollContainer = this.scrollable.nativeElement;
     scrollContainer.scrollTop = scrollContainer.scrollHeight;
-  }
-
-  ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
-    this.backgroundSubscription.unsubscribe();
   }
 }

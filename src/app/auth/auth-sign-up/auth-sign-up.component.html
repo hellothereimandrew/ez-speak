@@ -4,7 +4,7 @@
   </div>
 
   <div class="password">
-    <input class="ez-input" formControlName="password" placeholder="Придумайте пароль" type="{{ inputType }}" />
+    <input class="ez-input" formControlName="password" placeholder="Придумайте пароль" type="{{ passInputType }}" />
 
     <div (click)="showPass()">
       <svg class="showPass" fill="none" height="10" viewBox="0 0 15 10" width="15" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +20,12 @@
   </div>
 
   <div class="confirm-password">
-    <input class="ez-input" formControlName="confirmPassword" placeholder="Подтвердите пароль" type="{{ inputType }}" />
+    <input
+      class="ez-input"
+      formControlName="confirmPassword"
+      placeholder="Подтвердите пароль"
+      type="{{ passConfirmInputType }}"
+    />
 
     <div (click)="showPassConfirm()">
       <svg class="showPass" fill="none" height="10" viewBox="0 0 15 10" width="15" xmlns="http://www.w3.org/2000/svg">

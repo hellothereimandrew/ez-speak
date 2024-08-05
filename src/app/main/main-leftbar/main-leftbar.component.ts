@@ -17,12 +17,12 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
 
   @Output() public currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
-  public hideContextMenu: boolean = true;
-  public showPopup: boolean = false;
   public selectedTheme: string = '';
   public channelName: string = '';
   public channelCounterId: number = 1;
   public leftbarWidth: number = 346;
+  public hideContextMenu: boolean = true;
+  public showPopup: boolean = false;
   public themeSubscription: Subscription = new Subscription();
   public contextMenuPosition: {x: number; y: number} = {x: 0, y: 0};
   public popupData: PopupData = {
@@ -32,7 +32,6 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   };
   public chats: Chat[] = [];
   public pinnedChats: Chat[] = [];
-
   public user!: User;
 
   constructor(
@@ -71,7 +70,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getUserInfo();
 
-    this.themeSubscription = this.decorationService.selectedTheme$.pipe(take(1)).subscribe((theme) => {
+    this.themeSubscription = this.decorationService.selectedTheme$.pipe(take(1)).subscribe((theme: string): void => {
       this.selectedTheme = theme;
     });
   }

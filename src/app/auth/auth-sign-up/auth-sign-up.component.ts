@@ -18,7 +18,8 @@ export class AuthSignUpComponent {
   public isAuthorized: boolean = false;
   public showPassword: boolean = false;
   public showPasswordConfirm: boolean = false;
-  public inputType: string = 'password';
+  public passInputType: string = 'password';
+  public passConfirmInputType: string = 'password';
 
   constructor(private authService: AuthService) {}
 
@@ -43,11 +44,11 @@ export class AuthSignUpComponent {
 
   public showPass(): void {
     this.showPassword = !this.showPassword;
-    this.inputType = this.showPassword ? 'text' : 'password';
+    this.passInputType = this.showPassword ? 'text' : 'password';
   }
 
   public showPassConfirm(): void {
     this.showPasswordConfirm = !this.showPasswordConfirm;
-    this.inputType = this.showPasswordConfirm ? 'text' : 'password';
+    this.passConfirmInputType = this.showPasswordConfirm ? 'text' : 'password';
   }
 }

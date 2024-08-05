@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {DecorationService} from 'src/app/shared/services/decoration.service';
 import {Chat} from 'src/app/shared/interfaces/chat-db';
@@ -16,8 +16,6 @@ export class MainRightbarComponent implements OnInit, OnDestroy {
     name: '',
   };
 
-  @Output() public rightbarListener: EventEmitter<void> = new EventEmitter<void>();
-
   public selectedTheme: string = '';
   public themeSubscription: Subscription = new Subscription();
 
@@ -27,7 +25,7 @@ export class MainRightbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.themeSubscription = this.decorationService.selectedTheme$.subscribe((theme) => {
+    this.themeSubscription = this.decorationService.selectedTheme$.subscribe((theme: string): void => {
       this.selectedTheme = theme;
     });
   }

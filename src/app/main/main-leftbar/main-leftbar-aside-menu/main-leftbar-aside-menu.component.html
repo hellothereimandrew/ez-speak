@@ -9,7 +9,8 @@
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-opacity="0.3"
-          stroke-width="2" />
+          stroke-width="2"
+        />
       </svg>
     </div>
 
@@ -20,7 +21,8 @@
         height="16"
         viewBox="0 0 16 16"
         width="16"
-        xmlns="http://www.w3.org/2000/svg">
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path d="M1 1L15 15M15 1L1 15" stroke="white" stroke-linecap="round" stroke-opacity="0.3" stroke-width="2" />
       </svg>
     </div>
@@ -37,19 +39,22 @@
               (click)="setAppTheme('dark-theme')"
               [ngClass]="{active: selectedTheme === 'dark-theme'}"
               class="theme-picker__item"
-              style="background-color: rgb(35, 37, 41)"></div>
+              style="background-color: rgb(35, 37, 41)"
+            ></div>
 
             <div
               (click)="setAppTheme('dark-blue-theme')"
               [ngClass]="{active: selectedTheme === 'dark-blue-theme'}"
               class="theme-picker__item"
-              style="background-color: rgb(16, 24, 28)"></div>
+              style="background-color: rgb(16, 24, 28)"
+            ></div>
 
             <div
               (click)="setAppTheme('light-theme')"
               [ngClass]="{active: selectedTheme === 'light-theme'}"
               class="theme-picker__item"
-              style="background-color: rgb(220, 225, 233)"></div>
+              style="background-color: rgb(220, 225, 233)"
+            ></div>
 
             <div (click)="setAppTheme('combined-theme')" class="theme-picker__item"></div>
             <div class="theme-picker__item"></div>

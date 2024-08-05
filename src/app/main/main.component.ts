@@ -42,14 +42,19 @@ export class MainComponent implements OnInit, OnDestroy {
 
     if (!this.stateService.hideChatSection && event.code === 'Escape') {
       this.stateService.hideChatSection = true;
-      this.stateService.openRightbar = true;
+      this.stateService.openRightbar = false;
     }
   }
 
   ngOnInit(): void {
-    this.themeSubscription = this.decorationService.selectedTheme$.subscribe((theme) => {
+    this.themeSubscription = this.decorationService.selectedTheme$.subscribe((theme: string): void => {
       this.selectedTheme = theme;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.setDefaultState();
+    this.themeSubscription.unsubscribe();
   }
 
   public getCurrentChat(chat: Chat): void {
@@ -64,7 +69,15 @@ export class MainComponent implements OnInit, OnDestroy {
     this.hideFolderPopup = !this.hideFolderPopup;
   }
 
-  ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
+  public setDefaultState(): void {
+    this.stateService.hideNotifications = true;
+    this.stateService.hideOptions = true;
+    this.stateService.hideChatSection = true;
+    this.stateService.showControls = false;
+    this.stateService.showSearch = false;
+
+    this.stateService.isPrivate = false;
+    this.stateService.openRightbar = false;
+    this.stateService.showPinnedMsg = false;
   }
 }
