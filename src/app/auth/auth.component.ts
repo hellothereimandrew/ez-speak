@@ -7,16 +7,9 @@ import {AuthService} from './auth.service';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
-  public selectedButton: string = '';
-
-  constructor(public authService: AuthService) {}
+  constructor(protected authService: AuthService) {}
 
   ngOnInit() {
-    this.onSelect('sign-in');
-  }
-
-  public onSelect(button: string): void {
-    this.selectedButton = button;
-    this.authService.setActiveButton = button;
+    this.authService.setActiveButton = 'sign-in';
   }
 }

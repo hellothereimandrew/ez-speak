@@ -11,7 +11,6 @@ export class StateService {
   public showControls: boolean = false;
   public showSearch: boolean = false;
   public isResized: boolean = false;
-
   /** chat-section states **/
   public isPrivate: boolean = false;
   public openRightbar: boolean = false;

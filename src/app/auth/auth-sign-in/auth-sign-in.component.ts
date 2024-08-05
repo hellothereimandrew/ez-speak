@@ -17,7 +17,6 @@ export class AuthSignInComponent implements OnInit {
 
   public showPassword: boolean = false;
   public inputType: string = 'password';
-  public selectedButton: string = '';
 
   constructor(
     private authService: AuthService,
@@ -37,7 +36,6 @@ export class AuthSignInComponent implements OnInit {
   }
 
   public isValid(): boolean {
-    this.signInData.markAllAsTouched();
     this.authService.isAuthorized = !this.signInData.invalid;
 
     return this.authService.isAuthorized;
@@ -48,6 +46,8 @@ export class AuthSignInComponent implements OnInit {
       this.saveUserInfo();
       this.navigateToApp();
     }
+
+    this.signInData.markAllAsTouched();
   }
 
   public saveUserInfo(): void {

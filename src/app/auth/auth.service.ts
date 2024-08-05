@@ -21,10 +21,6 @@ export class AuthService {
     this.selectedButton = button;
   }
 
-  public getActiveButton(): string {
-    return this.selectedButton;
-  }
-
   public canActivate: CanActivateFn = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,

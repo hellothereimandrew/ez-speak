@@ -4,7 +4,17 @@
   .username,
   .password,
   .confirm-password {
+    position: relative;
     margin-bottom: 12px;
+  }
+
+  .showPass {
+    position: absolute;
+    top: 7px;
+    right: 3px;
+    fill: var(--active);
+    cursor: pointer;
+    transition: 500ms;
   }
 
   .email {
