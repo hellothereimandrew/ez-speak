@@ -29,30 +29,15 @@
 
       .slider__sign-in {
         margin-right: 15px;
-        cursor: pointer;
-
-        &:hover {
-          color: var(--active);
-          transition: 500ms;
-        }
-      }
-
-      .slider__sign-up {
-        cursor: pointer;
-
-        &:hover {
-          color: var(--active);
-          transition: 500ms;
-        }
       }
     }
 
     .active {
       color: var(--active);
-      cursor: pointer;
 
       &:hover {
         color: var(--active);
+        cursor: pointer;
       }
     }
 

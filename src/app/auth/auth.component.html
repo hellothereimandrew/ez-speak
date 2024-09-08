@@ -54,14 +54,14 @@
       <span
         (click)="authService.selectedButton = 'sign-in'"
         [ngClass]="{active: authService.selectedButton === 'sign-in'}"
-        class="slider__sign-in"
+        class="slider__sign-in pointer"
       >
         Авторизация
       </span>
       <span
         (click)="authService.selectedButton = 'sign-up'"
         [ngClass]="{active: authService.selectedButton === 'sign-up'}"
-        class="slider__sign-up"
+        class="slider__sign-up pointer"
       >
         Регистрация
       </span>
@@ -72,7 +72,7 @@
     <app-auth-sign-up *ngIf="authService.selectedButton === 'sign-up'"></app-auth-sign-up>
 
     <div class="version">
-      <p>v_0.01a</p>
+      <span>v_0.01a</span>
     </div>
   </div>
 </div>

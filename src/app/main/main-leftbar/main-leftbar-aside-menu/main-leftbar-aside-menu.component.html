@@ -14,15 +14,8 @@
       </svg>
     </div>
 
-    <div class="aside-menu__close">
-      <svg
-        (click)="stateService.hideOptions = true"
-        fill="none"
-        height="16"
-        viewBox="0 0 16 16"
-        width="16"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+    <div (click)="stateService.hideOptions = true" class="aside-menu__close">
+      <svg fill="none" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
         <path d="M1 1L15 15M15 1L1 15" stroke="white" stroke-linecap="round" stroke-opacity="0.3" stroke-width="2" />
       </svg>
     </div>

@@ -1,4 +1,4 @@
-<div (click)="closeContextMenu()" class="chat-section {{ selectedTheme }}">
+<div class="chat-section {{ selectedTheme }}">
   <div class="header {{ selectedTheme }}">
     <div *ngIf="currentChat.name" class="header__current-chat">
       <span (click)="showRightBar()" class="header__current-chat-name">
@@ -50,7 +50,7 @@
   </div>
 
   <div
-    (click)="closeDropdown()"
+    (click)="closeAll()"
     *ngIf="!stateService.isPrivate"
     [ngStyle]="{background: ' url(' + selectedBackground + ') 0% 0% / cover no-repeat '}"
     class="current-chat-public"
@@ -111,6 +111,7 @@
   </div>
 
   <div
+    (click)="closeContextMenu()"
     *ngIf="!hideContextMenu"
     [ngStyle]="{
       top: contextMenuPosition?.y + 'px',

@@ -9,7 +9,7 @@ import {AuthService} from './auth.service';
 export class AuthComponent implements OnInit {
   constructor(protected authService: AuthService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authService.setActiveButton = 'sign-in';
   }
 }

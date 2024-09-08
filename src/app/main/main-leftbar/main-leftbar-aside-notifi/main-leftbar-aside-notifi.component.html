@@ -1,9 +1,8 @@
 <div class="aside-notifi fade-in-left">
   <div class="aside-notifi__header">
     <p class="aside-notifi__heading">Уведомления</p>
-    <div>
+    <div (click)="clearNotifications()">
       <svg
-        (click)="clearNotifications()"
         class="aside-notifi__heading-trash"
         fill="none"
         height="15"

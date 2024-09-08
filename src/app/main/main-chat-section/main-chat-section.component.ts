@@ -27,7 +27,7 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
   public messages: Message[] = [];
   public themeSubscription: Subscription = new Subscription();
   public backgroundSubscription: Subscription = new Subscription();
-  public unsubscribe: Subject<any> = new Subject();
+  public unsubscribe: Subject<void> = new Subject();
 
   constructor(
     public stateService: StateService,
@@ -84,6 +84,12 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
     };
   }
 
+  public closeAll(): void {
+    this.closeContextMenu();
+    this.closeDropdown();
+    this.stateService.openRightbar = false;
+  }
+
   public closeContextMenu(): void {
     this.hideContextMenu = true;
   }
@@ -97,7 +103,7 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
   }
 
   public showRightBar(): void {
-    this.stateService.openRightbar = !this.stateService.openRightbar;
+    this.stateService.openRightbar = true;
   }
 
   public scrollClaimedToBottom(): void {
