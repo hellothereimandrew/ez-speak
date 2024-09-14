@@ -1,0 +1,28 @@
+.ez-context-menu {
+  position: absolute;
+  width: 200px;
+  user-select: none;
+  left: 10px;
+  border: var(--border);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+
+  .ez-context-menu__primary-items {
+    padding-top: 5px;
+    border-top: 1px solid rgba(126, 126, 126, 0.5);
+  }
+
+  .ez-context-menu__item {
+    margin-bottom: 5px;
+
+    &:hover {
+      color: var(--active);
+      cursor: pointer;
+    }
+  }
+}
+
+.padding-10 {
+  padding: 10px;
+}

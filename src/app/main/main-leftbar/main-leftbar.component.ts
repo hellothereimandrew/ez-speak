@@ -6,39 +6,55 @@ import {PopupData} from 'src/app/shared/interfaces/popup-data';
 import {AuthService} from '../../auth/auth.service';
 import {User} from '../../shared/interfaces/user';
 import {StateService} from '../../shared/services/state.service';
+import {ContextMenuComponent} from '../../shared/components/context-menu/context-menu.component';
+import {ContextMenuService} from '../../shared/components/context-menu/context-menu.service';
 
 @Component({
   selector: 'app-main-leftbar',
   templateUrl: './main-leftbar.component.html',
   styleUrls: ['./main-leftbar.component.scss'],
+  providers: [ContextMenuComponent],
 })
 export class MainLeftbarComponent implements OnInit, OnDestroy {
   @Input() public folderName: string = '';
 
   @Output() public currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
 
+  public themeSubscription: Subscription = new Subscription();
   public selectedTheme: string = '';
   public channelName: string = '';
   public channelCounterId: number = 1;
   public leftbarWidth: number = 346;
-  public hideContextMenu: boolean = true;
+
+  public chats: Chat[] = [];
+  public pinnedChats: Chat[] = [];
+  public user!: User;
+
   public showPopup: boolean = false;
-  public themeSubscription: Subscription = new Subscription();
-  public contextMenuPosition: {x: number; y: number} = {x: 0, y: 0};
   public popupData: PopupData = {
     message: '',
     firstButton: '',
     secondButton: '',
   };
-  public chats: Chat[] = [];
-  public pinnedChats: Chat[] = [];
-  public user!: User;
 
   constructor(
+    private authService: AuthService,
+    private contextMenuService: ContextMenuService,
     public decorationService: DecorationService,
     public stateService: StateService,
-    private authService: AuthService,
   ) {}
+
+  ngOnInit(): void {
+    this.themeSubscription = this.decorationService.selectedTheme$.pipe(take(1)).subscribe((theme: string): void => {
+      this.selectedTheme = theme;
+    });
+    this.getUserInfo();
+    this.generateMainContextItems();
+  }
+
+  public ngOnDestroy(): void {
+    this.themeSubscription.unsubscribe();
+  }
 
   @HostListener('window:mousemove', ['$event'])
   public resizeLeftbar(event: MouseEvent): void {
@@ -67,18 +83,6 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {
-    this.getUserInfo();
-
-    this.themeSubscription = this.decorationService.selectedTheme$.pipe(take(1)).subscribe((theme: string): void => {
-      this.selectedTheme = theme;
-    });
-  }
-
-  public ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
-  }
-
   public getUserInfo(): void {
     this.user = JSON.parse(this.authService.getUser);
   }
@@ -102,7 +106,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  public removeChannel(chat: Chat): any {
+  public removeChannel(chat: Chat): void {
     this.chats.splice(this.chats.indexOf(chat), 1);
   }
 
@@ -122,13 +126,38 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     this.currentChat.emit(item);
   }
 
-  public openContextMenu(event: MouseEvent): void {
-    event.preventDefault();
-    this.hideContextMenu = false;
-    this.contextMenuPosition = {
-      x: event.clientX - 10,
-      y: event.clientY - 10,
-    };
+  public generateMainContextItems(): void {
+    this.contextMenuService.mainMenuItems = [
+      {
+        name: 'Поиск',
+        method: (): boolean => (this.stateService.showSearch = true),
+      },
+      {
+        name: 'Создать канал',
+        method: (): boolean => (this.stateService.showControls = true),
+      },
+      {
+        name: 'Создать папку',
+        method: (): void => {},
+      },
+    ];
+  }
+
+  public generatePrimaryContextItems(chat: Chat): void {
+    if (chat) {
+      this.contextMenuService.primaryMenuItems = [
+        {
+          name: 'Закрепить канал',
+          method: (): void => this.pinChannel(chat),
+        },
+        {
+          name: 'Удалить канал',
+          method: (): void => this.openPopup(chat),
+        },
+      ];
+    } else {
+      this.contextMenuService.primaryMenuItems = [];
+    }
   }
 
   public openPopup(chat: Chat): void {
@@ -138,13 +167,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
       message: 'Вы уверены, что хотите удалить канал?',
       firstButton: 'Да',
       secondButton: 'Нет',
-      confirmed: () => {
-        this.removeChannel(chat);
-      },
+      confirmed: (): void => this.removeChannel(chat),
     };
-  }
-
-  public closeContextMenu(): void {
-    this.hideContextMenu = true;
   }
 }

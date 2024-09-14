@@ -80,4 +80,9 @@ export class MainComponent implements OnInit, OnDestroy {
     this.stateService.openRightbar = false;
     this.stateService.showPinnedMsg = false;
   }
+
+  public cancelDefaultActions(mouseEvent: MouseEvent): void {
+    mouseEvent.preventDefault();
+    mouseEvent.stopPropagation();
+  }
 }

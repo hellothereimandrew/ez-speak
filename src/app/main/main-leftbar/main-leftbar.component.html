@@ -1,9 +1,13 @@
-<div (click)="closeContextMenu()" [ngStyle]="{width: leftbarWidth + 'px'}" class="leftbar {{ selectedTheme }}">
+<div
+  class="leftbar {{ selectedTheme }}"
+  (click)="contextMenu.closeContextMenu()"
+  [ngStyle]="{width: leftbarWidth + 'px'}"
+>
   <div
+    class="leftbar-splitter"
     (mousedown)="stateService.isResized = true"
     (mouseup)="stateService.isResized = false"
     [ngStyle]="{left: leftbarWidth + 'px'}"
-    class="leftbar-splitter"
   ></div>
 
   <div class="leftbar__user-card">
@@ -13,12 +17,12 @@
       </div>
       <!-- переименовать класс ↓ -->
       <div class="leftbar__user">
-        <input class="leftbar__user-name" type="text" value="{{ user.name }}" />
-        <input class="leftbar__user-role" type="text" value="{{ user.role }}" />
+        <input class="leftbar__user-name" maxlength="16" type="text" value="{{ user.name }}" />
+        <input class="leftbar__user-role" maxlength="32" type="text" value="{{ user.role }}" />
       </div>
     </div>
 
-    <div (click)="stateService.hideOptions = false" class="leftbar__options pointer" title="Настройки">
+    <div class="leftbar__options pointer" title="Настройки" (click)="stateService.hideOptions = false">
       <svg
         [ngClass]="{active: !stateService.hideOptions}"
         fill="none"
@@ -45,26 +49,24 @@
 
   <app-main-leftbar-aside-notifi *ngIf="!stateService.hideNotifications"></app-main-leftbar-aside-notifi>
 
-  <div (contextmenu)="openContextMenu($event)" class="flex">
+  <div (contextmenu)="contextMenu.openContextMenu($event)" class="flex">
     <app-main-leftbar-navigation></app-main-leftbar-navigation>
 
     <div class="leftbar__chat-container">
       <div *ngIf="stateService.showControls" class="leftbar__create-chat fade-bottom">
         <div>
           <input
-            (keyup.enter)="createChannel(channelName)"
-            [(ngModel)]="channelName"
             class="ez-create-input"
             placeholder="Введите название канала"
             type="text"
+            (keyup.enter)="createChannel(channelName)"
+            [(ngModel)]="channelName"
           />
         </div>
 
         <div class="flex-align-center">
-          <button (click)="createChannel(channelName)" class="ez-small-button" style="margin-right: 10px">
-            Создать
-          </button>
-          <button (click)="stateService.showControls = false" class="ez-small-button">Отмена</button>
+          <button class="ez-small-button margin-right-10" (click)="createChannel(channelName)">Создать</button>
+          <button class="ez-small-button" (click)="stateService.showControls = false">Отмена</button>
         </div>
       </div>
 
@@ -72,8 +74,8 @@
         <div>
           <input class="ez-create-input" placeholder="Поиск" type="text" />
           <div class="flex-align-center">
-            <button class="ez-small-button" style="margin-right: 10px">Найти</button>
-            <button (click)="stateService.showSearch = false" class="ez-small-button">Отмена</button>
+            <button class="ez-small-button margin-right-10">Найти</button>
+            <button class="ez-small-button" (click)="stateService.showSearch = false">Отмена</button>
           </div>
         </div>
       </div>
@@ -82,80 +84,57 @@
         <div *ngFor="let item of pinnedChats">
           <div class="leftbar__chat-wrap fade-bottom">
             <div class="leftbar__chat-ico">{{ item?.ico }}</div>
-            <div (click)="showChatSection(item)" class="leftbar__chat">
+            <div class="leftbar__chat" (click)="showChatSection(item)">
               <div class="flex">
-                <p style="margin-right: 5px">{{ item?.name }}</p>
-                <div *ngIf="item?.msgs !== 0" class="leftbar__unread-msgs">
+                <span class="margin-right-5">{{ item?.name }}</span>
+                <div *ngIf="item?.msgs" class="leftbar__unread-msgs">
                   {{ item?.msgs }}
                 </div>
               </div>
-
               <div class="flex">
-                <p style="margin-right: 5px; white-space: nowrap">
+                <span style="white-space: nowrap" class="margin-right-5">
                   {{ item?.userName + ': ' }}
-                </p>
+                </span>
                 <div class="flex">
-                  <p class="leftbar__chat-last-msg" style="margin-right: 5px; white-space: nowrap">
+                  <span class="leftbar__chat-last-msg margin-right-5" style="white-space: nowrap">
                     {{ item?.lastMsg }}
-                  </p>
-                  <p>{{ item?.time }}</p>
+                  </span>
+                  <span>{{ item?.time }}</span>
                 </div>
               </div>
             </div>
-
-            <div class="flex">
-              <div (click)="unpinChannel(item)">&#9733;</div>
-              <div class="X">&times;</div>
-            </div>
           </div>
         </div>
       </div>
 
-      <div *ngFor="let item of chats" class="leftbar__chat-wrap fade-bottom">
+      <div
+        *ngFor="let item of chats"
+        class="leftbar__chat-wrap fade-bottom"
+        (contextmenu)="generatePrimaryContextItems(item)"
+      >
         <div class="leftbar__chat-ico">{{ item?.ico }}</div>
-        <div (click)="showChatSection(item)" class="leftbar__chat">
+        <div class="leftbar__chat" (click)="showChatSection(item)">
           <div class="flex">
-            <p style="margin-right: 5px">{{ item?.name }}</p>
-            <div *ngIf="item?.msgs !== 0" class="leftbar__unread-msgs">
+            <span class="margin-right-5">{{ item?.name }}</span>
+            <div *ngIf="item?.msgs" class="leftbar__unread-msgs">
               {{ item?.msgs }}
             </div>
           </div>
-
           <div class="flex">
-            <p style="margin-right: 5px; white-space: nowrap">
+            <span style="white-space: nowrap" class="margin-right-5">
               {{ item?.userName + ': ' }}
-            </p>
+            </span>
             <div class="flex">
-              <p class="leftbar__chat-last-msg" style="margin-right: 5px; white-space: nowrap">
+              <span class="leftbar__chat-last-msg margin-right-5" style="white-space: nowrap">
                 {{ item?.lastMsg }}
-              </p>
-              <p>{{ item?.time }}</p>
+              </span>
+              <span>{{ item?.time }}</span>
             </div>
           </div>
         </div>
-
-        <div class="flex">
-          <div (click)="pinChannel(item)">&#9734;</div>
-          <div (click)="openPopup(item)" class="X">&times;</div>
-        </div>
       </div>
     </div>
-  </div>
-
-  <div
-    *ngIf="!hideContextMenu"
-    [ngStyle]="{
-      top: contextMenuPosition.y + 'px',
-      left: contextMenuPosition.x + 'px'
-    }"
-    class="ez-context-menu"
-  >
-    <p (click)="stateService.showSearch = true" class="ez-context-menu__item">Поиск</p>
-    <p (click)="stateService.showControls = true" class="ez-context-menu__item">Создать канал</p>
-    <p class="ez-context-menu__item">Создать папку</p>
-    <p class="ez-context-menu__item">Закрепить канал</p>
-    <p class="ez-context-menu__item" routerLink="/options">Перейти в настройки</p>
-    <p class="ez-context-menu__item">Удалить канал</p>
+    <context-menu #contextMenu></context-menu>
   </div>
 </div>
 

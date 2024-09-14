@@ -1,4 +1,4 @@
-<div class="main {{ selectedTheme }}">
+<div class="main {{ selectedTheme }}" (contextmenu)="cancelDefaultActions($event)">
   <app-main-leftbar
     (currentChat)="getCurrentChat($event)"
     (showCreateFolder)="showFolderPopup()"
