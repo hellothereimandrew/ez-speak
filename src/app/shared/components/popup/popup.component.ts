@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {PopupData} from '../../interfaces/popup-data';
 
 @Component({
@@ -7,14 +7,15 @@ import {PopupData} from '../../interfaces/popup-data';
   styleUrl: './popup.component.scss',
 })
 export class PopupComponent {
-  @Input() public showPopup: boolean = false;
-
   @Input() public popupData: PopupData = {
     message: '',
     firstButton: '',
     secondButton: '',
-    confirmed: () => {},
+    confirmed: (): void => {},
   };
+  @Input() public showPopup: boolean = false;
+
+  @Output() public showPopupChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public confirmed(): void {
     if (this.popupData.confirmed) {
@@ -23,5 +24,6 @@ export class PopupComponent {
     }
 
     this.showPopup = false;
+    this.showPopupChange.emit(this.showPopup);
   }
 }

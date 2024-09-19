@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {ContextMenuService} from './context-menu.service';
 
 @Component({
@@ -6,7 +6,7 @@ import {ContextMenuService} from './context-menu.service';
   templateUrl: './context-menu.component.html',
   styleUrl: './context-menu.component.scss',
 })
-export class ContextMenuComponent implements OnDestroy {
+export class ContextMenuComponent {
   public hideContextMenu: boolean = true;
   public contextMenuPosition: {x: number; y: number} = {
     x: 0,
@@ -14,10 +14,6 @@ export class ContextMenuComponent implements OnDestroy {
   };
 
   constructor(public contextMenuService: ContextMenuService) {}
-
-  public ngOnDestroy(): void {
-    this.contextMenuService.primaryMenuItems = [];
-  }
 
   public openContextMenu(event: MouseEvent): void {
     event.preventDefault();
@@ -30,5 +26,6 @@ export class ContextMenuComponent implements OnDestroy {
 
   public closeContextMenu(): void {
     this.hideContextMenu = true;
+    this.contextMenuService.primaryMenuItems = [];
   }
 }

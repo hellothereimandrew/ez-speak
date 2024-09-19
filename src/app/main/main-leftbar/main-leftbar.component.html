@@ -138,4 +138,4 @@
   </div>
 </div>
 
-<popup [popupData]="popupData" [showPopup]="showPopup"></popup>
+<popup *ngIf="showPopup" [popupData]="popupData" [(showPopup)]="showPopup"></popup>
