@@ -1,7 +1,7 @@
 <div class="chat-section {{ selectedTheme }}">
   <div class="header {{ selectedTheme }}">
     <div *ngIf="currentChat.name" class="header__current-chat">
-      <span (click)="showRightBar()" class="header__current-chat-name">
+      <span (click)="openRightBar()" class="header__current-chat-name">
         {{ currentChat.name }}
       </span>
 
@@ -39,14 +39,14 @@
     </div>
   </div>
 
-  <div *ngIf="stateService.showPinnedMsg" class="pinned-msg fade-in-right">
+  <div *ngIf="stateService.showPinnedMsg" class="flex-align-center pinned-msg fade-in-right">
     <!-- исправить ↓ -->
-    <div>
+    <div style="width: 80%">
       <p>Закреплённое сообщение</p>
       <p>Уже лучше чем телеграм!</p>
     </div>
 
-    <span (click)="stateService.showPinnedMsg = false">&times;</span>
+    <span (click)="stateService.showPinnedMsg = false" class="pointer">&times;</span>
   </div>
 
   <div
@@ -62,7 +62,7 @@
         </div>
 
         <div>
-          <div style="display: flex">
+          <div class="flex">
             <div class="my-message__name">{{ item.user }}</div>
             <div class="my-message__time">{{ item.time }}</div>
           </div>
@@ -70,6 +70,8 @@
           <div class="my-message__text">{{ item.text }}</div>
         </div>
       </div>
+
+      <context-menu #contextMenu></context-menu>
     </div>
 
     <div class="messages-wrap">
@@ -108,23 +110,6 @@
         />
       </svg>
     </div>
-  </div>
-
-  <div
-    (click)="closeContextMenu()"
-    *ngIf="!hideContextMenu"
-    [ngStyle]="{
-      top: contextMenuPosition?.y + 'px',
-      left: contextMenuPosition?.x + 'px'
-    }"
-    class="ez-context-menu"
-  >
-    <p (click)="stateService.showPinnedMsg = true" class="ez-context-menu__item">Закрепить</p>
-    <p class="ez-context-menu__item">Ответить</p>
-    <p class="ez-context-menu__item">Переслать</p>
-    <p class="ez-context-menu__item">Выбрать</p>
-    <p class="ez-context-menu__item">Изменить</p>
-    <p class="ez-context-menu__item">Удалить</p>
   </div>
 
   <div *ngIf="!hideDropdown" class="ez-drop-down-menu">
