@@ -57,7 +57,6 @@
     .leftbar__options {
       display: flex;
       justify-content: flex-end;
-
     }
   }
 
@@ -87,6 +86,10 @@
       width: 4px;
       background-color: rgba(255, 255, 255, 0.2);
       border-radius: 10px;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
     }
   }
 
