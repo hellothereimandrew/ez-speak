@@ -1,16 +1,10 @@
-<div [formGroup]="signInData" class="sign-in">
+<div [formGroup]="signInData" class="sign-in" (keyup.enter)="submit()">
   <div class="username">
     <input class="ez-input" formControlName="name" placeholder="Логин" type="text" />
   </div>
 
   <div class="password">
-    <input
-      (keyup.enter)="submit()"
-      class="ez-input"
-      formControlName="password"
-      placeholder="Пароль"
-      type="{{ inputType }}"
-    />
+    <input class="ez-input" formControlName="password" placeholder="Пароль" type="{{ inputType }}" />
 
     <div (click)="showPass()">
       <svg class="showPass" fill="none" height="10" viewBox="0 0 15 10" width="15" xmlns="http://www.w3.org/2000/svg">

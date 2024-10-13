@@ -15,11 +15,16 @@
 }
 
 .rightbar-info__chat-ico {
-  min-width: 150px;
-  min-height: 150px;
+  height: 150px;
   margin-bottom: 10px;
   border: 2px solid rgb(255, 255, 255);
   border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: inherit;
+    height: inherit;
+  }
 }
 
 .rightbar-info {

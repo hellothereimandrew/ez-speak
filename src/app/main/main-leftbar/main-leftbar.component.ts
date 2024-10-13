@@ -1,13 +1,13 @@
 import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Subscription, take} from 'rxjs';
 import {DecorationService} from 'src/app/shared/services/decoration.service';
-import {Chat} from 'src/app/shared/interfaces/chat-db';
+import {IChat} from 'src/app/shared/interfaces/IChat';
 import {PopupData} from 'src/app/shared/interfaces/popup-data';
 import {AuthService} from '../../auth/auth.service';
-import {User} from '../../shared/interfaces/user';
 import {StateService} from '../../shared/services/state.service';
 import {ContextMenuService} from '../../shared/components/context-menu/context-menu.service';
 import {ContextMenuComponent} from '../../shared/components/context-menu/context-menu.component';
+import {User} from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-main-leftbar',
@@ -18,7 +18,7 @@ import {ContextMenuComponent} from '../../shared/components/context-menu/context
 export class MainLeftbarComponent implements OnInit, OnDestroy {
   @Input() public folderName: string = '';
 
-  @Output() public currentChat: EventEmitter<Chat> = new EventEmitter<Chat>();
+  @Output() public currentChat: EventEmitter<IChat> = new EventEmitter<IChat>();
 
   @ViewChild('contextMenu') public contextMenu!: ContextMenuComponent;
 
@@ -28,9 +28,9 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   public channelCounterId: number = 1;
   public leftbarWidth: number = 346;
 
-  public chats: Chat[] = [];
-  public pinnedChats: Chat[] = [];
-  public user!: User;
+  public chats: IChat[] = [];
+  public pinnedChats: IChat[] = [];
+  public user: User = new User();
 
   public showPopup: boolean = false;
   public popupData: PopupData = {
@@ -47,10 +47,8 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.themeSubscription = this.decorationService.selectedTheme$.pipe(take(1)).subscribe((theme: string): void => {
-      this.selectedTheme = theme;
-    });
     this.getUserInfo();
+    this.initSubcribes();
   }
 
   public ngOnDestroy(): void {
@@ -88,8 +86,14 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     this.user = JSON.parse(this.authService.getUser);
   }
 
-  public createChannel(name?: string): void {
-    const temp: Chat = {
+  public initSubcribes(): void {
+    this.themeSubscription = this.decorationService.selectedTheme$.pipe(take(1)).subscribe((theme: string): void => {
+      this.selectedTheme = theme;
+    });
+  }
+
+  public createChannel(name: string): void {
+    const temp: IChat = {
       id: this.channelCounterId++,
       ico: '',
       name: name,
@@ -107,29 +111,28 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  public removeChannel(chat: Chat): void {
+  public removeChannel(chat: IChat): void {
     this.chats.splice(this.chats.indexOf(chat), 1);
     this.stateService.hideChatSection = true;
   }
 
-  public pinChannel(currentChat?: Chat): void {
-    let pinnedChat: any = currentChat;
-    pinnedChat.pinned = true;
-    this.pinnedChats.push(pinnedChat);
+  public pinChannel(currentChat: IChat): void {
+    currentChat.pinned = true;
+    this.pinnedChats.push(currentChat);
   }
 
-  public unpinChannel(pinnedChat: Chat): void {
+  public unpinChannel(pinnedChat: IChat): void {
     pinnedChat.pinned = false;
     this.pinnedChats.splice(this.pinnedChats.indexOf(pinnedChat), 1);
     this.stateService.hideChatSection = true;
   }
 
-  public showChatSection(item: Chat): void {
+  public showChatSection(item: IChat): void {
     this.stateService.hideChatSection = false;
     this.currentChat.emit(item);
   }
 
-  public openContextMenu(event: MouseEvent, chat?: Chat): void {
+  public openContextMenu(event: MouseEvent, chat?: IChat): void {
     this.contextMenu.openContextMenu(event);
     this.generateMainContextItems();
 
@@ -155,11 +158,21 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     ];
   }
 
-  public generatePrimaryContextItems(chat: Chat): void {
+  public generatePrimaryContextItems(chat: IChat): void {
     this.contextMenuService.primaryMenuItems = [
       {
         name: chat.pinned ? 'Открепить канал' : 'Закрепить канал',
         method: (): void => (chat.pinned ? this.unpinChannel(chat) : this.pinChannel(chat)),
+      },
+      {
+        name: 'Копировать ссылку',
+        method: async (): Promise<void> => {
+          try {
+            await window.navigator.clipboard.writeText(`http://localhost:4300/main/${chat.id}`);
+          } catch (error) {
+            console.error(error);
+          }
+        },
       },
       {
         name: 'Удалить канал',
@@ -168,7 +181,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     ];
   }
 
-  public openPopup(chat: Chat): void {
+  public openPopup(chat: IChat): void {
     this.showPopup = true;
 
     this.popupData = {

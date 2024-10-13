@@ -16,6 +16,7 @@ export class ContextMenuComponent {
   constructor(public contextMenuService: ContextMenuService) {}
 
   public openContextMenu(event: MouseEvent): void {
+    event.stopPropagation();
     event.preventDefault();
     this.hideContextMenu = false;
     this.contextMenuPosition = {

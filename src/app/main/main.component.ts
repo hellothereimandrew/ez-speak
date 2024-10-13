@@ -1,8 +1,7 @@
 import {Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
-import {Chat} from 'src/app/shared/interfaces/chat-db';
+import {IChat} from 'src/app/shared/interfaces/IChat';
 import {DecorationService} from '../shared/services/decoration.service';
 import {Subscription} from 'rxjs';
-import {User} from '../shared/interfaces/user';
 import {StateService} from '../shared/services/state.service';
 
 @Component({
@@ -13,15 +12,7 @@ import {StateService} from '../shared/services/state.service';
 export class MainComponent implements OnInit, OnDestroy {
   @Input() folderName: string = '';
 
-  @Input() public user: User = {
-    id: 0,
-    ico: '',
-    name: '',
-    role: '',
-    status: '',
-  };
-
-  @Input() public currentChat: Chat = {
+  @Input() public currentChat: IChat = {
     id: 0,
     ico: '',
     name: '',
@@ -57,7 +48,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.themeSubscription.unsubscribe();
   }
 
-  public getCurrentChat(chat: Chat): void {
+  public getCurrentChat(chat: IChat): void {
     this.currentChat = chat;
   }
 

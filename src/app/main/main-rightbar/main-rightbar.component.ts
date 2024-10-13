@@ -1,8 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {DecorationService} from 'src/app/shared/services/decoration.service';
-import {Chat} from 'src/app/shared/interfaces/chat-db';
+import {IChat} from 'src/app/shared/interfaces/IChat';
 import {StateService} from '../../shared/services/state.service';
+import {MainRightbarService} from './main-rightbar.service';
 
 @Component({
   selector: 'app-main-rightbar',
@@ -10,7 +11,7 @@ import {StateService} from '../../shared/services/state.service';
   styleUrls: ['./main-rightbar.component.scss'],
 })
 export class MainRightbarComponent implements OnInit, OnDestroy {
-  @Input() public currentChat: Chat = {
+  @Input() public currentChat: IChat = {
     id: 0,
     ico: '',
     name: '',
@@ -22,15 +23,20 @@ export class MainRightbarComponent implements OnInit, OnDestroy {
   constructor(
     public stateService: StateService,
     public decorationService: DecorationService,
+    public rightbarService: MainRightbarService,
   ) {}
 
   ngOnInit(): void {
-    this.themeSubscription = this.decorationService.selectedTheme$.subscribe((theme: string): void => {
-      this.selectedTheme = theme;
-    });
+    this.initSubscribes();
   }
 
   ngOnDestroy(): void {
     this.themeSubscription.unsubscribe();
+  }
+
+  public initSubscribes(): void {
+    this.themeSubscription = this.decorationService.selectedTheme$.subscribe((theme: string): void => {
+      this.selectedTheme = theme;
+    });
   }
 }

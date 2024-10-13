@@ -118,6 +118,12 @@
       margin-right: 12px;
       border-radius: 100%;
       border: 2px solid rgb(240, 240, 240);
+      overflow: hidden;
+
+      img {
+        width: inherit;
+        height: inherit;
+      }
     }
 
     .leftbar__chat {

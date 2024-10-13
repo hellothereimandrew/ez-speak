@@ -1,7 +1,7 @@
-export interface Chat {
-  id?: number;
+export interface IChat {
+  id: number;
   ico?: string;
-  name?: string;
+  name: string;
   time?: string;
   userName?: string;
   lastMsg?: string;

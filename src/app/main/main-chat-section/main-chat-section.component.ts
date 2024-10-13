@@ -1,11 +1,14 @@
-import {AfterViewChecked, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subject, Subscription, take, takeUntil} from 'rxjs';
 import {DecorationService} from 'src/app/shared/services/decoration.service';
-import {Chat} from 'src/app/shared/interfaces/chat-db';
-import {Message} from 'src/app/shared/interfaces/messages-db';
+import {IChat} from 'src/app/shared/interfaces/IChat';
+import {IMessage} from 'src/app/shared/interfaces/IMessages';
 import {StateService} from '../../shared/services/state.service';
 import {ContextMenuService} from '../../shared/components/context-menu/context-menu.service';
 import {ContextMenuComponent} from '../../shared/components/context-menu/context-menu.component';
+import {AuthService} from '../../auth/auth.service';
+import {User} from '../../shared/models/user.model';
+import {MainRightbarService} from '../main-rightbar/main-rightbar.service';
 
 @Component({
   selector: 'app-main-chat-section',
@@ -13,44 +16,38 @@ import {ContextMenuComponent} from '../../shared/components/context-menu/context
   styleUrls: ['./main-chat-section.component.scss'],
   providers: [ContextMenuService],
 })
-export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChecked {
-  @Input() public currentChat: Chat = {
+export class MainChatSectionComponent implements OnInit, OnDestroy {
+  @Input() public currentChat: IChat = {
     id: 0,
     ico: '',
     name: '',
   };
 
-  @ViewChild('scrollable') public scrollable!: ElementRef;
+  @ViewChild('lastMessageRef') public lastMessageRef!: ElementRef;
   @ViewChild('contextMenu') public contextMenu!: ContextMenuComponent;
 
   public selectedTheme: string = '';
   public selectedBackground: string = '';
   public hideDropdown: boolean = true;
-  public messages: Message[] = [];
+  public messages: IMessage[] = [];
+  public pinnedMessage!: IMessage;
+  public user: User = new User();
+
   public themeSubscription: Subscription = new Subscription();
   public backgroundSubscription: Subscription = new Subscription();
   public unsubscribe: Subject<void> = new Subject();
 
   constructor(
+    private authService: AuthService,
+    private contextMenuService: ContextMenuService,
     public stateService: StateService,
     public decorationServise: DecorationService,
-    private contextMenuService: ContextMenuService,
+    public rightbarService: MainRightbarService,
   ) {}
 
   ngOnInit(): void {
-    this.themeSubscription = this.decorationServise.selectedTheme$.pipe(take(1)).subscribe((theme: string): void => {
-      this.selectedTheme = theme;
-    });
-
-    this.backgroundSubscription = this.decorationServise.selectedImage$
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((image) => {
-        this.selectedBackground = image;
-      });
-  }
-
-  ngAfterViewChecked() {
-    // this.scrollClaimedToBottom();
+    this.getUserInfo();
+    this.initSubscribes();
   }
 
   ngOnDestroy(): void {
@@ -58,12 +55,28 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
     this.backgroundSubscription.unsubscribe();
   }
 
+  public getUserInfo(): void {
+    this.user = JSON.parse(this.authService.getUser);
+  }
+
+  public initSubscribes(): void {
+    this.themeSubscription = this.decorationServise.selectedTheme$.pipe(take(1)).subscribe((theme: string): void => {
+      this.selectedTheme = theme;
+    });
+
+    this.backgroundSubscription = this.decorationServise.selectedImage$
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((image: string): void => {
+        this.selectedBackground = image;
+      });
+  }
+
   public sendMessage(event?: any): void {
-    let message: Message = {
+    let message: IMessage = {
       id: 1,
       isMine: true,
-      ico: '../assets/img/ZKoQpzcDggWg2ogpkHjR9JnzY9lbPC7wR_gI-BZX5ncn7VOpt-G_a2jJmQBzC4gx.jpg',
-      user: 'Андрей Дарий',
+      ico: this.user.ico,
+      user: this.user,
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString().slice(0, -3),
       text: event.target.value,
@@ -73,22 +86,19 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
     if (event.target.value.length > 0) {
       this.messages.push(message);
       event.target.value = '';
+      this.scrollToLastMessage();
     }
 
     return;
   }
 
-  public openContextMenu(event: MouseEvent): void {
+  public openContextMenu(event: MouseEvent, message: IMessage): void {
     this.contextMenu.openContextMenu(event);
-    this.generateMainContextItems();
+    this.generateMainContextItems(message);
   }
 
   public openDropdown(): void {
     this.hideDropdown = false;
-  }
-
-  public openRightBar(): void {
-    this.stateService.openRightbar = true;
   }
 
   public closeAll(): void {
@@ -101,11 +111,11 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
     this.hideDropdown = true;
   }
 
-  public generateMainContextItems(): void {
+  public generateMainContextItems(message: IMessage): void {
     this.contextMenuService.mainMenuItems = [
       {
         name: 'Выбрать',
-        method: () => void {},
+        method: () => console.log(this.messages),
       },
       {
         name: 'Ответить',
@@ -116,26 +126,67 @@ export class MainChatSectionComponent implements OnInit, OnDestroy, AfterViewChe
         method: () => void {},
       },
       {
-        name: this.stateService.showPinnedMsg ? 'Открепить' : 'Закрепить',
-        method: (): void => {
-          this.stateService.showPinnedMsg
-            ? (this.stateService.showPinnedMsg = false)
-            : (this.stateService.showPinnedMsg = true);
-        },
+        name: 'Копировать текст',
+        method: async (): Promise<void> => this.copyMessageText(message),
+      },
+      {
+        name: message?.pinned ? 'Открепить' : 'Закрепить',
+        method: (): void => (message?.pinned ? this.unpinMessage(message) : this.pinMessage(message)),
       },
       {
         name: 'Изменить',
-        method: () => void {},
+        method: () => this.editMessageText(message),
       },
       {
         name: 'Удалить',
-        method: () => void {},
+        method: () => this.removeMessage(message),
       },
     ];
   }
 
-  public scrollClaimedToBottom(): void {
-    const scrollContainer = this.scrollable.nativeElement;
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
+
+  public async copyMessageText(message: IMessage): Promise<void> {
+    try {
+      await window.navigator.clipboard.writeText(`${message.text.trim()}`);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  public pinMessage(message: IMessage): void {
+    message.pinned = true;
+    this.pinnedMessage = message;
+  }
+
+  public unpinMessage(message: IMessage): void {
+    message.pinned = false;
+  }
+
+  public editMessageText(message: IMessage): void {
+    message.text = 'new text message';
+  }
+
+  public removeMessage(message: IMessage): void {
+    this.messages.splice(this.messages.indexOf(message), 1);
+  }
+
+  public getUserByMessage(message: IMessage, mouseEvent: MouseEvent): void {
+    mouseEvent.stopPropagation();
+    this.rightbarService.userData = message.user;
+    this.openRightBar();
+  }
+
+  public getChatInfo(): void {
+    this.rightbarService.chatData = this.currentChat;
+    this.openRightBar();
+  }
+
+  public openRightBar(): void {
+    this.stateService.openRightbar = true;
+  }
+
+  public scrollToLastMessage(): void {
+    const lastMessageRef = this.lastMessageRef.nativeElement;
+    lastMessageRef.scrollTop = lastMessageRef.scrollHeight;
   }
 }

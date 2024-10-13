@@ -13,7 +13,7 @@
   <div class="leftbar__user-card">
     <div class="leftbar__user-info">
       <div class="leftbar__user-ico">
-        <img alt="alt" src="../assets/img/ZKoQpzcDggWg2ogpkHjR9JnzY9lbPC7wR_gI-BZX5ncn7VOpt-G_a2jJmQBzC4gx.jpg" />
+        <img alt="alt" src="{{ user.ico }}" />
       </div>
       <!-- переименовать класс ↓ -->
       <div class="leftbar__user">
@@ -22,7 +22,11 @@
       </div>
     </div>
 
-    <div class="leftbar__options pointer" title="Настройки" (click)="stateService.hideOptions = false">
+    <div
+      class="leftbar__options pointer"
+      title="Настройки"
+      (click)="stateService.hideOptions = !stateService.hideOptions"
+    >
       <svg
         [ngClass]="{active: !stateService.hideOptions}"
         fill="none"
@@ -112,7 +116,9 @@
         *ngFor="let item of chats"
         (contextmenu)="openContextMenu($event, item)"
       >
-        <div class="leftbar__chat-ico">{{ item?.ico }}</div>
+        <div class="leftbar__chat-ico">
+          <img src="" alt="" />
+        </div>
         <div class="leftbar__chat" (click)="showChatSection(item)">
           <div class="flex">
             <span class="margin-right-5">{{ item?.name }}</span>

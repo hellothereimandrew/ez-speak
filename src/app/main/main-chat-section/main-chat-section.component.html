@@ -1,10 +1,9 @@
 <div class="chat-section {{ selectedTheme }}">
   <div class="header {{ selectedTheme }}">
     <div *ngIf="currentChat.name" class="header__current-chat">
-      <span (click)="openRightBar()" class="header__current-chat-name">
+      <span (click)="getChatInfo()" class="header__current-chat-name">
         {{ currentChat.name }}
       </span>
-
       <div (click)="openDropdown()" class="header__current-chat-props">
         <svg fill="none" height="5" viewBox="0 0 23 5" width="23" xmlns="http://www.w3.org/2000/svg">
           <ellipse
@@ -39,38 +38,34 @@
     </div>
   </div>
 
-  <div *ngIf="stateService.showPinnedMsg" class="flex-align-center pinned-msg fade-in-right">
+  <div *ngIf="pinnedMessage?.pinned" class="flex-align-center pinned-msg fade-in-right">
     <!-- исправить ↓ -->
     <div style="width: 80%">
       <p>Закреплённое сообщение</p>
-      <p>Уже лучше чем телеграм!</p>
+      <p>{{ pinnedMessage.user.name }}: {{ pinnedMessage.text }}</p>
     </div>
-
-    <span (click)="stateService.showPinnedMsg = false" class="pointer">&times;</span>
+    <span (click)="pinnedMessage.pinned = false" class="pointer">&times;</span>
   </div>
 
   <div
-    (click)="closeAll()"
+    class="current-chat-public"
     *ngIf="!stateService.isPrivate"
     [ngStyle]="{background: ' url(' + selectedBackground + ') 0% 0% / cover no-repeat '}"
-    class="current-chat-public"
+    (click)="closeAll()"
   >
-    <div #scrollable class="messages-list">
-      <div (contextmenu)="openContextMenu($event)" *ngFor="let item of messages" class="my-message">
-        <div class="my-message__ico">
+    <div class="messages-list" #lastMessageRef>
+      <div class="my-message" *ngFor="let item of messages" (contextmenu)="openContextMenu($event, item)">
+        <div class="my-message__ico pointer" (click)="getUserByMessage(item, $event)">
           <img alt="alt" src="{{ item.ico }}" />
         </div>
-
         <div>
           <div class="flex">
-            <div class="my-message__name">{{ item.user }}</div>
+            <div class="my-message__name">{{ item.user.name }}</div>
             <div class="my-message__time">{{ item.time }}</div>
           </div>
-
           <div class="my-message__text">{{ item.text }}</div>
         </div>
       </div>
-
       <context-menu #contextMenu></context-menu>
     </div>
 

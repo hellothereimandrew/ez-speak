@@ -14,11 +14,13 @@
   </div>
 
   <div class="rightbar-info">
-    <div class="rightbar-info__chat-ico"></div>
+    <div class="rightbar-info__chat-ico">
+      <img src="{{ rightbarService.chatData.ico }}" alt="alt" />
+    </div>
     <p class="rightbar-info__chat-name">
-      {{ currentChat.name }}
+      {{ rightbarService.chatData.name }}
     </p>
-    <p>{{ 'id: ' + currentChat.id }}</p>
+    <p>{{ 'id: ' + rightbarService.chatData.id }}</p>
     <p class="rightbar-info__chat-name"></p>
 
     <div class="rightbar-info__ctrl-btns">

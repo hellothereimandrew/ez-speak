@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {User} from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -15,6 +16,7 @@ export class AuthSignInComponent implements OnInit {
     checked: new FormControl(false),
   });
 
+  public userData: User = new User();
   public showPassword: boolean = false;
   public inputType: string = 'password';
 
@@ -28,10 +30,9 @@ export class AuthSignInComponent implements OnInit {
   }
 
   public getUserInfo(): void {
-    const user: any = JSON.parse(this.authService?.getUser);
-
-    if (user.checked) {
+    if (this.authService.getUser) {
       this.signInData.patchValue(JSON.parse(this.authService?.getUser));
+      this.signInData.controls['checked'].setValue(true);
     }
   }
 
@@ -51,7 +52,11 @@ export class AuthSignInComponent implements OnInit {
   }
 
   public saveUserInfo(): void {
-    this.authService.setUser = JSON.stringify(this.signInData.getRawValue());
+    this.userData.id = 0;
+    this.userData.name = this.signInData.controls['name'].value;
+    this.userData.ico = '../assets/img/6YpRjbulh1Q.jpg';
+
+    this.authService.setUser(this.userData);
   }
 
   public navigateToApp(): void {

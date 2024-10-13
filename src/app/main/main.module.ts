@@ -13,6 +13,7 @@ import {MainLeftbarNavigationComponent} from './main-leftbar/main-leftbar-naviga
 import {MainRightbarComponent} from './main-rightbar/main-rightbar.component';
 import {MainComponent} from './main.component';
 import {ContextMenuComponent} from 'src/app/shared/components/context-menu/context-menu.component';
+import {MainRightbarService} from './main-rightbar/main-rightbar.service';
 
 @NgModule({
   declarations: [
@@ -28,5 +29,6 @@ import {ContextMenuComponent} from 'src/app/shared/components/context-menu/conte
     ContextMenuComponent,
   ],
   imports: [CommonModule, BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
+  providers: [MainRightbarService],
 })
 export class MainModule {}
