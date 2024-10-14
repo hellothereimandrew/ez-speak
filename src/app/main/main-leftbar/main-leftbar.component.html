@@ -1,6 +1,8 @@
 <div
   class="leftbar {{ selectedTheme }}"
   (click)="contextMenu.closeContextMenu()"
+  (mouseenter)="stateService.showNavbar = true"
+  (mouseleave)="stateService.showNavbar = false"
   [ngStyle]="{width: leftbarWidth + 'px'}"
 >
   <div

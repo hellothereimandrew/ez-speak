@@ -64,6 +64,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.stateService.hideNotifications = true;
     this.stateService.hideOptions = true;
     this.stateService.hideChatSection = true;
+    this.stateService.showNavbar = false;
     this.stateService.showControls = false;
     this.stateService.showSearch = false;
 

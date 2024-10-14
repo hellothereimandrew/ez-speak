@@ -8,6 +8,7 @@ export class StateService {
   public hideNotifications: boolean = true;
   public hideOptions: boolean = true;
   public hideChatSection: boolean = true;
+  public showNavbar: boolean = false;
   public showControls: boolean = false;
   public showSearch: boolean = false;
   public isResized: boolean = false;

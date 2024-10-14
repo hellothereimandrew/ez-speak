@@ -96,7 +96,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     const temp: IChat = {
       id: this.channelCounterId++,
       ico: '',
-      name: name,
+      name: name.trim(),
       time: new Date().toLocaleTimeString().slice(0, -3),
       userName: this.user.name,
       lastMsg: 'Уже круче, чем телега!',
