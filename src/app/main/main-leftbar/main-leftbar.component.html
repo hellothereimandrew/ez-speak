@@ -89,23 +89,40 @@
       <div *ngIf="pinnedChats.length" class="leftbar__pinned-chat">
         <div *ngFor="let item of pinnedChats" (contextmenu)="openContextMenu($event, item)">
           <div class="leftbar__chat-wrap fade-bottom">
-            <div class="leftbar__chat-ico">{{ item?.ico }}</div>
+            <div class="leftbar__chat-ico" [ngClass]="{'active-ico': item.active && !stateService.hideChatSection}">
+              <img src="" alt="" />
+            </div>
             <div class="leftbar__chat" (click)="showChatSection(item)">
               <div class="flex">
-                <span class="margin-right-5">{{ item?.name }}</span>
+                <div
+                  class="leftbar__chat-text margin-right-5"
+                  [ngClass]="{active: item.active && !stateService.hideChatSection}"
+                >
+                  {{ item?.name }}
+                </div>
                 <div *ngIf="item?.msgs" class="leftbar__unread-msgs">
                   {{ item?.msgs }}
                 </div>
               </div>
               <div class="flex">
-                <span style="white-space: nowrap" class="margin-right-5">
+                <span
+                  style="white-space: nowrap"
+                  class="leftbar__chat-text margin-right-5"
+                  [ngClass]="{active: item.active && !stateService.hideChatSection}"
+                >
                   {{ item?.userName + ': ' }}
                 </span>
                 <div class="flex">
-                  <span class="leftbar__chat-last-msg margin-right-5" style="white-space: nowrap">
+                  <span
+                    class="leftbar__chat-last-msg margin-right-5"
+                    style="white-space: nowrap"
+                    [ngClass]="{active: item.active && !stateService.hideChatSection}"
+                  >
                     {{ item?.lastMsg }}
                   </span>
-                  <span>{{ item?.time }}</span>
+                  <span class="leftbar__chat-text" [ngClass]="{active: item.active && !stateService.hideChatSection}">{{
+                    item?.time
+                  }}</span>
                 </div>
               </div>
             </div>
@@ -118,25 +135,39 @@
         *ngFor="let item of chats"
         (contextmenu)="openContextMenu($event, item)"
       >
-        <div class="leftbar__chat-ico">
+        <div class="leftbar__chat-ico" [ngClass]="{'active-ico': item.active && !stateService.hideChatSection}">
           <img src="" alt="" />
         </div>
         <div class="leftbar__chat" (click)="showChatSection(item)">
           <div class="flex">
-            <span class="margin-right-5">{{ item?.name }}</span>
+            <span
+              class="leftbar__chat-text margin-right-5"
+              [ngClass]="{active: item.active && !stateService.hideChatSection}"
+              >{{ item?.name }}</span
+            >
             <div *ngIf="item?.msgs" class="leftbar__unread-msgs">
               {{ item?.msgs }}
             </div>
           </div>
           <div class="flex">
-            <span style="white-space: nowrap" class="margin-right-5">
+            <span
+              style="white-space: nowrap"
+              class="margin-right-5 leftbar__chat-text"
+              [ngClass]="{active: item.active && !stateService.hideChatSection}"
+            >
               {{ item?.userName + ': ' }}
             </span>
             <div class="flex">
-              <span class="leftbar__chat-last-msg margin-right-5" style="white-space: nowrap">
+              <span
+                class="leftbar__chat-last-msg margin-right-5"
+                style="white-space: nowrap"
+                [ngClass]="{active: item.active && !stateService.hideChatSection}"
+              >
                 {{ item?.lastMsg }}
               </span>
-              <span>{{ item?.time }}</span>
+              <span class="leftbar__chat-text" [ngClass]="{active: item.active && !stateService.hideChatSection}">{{
+                item?.time
+              }}</span>
             </div>
           </div>
         </div>

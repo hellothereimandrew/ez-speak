@@ -8,6 +8,7 @@ import {StateService} from '../../shared/services/state.service';
 import {ContextMenuService} from '../../shared/components/context-menu/context-menu.service';
 import {ContextMenuComponent} from '../../shared/components/context-menu/context-menu.component';
 import {User} from '../../shared/models/user.model';
+import {Chat} from '../../shared/models/chat.model';
 
 @Component({
   selector: 'app-main-leftbar',
@@ -22,14 +23,12 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
 
   @ViewChild('contextMenu') public contextMenu!: ContextMenuComponent;
 
-  public themeSubscription: Subscription = new Subscription();
-  public selectedTheme: string = '';
   public channelName: string = '';
   public channelCounterId: number = 1;
   public leftbarWidth: number = 346;
 
-  public chats: IChat[] = [];
-  public pinnedChats: IChat[] = [];
+  public chats: Chat[] = [];
+  public pinnedChats: Chat[] = [];
   public user: User = new User();
 
   public showPopup: boolean = false;
@@ -38,6 +37,9 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     firstButton: '',
     secondButton: '',
   };
+
+  public selectedTheme: string = '';
+  public themeSubscription: Subscription = new Subscription();
 
   constructor(
     private authService: AuthService,
@@ -93,7 +95,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   }
 
   public createChannel(name: string): void {
-    const temp: IChat = {
+    const temp: Chat = {
       id: this.channelCounterId++,
       ico: '',
       name: name.trim(),
@@ -102,6 +104,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
       lastMsg: 'Уже круче, чем телега!',
       msgs: 0,
       pinned: false,
+      active: false,
     };
 
     if (name) {
@@ -111,28 +114,40 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  public removeChannel(chat: IChat): void {
+  public removeChannel(chat: Chat): void {
     this.chats.splice(this.chats.indexOf(chat), 1);
     this.stateService.hideChatSection = true;
   }
 
-  public pinChannel(currentChat: IChat): void {
+  public pinChannel(currentChat: Chat): void {
+    if (this.chats.includes(currentChat)) {
+      this.chats.splice(this.chats.indexOf(currentChat), 1);
+    }
+
     currentChat.pinned = true;
     this.pinnedChats.push(currentChat);
   }
 
-  public unpinChannel(pinnedChat: IChat): void {
+  public unpinChannel(pinnedChat: Chat): void {
     pinnedChat.pinned = false;
+    this.chats.push(pinnedChat);
     this.pinnedChats.splice(this.pinnedChats.indexOf(pinnedChat), 1);
     this.stateService.hideChatSection = true;
   }
 
-  public showChatSection(item: IChat): void {
-    this.stateService.hideChatSection = false;
+  public showChatSection(item: Chat): void {
+    this.stateService.hideChatSection = true;
+    this.currentChat.emit(new Chat());
+    this.chats.forEach((chat: Chat): void => {
+      chat.active = false;
+    });
+
+    item.active = true;
     this.currentChat.emit(item);
+    this.stateService.hideChatSection = false;
   }
 
-  public openContextMenu(event: MouseEvent, chat?: IChat): void {
+  public openContextMenu(event: MouseEvent, chat?: Chat): void {
     this.contextMenu.openContextMenu(event);
     this.generateMainContextItems();
 
@@ -158,7 +173,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     ];
   }
 
-  public generatePrimaryContextItems(chat: IChat): void {
+  public generatePrimaryContextItems(chat: Chat): void {
     this.contextMenuService.primaryMenuItems = [
       {
         name: chat.pinned ? 'Открепить канал' : 'Закрепить канал',
@@ -181,7 +196,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     ];
   }
 
-  public openPopup(chat: IChat): void {
+  public openPopup(chat: Chat): void {
     this.showPopup = true;
 
     this.popupData = {

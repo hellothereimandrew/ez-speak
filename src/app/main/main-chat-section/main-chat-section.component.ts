@@ -26,12 +26,14 @@ export class MainChatSectionComponent implements OnInit, OnDestroy {
   @ViewChild('lastMessageRef') public lastMessageRef!: ElementRef;
   @ViewChild('contextMenu') public contextMenu!: ContextMenuComponent;
 
+  public messages: IMessage[] = [];
+  public pinnedMessage!: IMessage;
+  public pickedMessages: IMessage[] = [];
+  public user: User = new User();
+
   public selectedTheme: string = '';
   public selectedBackground: string = '';
   public hideDropdown: boolean = true;
-  public messages: IMessage[] = [];
-  public pinnedMessage!: IMessage;
-  public user: User = new User();
 
   public themeSubscription: Subscription = new Subscription();
   public backgroundSubscription: Subscription = new Subscription();
@@ -114,16 +116,16 @@ export class MainChatSectionComponent implements OnInit, OnDestroy {
   public generateMainContextItems(message: IMessage): void {
     this.contextMenuService.mainMenuItems = [
       {
-        name: 'Выбрать',
-        method: () => console.log(this.messages),
+        name: message.picked ? 'Отменить выделение' : 'Выделить',
+        method: (): void => this.pickMessage(message),
       },
       {
         name: 'Ответить',
-        method: () => void {},
+        method: (): void => void {},
       },
       {
         name: 'Переслать',
-        method: () => void {},
+        method: (): void => void {},
       },
       {
         name: 'Копировать текст',
@@ -135,15 +137,23 @@ export class MainChatSectionComponent implements OnInit, OnDestroy {
       },
       {
         name: 'Изменить',
-        method: () => this.editMessageText(message),
+        method: (): void => this.editMessageText(message),
       },
       {
         name: 'Удалить',
-        method: () => this.removeMessage(message),
+        method: (): void => this.removeMessage(message),
       },
     ];
   }
 
+  public pickMessage(message: IMessage): void {
+    message.picked = true;
+    this.pickedMessages.push(message);
+  }
+
+  // public replyToMessage(): void {}
+  //
+  // public redirectMessage(message: string): void {}
 
   public async copyMessageText(message: IMessage): Promise<void> {
     try {
@@ -178,6 +188,7 @@ export class MainChatSectionComponent implements OnInit, OnDestroy {
 
   public getChatInfo(): void {
     this.rightbarService.chatData = this.currentChat;
+    this.rightbarService.chatData.ico = '../assets/img/6YpRjbulh1Q.jpg';
     this.openRightBar();
   }
 

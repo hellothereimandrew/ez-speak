@@ -117,7 +117,7 @@
       min-height: 45px;
       margin-right: 12px;
       border-radius: 100%;
-      border: 2px solid rgb(240, 240, 240);
+      border: 2px solid rgb(240, 240, 240, 0.3);
       overflow: hidden;
 
       img {
@@ -130,10 +130,15 @@
       margin-right: 10px;
       cursor: pointer;
 
+      .leftbar__chat-text {
+        color: rgb(240, 240, 240, 0.3);
+      }
+
       .leftbar__chat-last-msg {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        color: rgb(240, 240, 240, 0.3);
       }
     }
 
@@ -148,10 +153,11 @@
       background-color: #ca3838;
     }
 
-    .X {
-      &:hover {
-        background: none;
-        cursor: pointer;
+    .active {
+      color: rgb(240, 240, 240) !important;
+
+      &-ico {
+        border: 2px solid rgb(240, 240, 240) !important;
       }
     }
   }

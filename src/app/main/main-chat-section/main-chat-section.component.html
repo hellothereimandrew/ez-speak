@@ -54,7 +54,12 @@
     (click)="closeAll()"
   >
     <div class="messages-list" #lastMessageRef>
-      <div class="my-message" *ngFor="let item of messages" (contextmenu)="openContextMenu($event, item)">
+      <div
+        class="my-message"
+        *ngFor="let item of messages"
+        [ngClass]="{test: item.picked}"
+        (contextmenu)="openContextMenu($event, item)"
+      >
         <div class="my-message__ico pointer" (click)="getUserByMessage(item, $event)">
           <img alt="alt" src="{{ item.ico }}" />
         </div>
@@ -90,7 +95,11 @@
           />
         </svg>
       </div>
-      <textarea (keyup.enter)="sendMessage($event)" class="messages-wrap-input"></textarea>
+      <textarea
+        (keyup.enter)="sendMessage($event)"
+        class="messages-wrap-input"
+        placeholder="Для отправки сообщения нажмите Enter"
+      ></textarea>
     </div>
 
     <div class="scroll-to-bottom" hidden>

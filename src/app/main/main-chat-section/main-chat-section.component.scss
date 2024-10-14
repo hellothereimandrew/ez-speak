@@ -104,6 +104,10 @@
       }
     }
 
+    .test {
+      border: 1px solid var(--active) !important;
+    }
+
     .scroll-to-bottom {
       position: absolute;
       right: 173px;
@@ -130,7 +134,7 @@
     .messages-wrap-input {
       width: 80%;
       height: 60px;
-      padding: 19px 0 0 25px;
+      padding: 19px 50px 0 30px;
       outline: 0;
       background-color: var(--background);
       border: 1px solid rgba(255, 255, 255, 0.1);
