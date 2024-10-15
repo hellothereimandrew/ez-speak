@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from '../app-routing.module';
 
@@ -8,10 +8,9 @@ import {AuthPassRemindComponent} from './auth-pass-remind/auth-pass-remind.compo
 import {AuthSignInComponent} from './auth-sign-in/auth-sign-in.component';
 import {AuthSignUpComponent} from './auth-sign-up/auth-sign-up.component';
 import {AuthComponent} from './auth.component';
-import {SnackBarComponent} from '../shared/components/snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [AuthComponent, AuthSignInComponent, AuthSignUpComponent, AuthPassRemindComponent],
-  imports: [CommonModule, BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, SnackBarComponent],
+  imports: [CommonModule, BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
 })
 export class AuthModule {}
