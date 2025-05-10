@@ -1,7 +1,6 @@
 <div class="main {{ selectedTheme }}" (contextmenu)="cancelDefaultActions($event)">
   <app-main-leftbar
     (currentChat)="getCurrentChat($event)"
-    (showCreateFolder)="showFolderPopup()"
     [folderName]="folderName"
   ></app-main-leftbar>
 
@@ -10,4 +9,3 @@
   <app-main-rightbar *ngIf="stateService.openRightbar" [currentChat]="currentChat"></app-main-rightbar>
 </div>
 
-<create-folder (folderNameEmitter)="getFolderName($event)" [hideFolderPopup]="hideFolderPopup"></create-folder>

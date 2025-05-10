@@ -51,13 +51,14 @@
     class="current-chat-public"
     *ngIf="!stateService.isPrivate"
     [ngStyle]="{background: ' url(' + selectedBackground + ') 0% 0% / cover no-repeat '}"
-    (click)="closeAll()"
+    (click)="closeAllWindows()"
   >
     <div class="messages-list" #lastMessageRef>
       <div
         class="my-message"
         *ngFor="let item of messages"
-        [ngClass]="{test: item.picked}"
+        [ngClass]="{'my-message__picked': item.picked}"
+        (mousedown)="test(item)"
         (contextmenu)="openContextMenu($event, item)"
       >
         <div class="my-message__ico pointer" (click)="getUserByMessage(item, $event)">
@@ -72,6 +73,11 @@
         </div>
       </div>
       <context-menu #contextMenu></context-menu>
+    </div>
+
+    <div class="message-for-reply">
+      <span>{{ messageForReply.user.name }}</span>
+      <span>{{ messageForReply.text }}</span>
     </div>
 
     <div class="messages-wrap">
@@ -96,10 +102,13 @@
         </svg>
       </div>
       <textarea
-        (keyup.enter)="sendMessage($event)"
+        #messageInput
+        autofocus
         class="messages-wrap-input"
         placeholder="Для отправки сообщения нажмите Enter"
+        (keyup.enter)="sendMessage($event)"
       ></textarea>
+
     </div>
 
     <div class="scroll-to-bottom" hidden>

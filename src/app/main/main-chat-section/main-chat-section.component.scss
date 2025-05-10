@@ -79,7 +79,7 @@
         user-select: text;
         border: var(--border);
 
-        .my-message__ico {
+        &__ico {
           min-width: 40px;
           height: 40px;
           margin-right: 10px;
@@ -98,14 +98,14 @@
           margin-right: 10px;
         }
 
-        .my-message__text {
+        &__text {
           user-select: auto;
         }
-      }
-    }
 
-    .test {
-      border: 1px solid var(--active) !important;
+        &__picked {
+          border: 1px solid var(--active) !important;
+        }
+      }
     }
 
     .scroll-to-bottom {
@@ -134,7 +134,7 @@
     .messages-wrap-input {
       width: 80%;
       height: 60px;
-      padding: 19px 50px 0 30px;
+      padding: 18px 20px 0 10px;
       outline: 0;
       background-color: var(--background);
       border: 1px solid rgba(255, 255, 255, 0.1);

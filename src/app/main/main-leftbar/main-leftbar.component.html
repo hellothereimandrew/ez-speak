@@ -56,7 +56,7 @@
   <app-main-leftbar-aside-notifi *ngIf="!stateService.hideNotifications"></app-main-leftbar-aside-notifi>
 
   <div (contextmenu)="openContextMenu($event)" class="flex">
-    <app-main-leftbar-navigation></app-main-leftbar-navigation>
+    <app-main-leftbar-navigation *ngIf="stateService.showNavbar"></app-main-leftbar-navigation>
 
     <div class="leftbar__chat-container">
       <div *ngIf="stateService.showControls" class="leftbar__create-chat fade-bottom">
@@ -120,9 +120,9 @@
                   >
                     {{ item?.lastMsg }}
                   </span>
-                  <span class="leftbar__chat-text" [ngClass]="{active: item.active && !stateService.hideChatSection}">{{
-                    item?.time
-                  }}</span>
+                  <span class="leftbar__chat-text" [ngClass]="{active: item.active && !stateService.hideChatSection}">
+                    {{ item?.time }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -143,7 +143,7 @@
             <span
               class="leftbar__chat-text margin-right-5"
               [ngClass]="{active: item.active && !stateService.hideChatSection}"
-              >{{ item?.name }}</span
+            >{{ item?.name }}</span
             >
             <div *ngIf="item?.msgs" class="leftbar__unread-msgs">
               {{ item?.msgs }}
@@ -165,9 +165,9 @@
               >
                 {{ item?.lastMsg }}
               </span>
-              <span class="leftbar__chat-text" [ngClass]="{active: item.active && !stateService.hideChatSection}">{{
-                item?.time
-              }}</span>
+              <span class="leftbar__chat-text" [ngClass]="{active: item.active && !stateService.hideChatSection}">
+                {{ item?.time }}
+              </span>
             </div>
           </div>
         </div>

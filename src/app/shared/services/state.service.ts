@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class StateService {
   /** leftbar states **/
   public hideNotifications: boolean = true;

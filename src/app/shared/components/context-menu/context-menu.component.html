@@ -2,14 +2,14 @@
   class="ez-context-menu"
   *ngIf="!hideContextMenu"
   [ngStyle]="{
-    top: contextMenuPosition.y + 'px',
-    left: contextMenuPosition.x + 'px'
+    top: menu.positionY + 'px',
+    left: menu.positionX + 'px'
   }"
 >
   <div class="padding-10">
     <div>
       <div
-        *ngFor="let mainItem of contextMenuService.mainMenuItems"
+        *ngFor="let mainItem of menu.main"
         (click)="mainItem.method()"
         class="ez-context-menu__item"
       >
@@ -17,9 +17,9 @@
       </div>
     </div>
 
-    <div *ngIf="contextMenuService.primaryMenuItems.length" class="ez-context-menu__primary-items">
+    <div *ngIf="menu.primary.length" class="ez-context-menu__primary-items">
       <div
-        *ngFor="let primaryItem of contextMenuService.primaryMenuItems"
+        *ngFor="let primaryItem of menu.primary"
         (click)="primaryItem.method()"
         class="ez-context-menu__item"
       >

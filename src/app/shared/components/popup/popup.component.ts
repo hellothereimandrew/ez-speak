@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {PopupData} from '../../interfaces/popup-data';
 
 @Component({
+  standalone: true,
   selector: 'popup',
   templateUrl: './popup.component.html',
   styleUrl: './popup.component.scss',
@@ -12,6 +13,7 @@ export class PopupComponent {
     firstButton: '',
     secondButton: '',
     confirmed: (): void => {},
+    canceled: (): void => {},
   };
   @Input() public showPopup: boolean = false;
 
@@ -23,6 +25,11 @@ export class PopupComponent {
       this.showPopup = false;
     }
 
+    this.showPopup = false;
+    this.showPopupChange.emit(this.showPopup);
+  }
+
+  public canceled(): void {
     this.showPopup = false;
     this.showPopupChange.emit(this.showPopup);
   }

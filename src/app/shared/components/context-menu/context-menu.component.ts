@@ -1,32 +1,37 @@
-import {Component} from '@angular/core';
-import {ContextMenuService} from './context-menu.service';
+import {Component, Injectable} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
+  standalone: true,
   selector: 'context-menu',
   templateUrl: './context-menu.component.html',
   styleUrl: './context-menu.component.scss',
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
 })
+@Injectable()
 export class ContextMenuComponent {
   public hideContextMenu: boolean = true;
-  public contextMenuPosition: {x: number; y: number} = {
-    x: 0,
-    y: 0,
-  };
 
-  constructor(public contextMenuService: ContextMenuService) {}
+  public menu: any = {
+    main: [],
+    primary: [],
+    positionX: 0,
+    positionY: 0,
+  };
 
   public openContextMenu(event: MouseEvent): void {
     event.stopPropagation();
     event.preventDefault();
+
+    this.menu.positionX = event.clientX - 10;
+    this.menu.positionY = event.clientY - 10;
     this.hideContextMenu = false;
-    this.contextMenuPosition = {
-      x: event.clientX - 10,
-      y: event.clientY - 10,
-    };
   }
 
   public closeContextMenu(): void {
     this.hideContextMenu = true;
-    this.contextMenuService.primaryMenuItems = [];
+    this.menu.main = [];
+    this.menu.primary = [];
   }
 }

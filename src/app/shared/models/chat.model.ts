@@ -5,8 +5,8 @@ export class Chat implements IChat {
 
   public id: number = 0;
   public name: string = '';
-
   public ico?: string;
+
   public time?: string;
   public userName?: string;
   public lastMsg?: string;

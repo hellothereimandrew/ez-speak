@@ -14,8 +14,8 @@ body {
 :root {
   --font-family: 'Nunito-Light';
   --font-color: rgb(224, 224, 224);
-  --background: rgb(35, 37, 41);
-  --background-secondary: rgb(41, 44, 49);
+  --background: rgb(33, 35, 39);
+  --background-secondary: rgb(38, 40, 45);
   --border: 1px solid rgba(255, 255, 255, 0.1);
   --active: rgb(70, 188, 255);
 }
@@ -170,6 +170,12 @@ body {
 
     &-10 {
       margin-right: 10px;
+    }
+  }
+
+  &-bottom {
+    &-8 {
+      margin-bottom: 8px;
     }
   }
 }
