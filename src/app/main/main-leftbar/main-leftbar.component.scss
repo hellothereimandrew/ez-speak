@@ -2,63 +2,8 @@
   position: relative;
   width: 100%;
   height: 100%;
+  border-top: var(--border);
   background-color: var(--background);
-
-  .leftbar-splitter {
-    position: absolute;
-    height: inherit;
-    border-right: var(--border);
-    cursor: ew-resize;
-  }
-
-  .leftbar__user-card {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    border-bottom: var(--border);
-
-    .leftbar__user-info {
-      display: flex;
-      align-items: center;
-      width: 100%;
-
-      .leftbar__user-ico {
-        height: 45px;
-        margin-right: 12px;
-        border-radius: 100%;
-        border: 2px solid rgb(59, 147, 197);
-        overflow: hidden;
-
-        img {
-          width: inherit;
-          height: inherit;
-        }
-      }
-
-      .leftbar__user {
-        width: 80%;
-
-        .leftbar__user-name {
-          background: none;
-          outline: 0;
-          border: 0;
-          font-size: 16px;
-        }
-
-        .leftbar__user-role {
-          background: none;
-          outline: 0;
-          border: 0;
-          font-size: 14px;
-        }
-      }
-    }
-
-    .leftbar__options {
-      display: flex;
-      justify-content: flex-end;
-    }
-  }
 
   .leftbar__create-chat {
     padding: 10px;

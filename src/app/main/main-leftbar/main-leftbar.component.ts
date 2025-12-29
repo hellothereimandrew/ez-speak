@@ -26,19 +26,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
   public leftbarWidth: number = 346;
 
   public user: User = new User();
-  public chats: Chat[] = [
-    {
-      id: this.channelCounterId++,
-      ico: '',
-      name: 'ez-test',
-      time: new Date().toLocaleTimeString().slice(0, -3),
-      userName: 'admin',
-      lastMsg: 'ez-test',
-      msgs: 0,
-      pinned: false,
-      active: false,
-    },
-  ];
+  public chats: Chat[] = [];
   public pinnedChats: Chat[] = [];
 
   public showPopup: boolean = false;
@@ -57,7 +45,7 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
     public stateService: StateService,
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getUserInfo();
     this.initSubcribes();
   }
@@ -102,8 +90,6 @@ export class MainLeftbarComponent implements OnInit, OnDestroy {
       this.selectedTheme = theme;
     });
   }
-
-  // 192.168.228.0.3/getUsers
 
   public createChannel(name: string): void {
     const temp: Chat = {

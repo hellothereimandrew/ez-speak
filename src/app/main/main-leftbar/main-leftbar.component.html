@@ -1,62 +1,21 @@
 <div
   class="leftbar {{ selectedTheme }}"
   (click)="contextMenu.closeContextMenu()"
-  (mouseenter)="stateService.showNavbar = true"
-  (mouseleave)="stateService.showNavbar = false"
   [ngStyle]="{width: leftbarWidth + 'px'}"
 >
   <div
-    class="leftbar-splitter"
+    class="ez-splitter"
     (mousedown)="stateService.isResized = true"
     (mouseup)="stateService.isResized = false"
     [ngStyle]="{left: leftbarWidth + 'px'}"
   ></div>
-
-  <div class="leftbar__user-card">
-    <div class="leftbar__user-info">
-      <div class="leftbar__user-ico">
-        <img alt="alt" src="{{ user.ico }}" />
-      </div>
-      <!-- переименовать класс ↓ -->
-      <div class="leftbar__user">
-        <input class="leftbar__user-name" maxlength="16" type="text" value="{{ user.name }}" />
-        <input class="leftbar__user-role" maxlength="32" type="text" value="{{ user.role }}" />
-      </div>
-    </div>
-
-    <div
-      class="leftbar__options pointer"
-      title="Настройки"
-      (click)="stateService.hideOptions = !stateService.hideOptions"
-    >
-      <svg
-        [ngClass]="{active: !stateService.hideOptions}"
-        fill="none"
-        height="18"
-        viewBox="0 0 27 18"
-        width="27"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          [ngClass]="{'active-stroke': !stateService.hideOptions}"
-          d="M1.5 17H25.5M1 9H25M1 1H25"
-          stroke="white"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-miterlimit="1.30541"
-          stroke-opacity="0.3"
-          stroke-width="2"
-        />
-      </svg>
-    </div>
-  </div>
 
   <app-main-leftbar-aside-menu *ngIf="!stateService.hideOptions"></app-main-leftbar-aside-menu>
 
   <app-main-leftbar-aside-notifi *ngIf="!stateService.hideNotifications"></app-main-leftbar-aside-notifi>
 
   <div (contextmenu)="openContextMenu($event)" class="flex">
-    <app-main-leftbar-navigation *ngIf="stateService.showNavbar"></app-main-leftbar-navigation>
+    <app-main-leftbar-navigation *ngIf="stateService.showNavbar" [userInfo]="user"></app-main-leftbar-navigation>
 
     <div class="leftbar__chat-container">
       <div *ngIf="stateService.showControls" class="leftbar__create-chat fade-bottom">

@@ -47,6 +47,13 @@ body {
   background: black;
 }
 
+.ez-splitter {
+  position: absolute;
+  height: inherit;
+  border-right: var(--border);
+  cursor: ew-resize;
+}
+
 .ez-input {
   padding-left: 15px;
   background: none;

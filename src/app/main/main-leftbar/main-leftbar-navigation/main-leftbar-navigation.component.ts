@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Folder} from 'src/app/shared/interfaces/folder';
 import {StateService} from '../../../shared/services/state.service';
+import {User} from '../../../shared/models/user.model';
 
 @Component({
   selector: 'app-main-leftbar-navigation',
@@ -8,6 +9,8 @@ import {StateService} from '../../../shared/services/state.service';
   styleUrl: './main-leftbar-navigation.component.scss',
 })
 export class MainLeftbarNavigationComponent implements OnInit {
+  @Input() public userInfo: User = new User();
+
   @Input() public folderName: string = '';
 
   @Output() public createFolderEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -16,33 +19,27 @@ export class MainLeftbarNavigationComponent implements OnInit {
   public customFolders: Folder[] = [];
   public defaultFolders: Folder[] = [
     {
-      id: 1,
+      id: 2,
       ico: 'private.svg',
       name: 'Личные сообщения',
     },
 
     {
-      id: 2,
+      id: 3,
       ico: 'group.svg',
       name: 'Группы',
     },
 
     {
-      id: 3,
+      id: 4,
       ico: 'group.svg',
       name: 'Каналы',
     },
 
     {
-      id: 4,
+      id: 5,
       ico: 'notifi.svg',
       name: 'Уведомления',
-    },
-
-    {
-      id: 5,
-      ico: 'plus.svg',
-      name: 'Добавить папку',
     },
   ];
 

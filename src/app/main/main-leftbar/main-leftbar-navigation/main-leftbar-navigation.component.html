@@ -1,5 +1,15 @@
 <div *ngIf="stateService.showNavbar" class="leftbar__nav fade-in-left">
   <div class="leftbar__nav-default-folders">
+    <div class="pointer">
+      <div
+        class="leftbar__user-ico"
+        [ngClass]="{'active-fill': !stateService.hideNotifications}"
+        (click)="stateService.hideOptions = !stateService.hideOptions"
+      >
+        <img alt="alt" src="{{ userInfo.ico }}" />
+      </div>
+    </div>
+
     <div class="flex pointer" style="margin-bottom: 15px" title="Уведомления">
       <svg
         (click)="stateService.hideNotifications = false"
